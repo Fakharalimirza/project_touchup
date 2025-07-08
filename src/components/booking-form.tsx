@@ -82,7 +82,6 @@ export default function BookingForm() {
       email: '',
       phone: '',
       service: defaultService,
-      address: '',
       instructions: '',
       specificPropertyType: '',
       time: '',
@@ -509,7 +508,7 @@ export default function BookingForm() {
             <AlertDialogTitle>Confirm Detected Address</AlertDialogTitle>
             <AlertDialogDescription>
               Is the following address approximately correct? Please fill in your specific apartment or villa number manually.
-              <p className="font-semibold text-foreground mt-2">{detectedAddressString}</p>
+              <div className="font-semibold text-foreground mt-2">{detectedAddressString}</div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
