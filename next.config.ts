@@ -24,6 +24,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  webpack: (config) => {
+    config.externals.push("@react-email/render");
+    return config;
+  },
 };
 
 export default nextConfig;

@@ -1,6 +1,9 @@
 'use server';
 
 import { z } from 'zod';
+import { Resend } from 'resend';
+import AdminBookingNoticeEmail from '@/emails/admin-booking-notice';
+import CustomerConfirmationEmail from '@/emails/customer-confirmation';
 
 const bookingSchema = z.object({
   name: z.string().min(2),
@@ -20,10 +23,11 @@ const bookingSchema = z.object({
   terms: z.literal(true),
 });
 
-type BookingFormValues = z.infer<typeof bookingSchema>;
+export type BookingFormValues = z.infer<typeof bookingSchema>;
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function submitBooking(data: BookingFormValues) {
-  // Validate data on the server
   const validatedData = bookingSchema.safeParse(data);
 
   if (!validatedData.success) {
@@ -31,58 +35,26 @@ export async function submitBooking(data: BookingFormValues) {
     return { success: false, error: 'Invalid data provided.' };
   }
 
-  const { name, email, phone, service, propertyType, specificPropertyType, date, time, apartmentVilla, building, street, area, city, instructions } = validatedData.data;
+  try {
+    // Send email to admin
+    await resend.emails.send({
+      from: 'TouchUp Booking <booking@touchup.ae>',
+      to: 'info@touchup.ae',
+      subject: `New Booking Request - ${validatedData.data.service}`,
+      react: AdminBookingNoticeEmail({ data: validatedData.data }),
+    });
 
-  // In a real application, you would use a service like Resend, SendGrid, or Nodemailer to send emails.
-  // As I cannot handle API keys, I will simulate the email sending process by logging to the console.
+    // Send confirmation email to customer
+    await resend.emails.send({
+      from: 'TouchUp Hub <booking@touchup.ae>',
+      to: validatedData.data.email,
+      subject: 'Your Booking Request with TouchUp Hub has been received!',
+      react: CustomerConfirmationEmail({ name: validatedData.data.name, data: validatedData.data }),
+    });
 
-  // 1. Email to the admin
-  const adminEmailContent = `
-    New Booking Request
-    -------------------
-    Name: ${name}
-    Email: ${email}
-    Phone: ${phone}
-    Service: ${service}
-    Property Type: ${propertyType}
-    Property Details: ${specificPropertyType}
-    Date: ${date.toLocaleDateString()}
-    Time: ${time}
-    Address: ${apartmentVilla}, ${building}, ${street}, ${area}, ${city}
-    Instructions: ${instructions || 'N/A'}
-  `;
-
-  console.log('--- Sending Email to Admin (info@touchup.ae) ---');
-  console.log(adminEmailContent);
-  console.log('-------------------------------------------------');
-
-
-  // 2. Confirmation email to the customer
-  const customerEmailContent = `
-    Subject: Your Booking Request with TouchUp Hub has been received!
-
-    Hi ${name},
-
-    Thank you for choosing TouchUp Hub!
-
-    We have received your booking request and a member of our team will contact you shortly to confirm the details.
-
-    Your Request Summary:
-    --------------------
-    Service: ${service}
-    Date: ${date.toLocaleDateString()}
-    Time: ${time}
-
-    We look forward to serving you!
-
-    Best regards,
-    The TouchUp Hub Team
-  `;
-
-  console.log(`--- Sending Confirmation Email to Customer (${email}) ---`);
-  console.log(customerEmailContent);
-  console.log('---------------------------------------------------------');
-
-  // Simulate a successful operation
-  return { success: true };
+    return { success: true };
+  } catch (error) {
+    console.error('Email sending failed:', error);
+    return { success: false, error: 'Failed to send emails.' };
+  }
 }
