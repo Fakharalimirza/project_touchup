@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Wrench, Phone, Mail, MapPin, Twitter, Facebook, Instagram } from 'lucide-react';
+import Image from 'next/image';
+import { Phone, Mail, MapPin, Twitter, Facebook, Instagram } from 'lucide-react';
 
 const socialLinks = [
   { icon: Twitter, href: '#', name: 'Twitter' },
@@ -24,8 +25,7 @@ export default function Footer() {
           {/* About */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 font-bold text-primary">
-              <Wrench className="h-6 w-6" />
-              <span className="text-xl font-headline">TouchUp Hub</span>
+               <Image src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" alt="TouchUp Hub Logo" width={150} height={40} className="object-contain" />
             </Link>
             <p className="text-muted-foreground">
               Your trusted partner for all home maintenance and cleaning needs in Dubai. Quality service, guaranteed.

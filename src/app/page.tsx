@@ -60,7 +60,7 @@ export default function Home() {
           src="https://touchup.ae/wp-content/uploads/2023/10/test.jpg"
           alt="Technician working on an air conditioner"
           fill
-          className="object-cover"
+          className="object-fit"
           priority
           data-ai-hint="cleaning team"
         />

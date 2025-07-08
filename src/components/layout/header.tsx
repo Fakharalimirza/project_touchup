@@ -1,11 +1,12 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Wrench } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const navLinks = [
@@ -26,8 +27,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 font-bold text-primary">
-          <Wrench className="h-6 w-6" />
-          <span className="text-xl font-headline">TouchUp Hub</span>
+          <Image src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" alt="TouchUp Hub Logo" width={150} height={40} className="object-contain" />
         </Link>
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
@@ -59,8 +59,7 @@ export default function Header() {
             <SheetContent side="right">
               <div className="flex flex-col gap-6 p-6">
                 <Link href="/" className="flex items-center gap-2 font-bold text-primary mb-4" onClick={closeSheet}>
-                  <Wrench className="h-6 w-6" />
-                  <span className="text-xl font-headline">TouchUp Hub</span>
+                   <Image src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" alt="TouchUp Hub Logo" width={150} height={40} className="object-contain" />
                 </Link>
                 {navLinks.map((link) => (
                   <Link
