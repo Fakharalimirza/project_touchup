@@ -4,7 +4,7 @@ import { Target, Eye, Heart } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description: 'Learn about TouchUp Hub, our mission, vision, and the values that drive our commitment to providing top-quality home maintenance services in Dubai.',
+  description: 'Learn about TouchUp, our mission, vision, and the values that drive our commitment to providing top-quality home maintenance services in Dubai.',
 };
 
 const values = [
@@ -30,7 +30,7 @@ export default function AboutPage() {
     <>
       <section className="bg-primary text-primary-foreground py-20">
         <div className="container text-center">
-          <h1 className="text-4xl md:text-5xl font-bold font-headline">About TouchUp Hub</h1>
+          <h1 className="text-4xl md:text-5xl font-bold font-headline">About TouchUp</h1>
           <p className="mt-4 text-lg max-w-3xl mx-auto">
             Your dedicated partner in home maintenance, committed to quality and excellence.
           </p>
@@ -43,7 +43,7 @@ export default function AboutPage() {
             <div className="space-y-6">
               <h2 className="text-3xl font-bold font-headline text-primary">Who We Are</h2>
               <p className="text-muted-foreground">
-                TouchUp Hub was founded with a simple mission: to make professional home maintenance services accessible and hassle-free for everyone in Dubai. With years of experience in the industry, our founders noticed a gap in the market for a reliable, customer-centric service provider that homeowners and businesses could truly depend on.
+                TouchUp was founded with a simple mission: to make professional home maintenance services accessible and hassle-free for everyone in Dubai. With years of experience in the industry, our founders noticed a gap in the market for a reliable, customer-centric service provider that homeowners and businesses could truly depend on.
               </p>
               <p className="text-muted-foreground">
                 Today, we are a leading name in home maintenance, with a growing team of skilled, certified, and passionate technicians. We are proud to have served over 500 homes and businesses, building a reputation for quality, integrity, and exceptional customer care.
@@ -52,7 +52,7 @@ export default function AboutPage() {
             <div>
               <Image
                 src="https://placehold.co/600x400.png"
-                alt="TouchUp Hub team"
+                alt="TouchUp team"
                 width={600}
                 height={400}
                 className="rounded-lg shadow-xl"
