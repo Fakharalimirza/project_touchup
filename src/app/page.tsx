@@ -57,7 +57,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[60vh] md:h-[70vh] w-full flex items-center justify-center text-center text-white">
         <Image
-          src="https://placehold.co/1920x1080.png"
+          src="https://touchup.ae/wp-content/uploads/2023/10/test.jpg"
           alt="Technician working on an air conditioner"
           fill
           className="object-cover"
