@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { services, Service } from '@/lib/data';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Check } from 'lucide-react';
 import type { Metadata } from 'next';
 
 type Props = {
@@ -49,7 +49,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
             </Link>
           </Button>
         </div>
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
           <div>
             <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg">
               <Image
@@ -65,6 +65,21 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
             <span className="text-primary font-semibold">SERVICE</span>
             <h1 className="text-4xl md:text-5xl font-bold font-headline">{service.title}</h1>
             <p className="text-lg text-muted-foreground">{service.details}</p>
+
+            {service.subServices && service.subServices.length > 0 && (
+              <div className="pt-4 space-y-4">
+                <h3 className="text-2xl font-semibold font-headline text-primary">Our Offerings</h3>
+                <ul className="space-y-3">
+                  {service.subServices.map((sub, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-accent mt-1 shrink-0" />
+                      <span className="text-muted-foreground">{sub}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            
             <Button asChild size="lg">
               <Link href={`/booking?service=${service.slug}`}>Book This Service</Link>
             </Button>

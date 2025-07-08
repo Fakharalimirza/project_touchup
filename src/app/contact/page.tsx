@@ -8,13 +8,13 @@ import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Contact Us',
-  description: 'Get in touch with TouchUp Hub. Find our contact details, office location, and send us a message through our contact form. We are here to help!',
+  description: 'Get in touch with TouchUp. Find our contact details, office location, and send us a message through our contact form. We are here to help!',
 };
 
 const contactDetails = [
-  { icon: Phone, text: '+971 (0)4 123 4567', href: 'tel:+97141234567' },
-  { icon: Mail, text: 'contact@touchup.ae', href: 'mailto:contact@touchup.ae' },
-  { icon: MapPin, text: '123 Maintenance Ave, Business Bay, Dubai' },
+  { icon: Phone, text: '+971 54 531 4170', href: 'tel:+971545314170' },
+  { icon: Mail, text: 'info@touchup.ae', href: 'mailto:info@touchup.ae' },
+  { icon: MapPin, text: <a href="https://maps.app.goo.gl/j2K9xckTiutBcczi7" className="hover:text-primary">A202 - Sport Society Mall - Mirdif - Dubai</a> },
 ];
 
 export default function ContactPage() {
@@ -63,13 +63,17 @@ export default function ContactPage() {
               ))}
               <div className="flex items-center gap-4">
                 <Clock className="h-6 w-6 text-primary" />
-                <span className="text-muted-foreground">Sat - Thu: 8 AM - 6 PM</span>
+                <ul>
+                <li><strong>Mon - Fri:</strong> 10:00 AM - 6:30 PM</li>
+                <li><strong>Saturday:</strong> 10:00 AM - 3:00 PM</li>
+                <li><strong>Sunday:</strong> Closed</li>
+                </ul>
               </div>
             </CardContent>
           </Card>
 
           <Button asChild size="lg" className="w-full bg-green-500 hover:bg-green-600">
-            <a href="https://wa.me/971501234567" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+            <a href="https://wa.me/+971545314170" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
           </Button>
           
           <div className="relative aspect-video rounded-lg overflow-hidden shadow-md">

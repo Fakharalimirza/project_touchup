@@ -60,15 +60,15 @@ export default function Footer() {
             <ul className="space-y-3 text-muted-foreground">
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-1 shrink-0" />
-                <span>123 Maintenance Ave, Business Bay, Dubai, UAE</span>
+                <a href="https://maps.app.goo.gl/j2K9xckTiutBcczi7" className="hover:text-primary">A202 - Sport Society Mall - Mirdif - Dubai</a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 shrink-0" />
-                <a href="mailto:contact@touchup.ae" className="hover:text-primary">contact@touchup.ae</a>
+                <a href="mailto:info@touchup.ae" className="hover:text-primary">info@touchup.ae</a>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 shrink-0" />
-                <a href="tel:+971041234567" className="hover:text-primary">+971 (0)4 123 4567</a>
+                <a href="tel:+971545314170" className="hover:text-primary">+971 54 531 4170</a>
               </li>
             </ul>
           </div>
@@ -77,8 +77,9 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Office Hours</h3>
             <ul className="space-y-2 text-muted-foreground">
-                <li><strong>Sat - Thu:</strong> 8:00 AM - 6:00 PM</li>
-                <li><strong>Friday:</strong> Closed</li>
+                <li><strong>Mon - Fri:</strong> 10:00 AM - 6:30 PM</li>
+                <li><strong>Saturday:</strong> 10:00 AM - 3:00 PM</li>
+                <li><strong>Sunday:</strong> Closed</li>
             </ul>
           </div>
         </div>
