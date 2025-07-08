@@ -506,9 +506,11 @@ export default function BookingForm() {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Confirm Detected Address</AlertDialogTitle>
-            <AlertDialogDescription>
-              Is the following address approximately correct? Please fill in your specific apartment or villa number manually.
-              <div className="font-semibold text-foreground mt-2">{detectedAddressString}</div>
+            <AlertDialogDescription asChild>
+              <div>
+                Is the following address approximately correct? Please fill in your specific apartment or villa number manually.
+                <div className="font-semibold text-foreground mt-2">{detectedAddressString}</div>
+              </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
