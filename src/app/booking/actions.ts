@@ -1,7 +1,9 @@
 'use server';
 
 import { z } from 'zod';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
+import { render } from '@react-email/render';
+
 import AdminBookingNoticeEmail from '@/emails/admin-booking-notice';
 import CustomerConfirmationEmail from '@/emails/customer-confirmation';
 
@@ -25,7 +27,16 @@ const bookingSchema = z.object({
 
 export type BookingFormValues = z.infer<typeof bookingSchema>;
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Create a transporter object using the default SMTP transport
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: parseInt(process.env.SMTP_PORT || '587', 10),
+  secure: parseInt(process.env.SMTP_PORT || '587', 10) === 465, // true for 465, false for other ports
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+});
 
 export async function submitBooking(data: BookingFormValues) {
   const validatedData = bookingSchema.safeParse(data);
@@ -35,21 +46,24 @@ export async function submitBooking(data: BookingFormValues) {
     return { success: false, error: 'Invalid data provided.' };
   }
 
+  const adminEmailHtml = render(AdminBookingNoticeEmail({ data: validatedData.data }));
+  const customerEmailHtml = render(CustomerConfirmationEmail({ name: validatedData.data.name, data: validatedData.data }));
+
   try {
     // Send email to admin
-    await resend.emails.send({
-      from: 'TouchUp Booking <booking@touchup.ae>',
-      to: 'info@touchup.ae',
+    await transporter.sendMail({
+      from: `"TouchUp Booking" <${process.env.SMTP_FROM_EMAIL}>`,
+      to: process.env.ADMIN_EMAIL,
       subject: `New Booking Request - ${validatedData.data.service}`,
-      react: AdminBookingNoticeEmail({ data: validatedData.data }),
+      html: adminEmailHtml,
     });
 
     // Send confirmation email to customer
-    await resend.emails.send({
-      from: 'TouchUp Hub <booking@touchup.ae>',
+    await transporter.sendMail({
+      from: `"TouchUp Hub" <${process.env.SMTP_FROM_EMAIL}>`,
       to: validatedData.data.email,
       subject: 'Your Booking Request with TouchUp Hub has been received!',
-      react: CustomerConfirmationEmail({ name: validatedData.data.name, data: validatedData.data }),
+      html: customerEmailHtml,
     });
 
     return { success: true };
