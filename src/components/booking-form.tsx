@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -75,6 +75,7 @@ const timeSlots = [
 
 export default function BookingForm() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const defaultService = searchParams.get('service') || '';
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -118,9 +119,12 @@ export default function BookingForm() {
       if (result.success) {
         toast({
           title: 'Booking Request Sent!',
-          description: 'Thank you! We have received your request and will contact you shortly to confirm.',
+          description: 'Thank you! We will contact you shortly to confirm. Redirecting to homepage in 5 seconds.',
         });
         form.reset();
+        setTimeout(() => {
+          router.push('/');
+        }, 5000);
       } else {
         toast({
           variant: 'destructive',
@@ -579,3 +583,4 @@ export default function BookingForm() {
     </Card>
   );
 }
+    
