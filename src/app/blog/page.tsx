@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Blog & Tips',
@@ -46,23 +45,6 @@ export default function BlogPage() {
           Expert advice and insights to help you keep your home in top shape.
         </p>
       </div>
-
-      <Card className="mb-12 bg-primary/5 border-primary/20">
-        <CardContent className="p-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <Sparkles className="h-10 w-10 text-primary" />
-            <div>
-              <h2 className="text-xl font-semibold">AI Blog Title Generator</h2>
-              <p className="text-muted-foreground">Struggling with a title for your post? Try our AI tool!</p>
-            </div>
-          </div>
-          <Button asChild>
-            <Link href="/blog/title-generator">
-              Generate Title <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
-        </CardContent>
-      </Card>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogPosts.map((post) => (
