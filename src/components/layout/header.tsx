@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -27,7 +28,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-primary">
-          <Image src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" alt="TouchUp Hub Logo" width={50} height={40} className="object-contain" />
+          <Image src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" alt="TouchUp Hub Logo" width={150} height={40} className="object-contain" />
         </Link>
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
@@ -43,7 +44,8 @@ export default function Header() {
             </Link>
           ))}
         </nav>
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-2">
+          <ThemeToggle />
           <Button asChild>
             <Link href="/booking">Book Now</Link>
           </Button>
@@ -79,9 +81,12 @@ export default function Header() {
                     {link.label}
                   </Link>
                 ))}
-                <Button asChild className="mt-4" onClick={closeSheet}>
-                  <Link href="/booking">Book Now</Link>
-                </Button>
+                 <div className="flex items-center gap-2">
+                  <ThemeToggle />
+                  <Button asChild className="w-full" onClick={closeSheet}>
+                    <Link href="/booking">Book Now</Link>
+                  </Button>
+                </div>
               </div>
             </SheetContent>
           </Sheet>
