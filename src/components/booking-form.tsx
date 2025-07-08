@@ -2,6 +2,7 @@
 "use client";
 
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -22,24 +23,30 @@ import { useToast } from '@/hooks/use-toast';
 import { services } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
+import { Checkbox } from '@/components/ui/checkbox';
+import { submitBooking } from '@/app/booking/actions';
+
 
 const bookingSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
   email: z.string().email({ message: 'Please enter a valid email address.' }),
   phone: z.string().min(9, { message: 'Please enter a valid phone number.' }),
-  service: z.string({ required_error: 'Please select a service.' }),
+  service: z.string().min(1, { message: 'Please select a service.' }),
   propertyType: z.enum(['residential', 'commercial'], {
     required_error: 'You need to select a property type.',
   }),
-  specificPropertyType: z.string({ required_error: 'Please select the property details.' }),
+  specificPropertyType: z.string().min(1, { message: 'Please select the property details.' }),
   date: z.date({ required_error: 'Please select a date.' }),
-  time: z.string({ required_error: 'Please select a time slot.' }),
+  time: z.string().min(1, { message: 'Please select a time slot.' }),
   apartmentVilla: z.string().min(1, { message: 'Please enter your apartment/villa number.' }),
   building: z.string().min(2, { message: 'Please enter your building/villa name.' }),
   street: z.string().min(3, { message: 'Please enter a valid street.' }),
   area: z.string().min(3, { message: 'Please enter a valid area.' }),
   city: z.string().min(2, { message: 'Please enter a valid city.' }),
   instructions: z.string().optional(),
+  terms: z.boolean().refine((val) => val === true, {
+    message: 'You must accept the terms and conditions.',
+  }),
 });
 
 type BookingFormValues = z.infer<typeof bookingSchema>;
@@ -70,6 +77,7 @@ export default function BookingForm() {
   const searchParams = useSearchParams();
   const defaultService = searchParams.get('service') || '';
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isCalendarOpen, setCalendarOpen] = React.useState(false);
   const [isDetectingLocation, setIsDetectingLocation] = React.useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = React.useState(false);
@@ -90,6 +98,7 @@ export default function BookingForm() {
       street: '',
       area: '',
       city: 'Dubai',
+      terms: false,
     },
   });
 
@@ -102,13 +111,33 @@ export default function BookingForm() {
   }, [propertyType, form]);
 
 
-  function onSubmit(data: BookingFormValues) {
-    console.log(data);
-    toast({
-      title: 'Booking Request Sent!',
-      description: 'Thank you! We have received your request and will contact you shortly to confirm.',
-    });
-    form.reset();
+  async function onSubmit(data: BookingFormValues) {
+    setIsSubmitting(true);
+    try {
+      const result = await submitBooking(data);
+      if (result.success) {
+        toast({
+          title: 'Booking Request Sent!',
+          description: 'Thank you! We have received your request and will contact you shortly to confirm.',
+        });
+        form.reset();
+      } else {
+        toast({
+          variant: 'destructive',
+          title: 'Submission Failed',
+          description: result.error || 'An unexpected error occurred. Please try again.',
+        });
+      }
+    } catch (error) {
+      console.error("Submission Error:", error);
+      toast({
+        variant: 'destructive',
+        title: 'Submission Error',
+        description: 'Something went wrong. Please check your connection and try again.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   const handleDetectLocation = async () => {
@@ -497,8 +526,32 @@ export default function BookingForm() {
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="terms"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel>
+                      I agree to the <Link href="/terms-and-conditions" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">Terms and Conditions</Link>.
+                    </FormLabel>
+                    <FormMessage />
+                  </div>
+                </FormItem>
+              )}
+            />
             
-            <Button type="submit" size="lg" className="w-full">Submit Booking Request</Button>
+            <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+              {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isSubmitting ? 'Submitting...' : 'Submit Booking Request'}
+            </Button>
           </form>
         </Form>
       </CardContent>
