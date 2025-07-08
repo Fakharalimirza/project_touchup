@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -57,10 +57,15 @@ export default function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right">
-              <div className="flex flex-col gap-6 p-6">
-                <Link href="/" className="flex items-center gap-2 font-bold text-primary mb-4" onClick={closeSheet}>
-                   <Image src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" alt="TouchUp Hub Logo" width={150} height={40} className="object-contain" />
-                </Link>
+              <SheetHeader>
+                <SheetTitle>
+                   <Link href="/" className="flex items-center gap-2 font-bold text-primary mb-4" onClick={closeSheet}>
+                     <Image src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" alt="TouchUp Hub Logo" width={150} height={40} className="object-contain" />
+                  </Link>
+                </SheetTitle>
+                <SheetDescription className="sr-only">Main navigation menu</SheetDescription>
+              </SheetHeader>
+              <div className="flex flex-col gap-6 mt-4">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
