@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useSearchParams } from 'next/navigation';
@@ -64,6 +65,7 @@ export default function BookingForm() {
   const searchParams = useSearchParams();
   const defaultService = searchParams.get('service') || '';
   const { toast } = useToast();
+  const [isCalendarOpen, setCalendarOpen] = React.useState(false);
 
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(bookingSchema),
@@ -237,7 +239,7 @@ export default function BookingForm() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Preferred Date</FormLabel>
-                    <Popover>
+                    <Popover open={isCalendarOpen} onOpenChange={setCalendarOpen}>
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
@@ -260,7 +262,10 @@ export default function BookingForm() {
                         <Calendar
                           mode="single"
                           selected={field.value}
-                          onSelect={field.onChange}
+                          onSelect={(date) => {
+                            field.onChange(date);
+                            setCalendarOpen(false);
+                          }}
                           disabled={(date) => date < new Date(new Date().setHours(0,0,0,0))}
                           initialFocus
                         />
