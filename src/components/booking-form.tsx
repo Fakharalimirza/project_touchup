@@ -235,7 +235,7 @@ export default function BookingForm() {
                 control={form.control}
                 name="date"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem>
                     <FormLabel>Preferred Date</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
