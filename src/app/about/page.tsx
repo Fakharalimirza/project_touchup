@@ -29,7 +29,7 @@ export default function AboutPage() {
   return (
     <>
       <section className="bg-primary text-primary-foreground py-20">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container text-center">
           <h1 className="text-4xl md:text-5xl font-bold font-headline">About TouchUp Hub</h1>
           <p className="mt-4 text-lg max-w-3xl mx-auto">
             Your dedicated partner in home maintenance, committed to quality and excellence.
@@ -38,7 +38,7 @@ export default function AboutPage() {
       </section>
       
       <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
+        <div className="container">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <h2 className="text-3xl font-bold font-headline text-primary">Who We Are</h2>
@@ -64,7 +64,7 @@ export default function AboutPage() {
       </section>
 
       <section className="bg-card py-16 md:py-24">
-        <div className="container mx-auto px-4">
+        <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {values.map((value) => (
               <div key={value.title} className="text-center p-6">

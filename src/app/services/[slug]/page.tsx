@@ -40,7 +40,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
   return (
     <div className="bg-card">
-      <div className="container mx-auto px-4 py-16">
+      <div className="container py-16">
         <div className="mb-8">
           <Button asChild variant="ghost">
             <Link href="/services" className="flex items-center gap-2 text-muted-foreground">

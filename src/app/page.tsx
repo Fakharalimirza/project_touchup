@@ -60,7 +60,7 @@ export default function Home() {
           src="https://touchup.ae/wp-content/uploads/2023/10/test.jpg"
           alt="Technician working on an air conditioner"
           fill
-          className="object-fit"
+          className="object-cover"
           priority
           data-ai-hint="cleaning team"
         />
@@ -80,7 +80,7 @@ export default function Home() {
 
       {/* Services Overview */}
       <section id="services" className="py-16 md:py-24 bg-card">
-        <div className="container mx-auto px-4">
+        <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">Our Services</h2>
             <p className="text-lg text-muted-foreground mt-2 max-w-2xl mx-auto">
@@ -110,7 +110,7 @@ export default function Home() {
 
       {/* Why Choose Us */}
       <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
+        <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">Why Choose Us?</h2>
             <p className="text-lg text-muted-foreground mt-2">
@@ -133,7 +133,7 @@ export default function Home() {
 
       {/* Testimonials Section */}
       <section className="py-16 md:py-24 bg-card">
-        <div className="container mx-auto px-4">
+        <div className="container">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">What Our Clients Say</h2>
             <p className="text-lg text-muted-foreground mt-2">
@@ -171,7 +171,7 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
+        <div className="container text-center">
           <h2 className="text-3xl font-bold font-headline mb-4">Ready for a Spotless Home?</h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto">
             Let our experts take care of your home maintenance needs. Get a free quote or book your service online today!
