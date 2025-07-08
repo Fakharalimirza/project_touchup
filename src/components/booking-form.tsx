@@ -21,6 +21,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { services } from '@/lib/data';
 import { cn } from '@/lib/utils';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 
 const bookingSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -33,7 +34,11 @@ const bookingSchema = z.object({
   specificPropertyType: z.string({ required_error: 'Please select the property details.' }),
   date: z.date({ required_error: 'Please select a date.' }),
   time: z.string({ required_error: 'Please select a time slot.' }),
-  address: z.string().min(10, { message: 'Address must be at least 10 characters.' }),
+  apartmentVilla: z.string().min(1, { message: 'Please enter your apartment/villa number.' }),
+  building: z.string().min(2, { message: 'Please enter your building/villa name.' }),
+  street: z.string().min(3, { message: 'Please enter a valid street.' }),
+  area: z.string().min(3, { message: 'Please enter a valid area.' }),
+  city: z.string().min(2, { message: 'Please enter a valid city.' }),
   instructions: z.string().optional(),
 });
 
@@ -67,6 +72,8 @@ export default function BookingForm() {
   const { toast } = useToast();
   const [isCalendarOpen, setCalendarOpen] = React.useState(false);
   const [isDetectingLocation, setIsDetectingLocation] = React.useState(false);
+  const [showConfirmDialog, setShowConfirmDialog] = React.useState(false);
+  const [detectedAddressString, setDetectedAddressString] = React.useState('');
 
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(bookingSchema),
@@ -79,6 +86,11 @@ export default function BookingForm() {
       instructions: '',
       specificPropertyType: '',
       time: '',
+      apartmentVilla: '',
+      building: '',
+      street: '',
+      area: '',
+      city: 'Dubai',
     },
   });
 
@@ -118,16 +130,17 @@ export default function BookingForm() {
         try {
           // Using OpenStreetMap's free Nominatim reverse geocoding service
           const response = await fetch(
-            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`
           );
           if (!response.ok) throw new Error('Failed to fetch address');
           const data = await response.json();
-          if (data && data.display_name) {
-            form.setValue('address', data.display_name, { shouldValidate: true });
-            toast({
-              title: 'Location Detected',
-              description: 'Your address has been filled in.',
-            });
+          if (data && data.display_name && data.address) {
+            form.setValue('street', data.address.road || '', { shouldValidate: true });
+            form.setValue('area', data.address.suburb || data.address.neighbourhood || '', { shouldValidate: true });
+            form.setValue('city', data.address.city || 'Dubai', { shouldValidate: true });
+            form.setValue('building', data.address.building || data.address.house_number || '', { shouldValidate: true });
+            setDetectedAddressString(data.display_name);
+            setShowConfirmDialog(true);
           } else {
             throw new Error('Could not find address');
           }
@@ -163,6 +176,25 @@ export default function BookingForm() {
       }
     );
   };
+
+  const handleConfirmCancel = () => {
+    form.setValue('street', '', { shouldValidate: false });
+    form.setValue('area', '', { shouldValidate: false });
+    form.setValue('city', 'Dubai', { shouldValidate: false });
+    form.setValue('building', '', { shouldValidate: false });
+    form.setValue('apartmentVilla', '', { shouldValidate: false });
+    toast({
+      title: 'Address Cleared',
+      description: 'Please enter your address manually.',
+    });
+  }
+
+  const handleConfirmAction = () => {
+    toast({
+        title: 'Address Confirmed',
+        description: 'Please double-check and fill in any missing details like your apartment number.',
+    });
+  }
 
   return (
     <Card>
@@ -366,12 +398,8 @@ export default function BookingForm() {
               />
             </div>
             
-            <FormField
-              control={form.control}
-              name="address"
-              render={({ field }) => (
-                <FormItem>
-                   <div className="flex justify-between items-center">
+            <div className="space-y-4">
+                <div className="flex justify-between items-center">
                     <FormLabel>Full Address</FormLabel>
                     <Button
                       type="button"
@@ -387,14 +415,75 @@ export default function BookingForm() {
                       )}
                       Detect
                     </Button>
-                  </div>
-                  <FormControl>
-                    <Textarea placeholder="Villa 123, Street 45, Your Area, Dubai" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <FormField
+                        control={form.control}
+                        name="apartmentVilla"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className="text-xs text-muted-foreground">Apt / Villa No.</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="e.g. 1204 or Villa 5" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="building"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className="text-xs text-muted-foreground">Building / Villa Name</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="e.g. Marina Tower" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="street"
+                        render={({ field }) => (
+                            <FormItem>
+                                 <FormLabel className="text-xs text-muted-foreground">Street</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="e.g. Al Safa St" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                     <FormField
+                        control={form.control}
+                        name="area"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className="text-xs text-muted-foreground">Area / Community</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="e.g. Dubai Marina" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                     <FormField
+                        control={form.control}
+                        name="city"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className="text-xs text-muted-foreground">City</FormLabel>
+                                <FormControl>
+                                    <Input {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                </div>
+            </div>
             
             <FormField
               control={form.control}
@@ -414,6 +503,25 @@ export default function BookingForm() {
           </form>
         </Form>
       </CardContent>
+      <AlertDialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirm Detected Address</AlertDialogTitle>
+            <AlertDialogDescription>
+              Is the following address approximately correct? Please fill in your specific apartment or villa number manually.
+              <p className="font-semibold text-foreground mt-2">{detectedAddressString}</p>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={handleConfirmCancel}>
+              No, Enter Manually
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={handleConfirmAction}>
+              Yes, Confirm
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Card>
   );
 }
