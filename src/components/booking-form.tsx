@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { format } from 'date-fns';
-import { Calendar as CalendarIcon } from 'lucide-react';
+import { Calendar as CalendarIcon, MapPin, Loader2 } from 'lucide-react';
 import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -66,6 +66,7 @@ export default function BookingForm() {
   const defaultService = searchParams.get('service') || '';
   const { toast } = useToast();
   const [isCalendarOpen, setCalendarOpen] = React.useState(false);
+  const [isDetectingLocation, setIsDetectingLocation] = React.useState(false);
 
   const form = useForm<BookingFormValues>({
     resolver: zodResolver(bookingSchema),
@@ -98,6 +99,70 @@ export default function BookingForm() {
     });
     form.reset();
   }
+
+  const handleDetectLocation = async () => {
+    setIsDetectingLocation(true);
+    if (!navigator.geolocation) {
+      toast({
+        variant: 'destructive',
+        title: 'Geolocation not supported',
+        description: 'Your browser does not support geolocation.',
+      });
+      setIsDetectingLocation(false);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        try {
+          // Using OpenStreetMap's free Nominatim reverse geocoding service
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+          );
+          if (!response.ok) throw new Error('Failed to fetch address');
+          const data = await response.json();
+          if (data && data.display_name) {
+            form.setValue('address', data.display_name, { shouldValidate: true });
+            toast({
+              title: 'Location Detected',
+              description: 'Your address has been filled in.',
+            });
+          } else {
+            throw new Error('Could not find address');
+          }
+        } catch (error) {
+          toast({
+            variant: 'destructive',
+            title: 'Error detecting location',
+            description: 'Could not fetch address details. Please enter manually.',
+          });
+        } finally {
+          setIsDetectingLocation(false);
+        }
+      },
+      (error) => {
+        let errorMessage = 'An unknown error occurred.';
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage = 'You denied the request for Geolocation.';
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = 'Location information is unavailable.';
+            break;
+          case error.TIMEOUT:
+            errorMessage = 'The request to get user location timed out.';
+            break;
+        }
+        toast({
+          variant: 'destructive',
+          title: 'Geolocation Error',
+          description: errorMessage,
+        });
+        setIsDetectingLocation(false);
+      }
+    );
+  };
 
   return (
     <Card>
@@ -232,7 +297,7 @@ export default function BookingForm() {
               />
             )}
             
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 gap-8 items-start">
               <FormField
                 control={form.control}
                 name="date"
@@ -306,7 +371,23 @@ export default function BookingForm() {
               name="address"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Full Address</FormLabel>
+                   <div className="flex justify-between items-center">
+                    <FormLabel>Full Address</FormLabel>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={handleDetectLocation}
+                      disabled={isDetectingLocation}
+                    >
+                      {isDetectingLocation ? (
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      ) : (
+                        <MapPin className="mr-2 h-4 w-4" />
+                      )}
+                      Detect
+                    </Button>
+                  </div>
                   <FormControl>
                     <Textarea placeholder="Villa 123, Street 45, Your Area, Dubai" {...field} />
                   </FormControl>
