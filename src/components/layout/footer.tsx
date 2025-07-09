@@ -21,9 +21,9 @@ export default function Footer() {
   return (
     <footer className="bg-card border-t">
       <div className="container py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About */}
-          <div className="space-y-4">
+          <div className="space-y-4 text-left">
             <Link href="/" className="flex items-center justify-start gap-2 font-bold text-primary">
                <Image src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" alt="TouchUp Hub Logo" width={150} height={40} className="object-contain" />
             </Link>
@@ -41,7 +41,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-4">
+          <div className="space-y-4 text-left">
             <h3 className="text-lg font-semibold">Quick Links</h3>
             <ul className="space-y-2">
               {quickLinks.map(link => (
@@ -55,7 +55,7 @@ export default function Footer() {
           </div>
 
           {/* Contact Info */}
-          <div className="space-y-4">
+          <div className="space-y-4 text-left">
             <h3 className="text-lg font-semibold">Contact Us</h3>
             <ul className="space-y-3 text-muted-foreground">
               <li className="flex items-start gap-3">
@@ -74,7 +74,7 @@ export default function Footer() {
           </div>
           
           {/* Office Hours */}
-          <div className="space-y-4">
+          <div className="space-y-4 text-left">
             <h3 className="text-lg font-semibold">Office Hours</h3>
             <ul className="space-y-2 text-muted-foreground">
                 <li><strong>Mon - Fri:</strong> 10:00 AM - 6:30 PM</li>
