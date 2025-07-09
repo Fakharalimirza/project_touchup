@@ -1,15 +1,17 @@
+
 "use client";
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetDescription } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from '@/components/theme-toggle';
+import LanguageSwitcher from '@/components/language-switcher';
 
 const navLinks = [
   { href: '/', key: 'home' },
@@ -22,9 +24,21 @@ const navLinks = [
 export default function Header() {
   const t = useTranslations('Header');
   const pathname = usePathname();
+  const locale = useLocale();
   const [isSheetOpen, setSheetOpen] = useState(false);
 
   const closeSheet = () => setSheetOpen(false);
+
+  const getIsActive = (href: string) => {
+    const localizedPath = `/${locale}${href === '/' ? '' : href}`;
+    
+    if (href === '/') {
+        return pathname === `/${locale}` || pathname === `/${locale}/`;
+    }
+
+    return pathname.startsWith(localizedPath);
+  };
+
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -40,7 +54,7 @@ export default function Header() {
               href={link.href}
               className={cn(
                 'text-sm font-medium transition-colors hover:text-primary',
-                pathname.endsWith(link.href) ? 'text-primary' : 'text-muted-foreground'
+                getIsActive(link.href) ? 'text-primary' : 'text-muted-foreground'
               )}
             >
               {t(link.key)}
@@ -48,6 +62,7 @@ export default function Header() {
           ))}
         </nav>
         <div className="hidden md:flex items-center gap-2">
+          <LanguageSwitcher />
           <ThemeToggle />
            <Button asChild size="icon" className="bg-green-500 hover:bg-green-600 text-white hover:text-white/90">
             <a href="https://wa.me/+971545314170" target="_blank" rel="noopener noreferrer" aria-label={t('whatsApp')}>
@@ -97,7 +112,7 @@ export default function Header() {
                       onClick={closeSheet}
                       className={cn(
                         'text-lg font-medium transition-colors hover:text-primary',
-                        pathname.endsWith(link.href) ? 'text-primary' : 'text-muted-foreground'
+                        getIsActive(link.href) ? 'text-primary' : 'text-muted-foreground'
                       )}
                     >
                       {t(link.key)}
@@ -126,7 +141,8 @@ export default function Header() {
                     <Button asChild className="w-full" onClick={closeSheet}>
                       <Link href="/booking">{t('bookNow')}</Link>
                     </Button>
-                    <div className="flex justify-center mt-2">
+                    <div className="flex justify-center mt-2 gap-2">
+                      <LanguageSwitcher />
                       <ThemeToggle />
                     </div>
                 </div>
