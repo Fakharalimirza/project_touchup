@@ -77,7 +77,7 @@
         "table_chair": "Painting Table or Chair"
       }
     },
-    "electrical": {
+    "electrical-repair": {
       "title": "Electrical Work",
       "description": "Safe and reliable electrical services, from minor repairs to complete wiring solutions.",
       "details": "Our certified electricians handle all types of electrical work, including fixing short circuits, installing new light fixtures, socket replacements, and comprehensive electrical safety checks for your home or office.",
@@ -110,7 +110,7 @@
         "shower_head": "Replacement of Shower Head or Pipe"
       }
     },
-    "cleaning": {
+    "cleaning-services": {
       "title": "Cleaning Services",
       "description": "Thorough cleaning services for homes and offices, leaving your space spotless and fresh.",
       "details": "Our cleaning service covers every nook and cranny of your property. We use eco-friendly products and professional equipment to ensure a healthy environment.",
@@ -121,7 +121,7 @@
         "hourly": "Hourly Cleaning (1 Hour)"
       }
     },
-    "pest_control": {
+    "pest-control": {
       "title": "Pest Control",
       "description": "Effective and safe pest control solutions to protect your home from unwanted intruders.",
       "details": "We provide comprehensive pest control services for common pests in Dubai like cockroaches, ants, bed bugs, and rodents. Our treatments are safe for your family and pets, ensuring a pest-free environment.",
@@ -135,5 +135,126 @@
     "service": "SERVICE",
     "ourOfferings": "Our Offerings",
     "bookThisService": "Book This Service"
+  },
+  "AboutPage": {
+    "title": "About TouchUp",
+    "subtitle": "Your dedicated partner in home maintenance, committed to quality and excellence.",
+    "whoWeAreTitle": "Who We Are",
+    "whoWeAreP1": "TouchUp was founded with a simple mission: to make professional home maintenance services accessible and hassle-free for everyone in Dubai. With years of experience in the industry, our founders noticed a gap in the market for a reliable, customer-centric service provider that homeowners and businesses could truly depend on.",
+    "whoWeAreP2": "Today, we are a leading name in home maintenance, with a growing team of skilled, certified, and passionate technicians. We are proud to have served over 500 homes and businesses, building a reputation for quality, integrity, and exceptional customer care.",
+    "missionTitle": "Our Mission",
+    "missionText": "To provide reliable, high-quality, and affordable home maintenance and cleaning solutions that exceed our clients' expectations, ensuring their spaces are safe, comfortable, and pristine.",
+    "visionTitle": "Our Vision",
+    "visionText": "To be Dubai's most trusted and sought-after home services company, known for our professionalism, efficiency, and unwavering commitment to customer satisfaction.",
+    "valuesTitle": "Our Values",
+    "valuesText": "We operate with integrity, professionalism, and a strong work ethic. We believe in building long-term relationships with our clients based on trust and exceptional service."
+  },
+  "BlogPage": {
+    "title": "Blog & Maintenance Tips",
+    "subtitle": "Expert advice and insights to help you keep your home in top shape.",
+    "readMore": "Read More"
+  },
+  "BlogPosts": {
+    "ac_maintenance_tips": {
+      "title": "Top 5 AC Maintenance Tips for the Dubai Heat",
+      "excerpt": "Keep your cool this summer with these essential tips for maintaining your air conditioning unit. A little care goes a long way!",
+      "date": "July 15, 2024"
+    },
+    "choosing_paint": {
+      "title": "How to Choose the Right Paint for Your Dubai Home",
+      "excerpt": "Picking the right paint is more than just color. Learn about different types of paint and what works best for the local climate.",
+      "date": "July 10, 2024"
+    },
+    "common_plumbing_issues": {
+      "title": "DIY Fixes for Common Plumbing Issues (and When to Call a Pro)",
+      "excerpt": "A leaky faucet? A slow drain? Here are some simple fixes you can try yourself, and how to know when it's time to call TouchUp Hub.",
+      "date": "July 5, 2024"
+    }
+  },
+  "ContactPage": {
+    "title": "Get In Touch",
+    "subtitle": "We're here to help with all your maintenance needs. Reach out to us via phone, email, or the form below.",
+    "formTitle": "Send Us a Message",
+    "namePlaceholder": "Your Name",
+    "emailPlaceholder": "Your Email",
+    "subjectPlaceholder": "Subject",
+    "messagePlaceholder": "Your Message",
+    "sendButton": "Send Message",
+    "infoTitle": "Contact Information",
+    "workHours": {
+      "mon_fri": "Mon - Fri:",
+      "sat": "Saturday:",
+      "sun": "Sunday:"
+    },
+    "workHoursTime": {
+      "mon_fri": "10:00 AM - 6:30 PM",
+      "sat": "10:00 AM - 3:00 PM",
+      "sun": "Closed"
+    },
+    "chatOnWhatsApp": "Chat on WhatsApp"
+  },
+  "BookingPage": {
+    "title": "Book a Service",
+    "subtitle": "Fill out the form below to schedule your service. We'll get back to you to confirm your appointment.",
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "John Doe",
+      "email": "Email Address",
+      "emailPlaceholder": "you@example.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+971 50 123 4567",
+      "service": "Service Required",
+      "servicePlaceholder": "Select a service",
+      "propertyType": "Property Type",
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "propertyDetails": "Property Details",
+      "businessType": "Business Type",
+      "propertyDetailsPlaceholder": "Select a property type",
+      "businessTypePlaceholder": "Select a business type",
+      "preferredDate": "Preferred Date",
+      "pickDate": "Pick a date",
+      "preferredTime": "Preferred Time",
+      "timePlaceholder": "Select a time slot",
+      "fullAddress": "Full Address",
+      "detectButton": "Detect",
+      "detectingButton": "Detecting...",
+      "aptNo": "Apt / Villa No.",
+      "aptNoPlaceholder": "e.g. 1204 or Villa 5",
+      "buildingName": "Building / Villa Name",
+      "buildingNamePlaceholder": "e.g. Marina Tower",
+      "street": "Street",
+      "streetPlaceholder": "e.g. Al Safa St",
+      "area": "Area / Community",
+      "areaPlaceholder": "e.g. Dubai Marina",
+      "city": "City",
+      "specialInstructions": "Special Instructions (Optional)",
+      "specialInstructionsPlaceholder": "e.g., Please call before arrival.",
+      "terms": "I agree to the",
+      "termsLink": "Terms and Conditions",
+      "submitButton": "Submit Booking Request",
+      "submittingButton": "Submitting...",
+      "successTitle": "Booking Request Sent!",
+      "successDescription": "Thank you! We will contact you shortly to confirm. Redirecting to homepage in 5 seconds.",
+      "failTitle": "Submission Failed",
+      "failDescription": "An unexpected error occurred. Please try again.",
+      "errorTitle": "Submission Error",
+      "errorDescription": "Something went wrong. Please check your connection and try again.",
+      "geoErrorTitle": "Geolocation Error",
+      "geoErrorDenied": "You denied the request for Geolocation.",
+      "geoErrorUnavailable": "Location information is unavailable.",
+      "geoErrorTimeout": "The request to get user location timed out.",
+      "geoErrorUnknown": "An unknown error occurred.",
+      "geoDetectErrorTitle": "Error detecting location",
+      "geoDetectErrorDescription": "Could not fetch address details. Please enter manually.",
+      "addressConfirmTitle": "Confirm Detected Address",
+      "addressConfirmDescription": "Is the following address approximately correct? Please fill in any specific apartment or villa number manually.",
+      "addressConfirmCancel": "No, Enter Manually",
+      "addressConfirmAction": "Yes, Confirm",
+      "addressClearedTitle": "Address Cleared",
+      "addressClearedDescription": "Please enter your address manually.",
+      "addressConfirmedTitle": "Address Confirmed",
+      "addressConfirmedDescription": "Please double-check and fill in any missing details like your apartment number."
+    }
   }
 }

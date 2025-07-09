@@ -4,11 +4,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
-export const metadata: Metadata = {
-  title: 'Contact Us',
-  description: 'Get in touch with TouchUp. Find our contact details, office location, and send us a message through our contact form. We are here to help!',
-};
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: 'ContactPage' });
+ 
+  return {
+    title: t('title'),
+    description: t('subtitle'),
+  };
+}
 
 const contactDetails = [
   { icon: Phone, text: '+971 54 531 4170', href: 'tel:+971545314170' },
@@ -16,13 +21,14 @@ const contactDetails = [
   { icon: MapPin, text: 'A202 - Sport Society Mall - Mirdif - Dubai', href: 'https://maps.app.goo.gl/j2K9xckTiutBcczi7' },
 ];
 
-export default function ContactPage() {
+export default async function ContactPage({ params: { locale } }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale, namespace: 'ContactPage' });
   return (
     <div className="container py-16">
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">Get In Touch</h1>
+        <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">{t('title')}</h1>
         <p className="text-lg text-muted-foreground mt-4 max-w-3xl mx-auto">
-          We're here to help with all your maintenance needs. Reach out to us via phone, email, or the form below.
+          {t('subtitle')}
         </p>
       </div>
 
@@ -30,15 +36,15 @@ export default function ContactPage() {
         {/* Contact Form */}
         <Card className="flex flex-col">
           <CardHeader>
-            <CardTitle className="font-headline text-2xl text-center">Send Us a Message</CardTitle>
+            <CardTitle className="font-headline text-2xl text-center">{t('formTitle')}</CardTitle>
           </CardHeader>
           <CardContent className="flex-grow flex flex-col">
             <form className="space-y-4 flex flex-col flex-grow">
-              <Input placeholder="Your Name" />
-              <Input type="email" placeholder="Your Email" />
-              <Input placeholder="Subject" />
-              <Textarea placeholder="Your Message" rows={5} className="flex-grow" />
-              <Button type="submit" className="w-full" size="lg">Send Message</Button>
+              <Input placeholder={t('namePlaceholder')} />
+              <Input type="email" placeholder={t('emailPlaceholder')} />
+              <Input placeholder={t('subjectPlaceholder')} />
+              <Textarea placeholder={t('messagePlaceholder')} rows={5} className="flex-grow" />
+              <Button type="submit" className="w-full" size="lg">{t('sendButton')}</Button>
             </form>
           </CardContent>
         </Card>
@@ -46,7 +52,7 @@ export default function ContactPage() {
         {/* Contact Details */}
         <Card className="flex flex-col">
           <CardHeader className="text-center">
-            <CardTitle className="font-headline text-2xl">Contact Information</CardTitle>
+            <CardTitle className="font-headline text-2xl">{t('infoTitle')}</CardTitle>
           </CardHeader>
           <CardContent className="flex-grow flex flex-col items-center justify-around p-6 text-lg">
             {contactDetails.map((item, index) => (
@@ -58,9 +64,9 @@ export default function ContactPage() {
             <div className="flex flex-col items-center gap-3 text-muted-foreground">
               <Clock className="h-8 w-8 text-primary" />
               <ul className="text-center">
-                <li><strong>Mon - Fri:</strong> 10:00 AM - 6:30 PM</li>
-                <li><strong>Saturday:</strong> 10:00 AM - 3:00 PM</li>
-                <li><strong>Sunday:</strong> Closed</li>
+                <li><strong>{t('workHours.mon_fri')}</strong> {t('workHoursTime.mon_fri')}</li>
+                <li><strong>{t('workHours.sat')}</strong> {t('workHoursTime.sat')}</li>
+                <li><strong>{t('workHours.sun')}</strong> {t('workHoursTime.sun')}</li>
               </ul>
             </div>
             <Button asChild size="lg" className="w-full max-w-xs bg-green-500 hover:bg-green-600">
@@ -78,7 +84,7 @@ export default function ContactPage() {
                     d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.8 0-65.7-11.8-90.3-32.5l-6.7-4-67.1 17.5L52.4 352l-4.4-7c-18.6-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
                   ></path>
                 </svg>
-                Chat on WhatsApp
+                {t('chatOnWhatsApp')}
               </a>
             </Button>
           </CardContent>

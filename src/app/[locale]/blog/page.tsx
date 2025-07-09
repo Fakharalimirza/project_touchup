@@ -3,69 +3,57 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
-export const metadata: Metadata = {
-  title: 'Blog & Tips',
-  description: 'Find helpful tips, maintenance advice, and company news on the TouchUp Hub blog. Your resource for a well-maintained home.',
+const blogPostKeys = ['ac_maintenance_tips', 'choosing_paint', 'common_plumbing_issues'];
+const blogPostImages: Record<string, { image: string, dataAiHint: string }> = {
+  ac_maintenance_tips: { image: 'https://placehold.co/400x250.png', dataAiHint: 'air conditioner' },
+  choosing_paint: { image: 'https://placehold.co/400x250.png', dataAiHint: 'paint roller' },
+  common_plumbing_issues: { image: 'https://placehold.co/400x250.png', dataAiHint: 'leaky faucet' },
 };
 
-const blogPosts = [
-  {
-    slug: 'ac-maintenance-tips',
-    title: 'Top 5 AC Maintenance Tips for the Dubai Heat',
-    excerpt: 'Keep your cool this summer with these essential tips for maintaining your air conditioning unit. A little care goes a long way!',
-    date: 'July 15, 2024',
-    image: 'https://placehold.co/400x250.png',
-    dataAiHint: 'air conditioner',
-  },
-  {
-    slug: 'choosing-paint',
-    title: 'How to Choose the Right Paint for Your Dubai Home',
-    excerpt: 'Picking the right paint is more than just color. Learn about different types of paint and what works best for the local climate.',
-    date: 'July 10, 2024',
-    image: 'https://placehold.co/400x250.png',
-    dataAiHint: 'paint roller',
-  },
-  {
-    slug: 'common-plumbing-issues',
-    title: 'DIY Fixes for Common Plumbing Issues (and When to Call a Pro)',
-    excerpt: 'A leaky faucet? A slow drain? Here are some simple fixes you can try yourself, and how to know when it\'s time to call TouchUp Hub.',
-    date: 'July 5, 2024',
-    image: 'https://placehold.co/400x250.png',
-    dataAiHint: 'leaky faucet',
-  },
-];
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: 'BlogPage' });
+ 
+  return {
+    title: t('title'),
+    description: t('subtitle'),
+  };
+}
 
-export default function BlogPage() {
+export default async function BlogPage({ params: { locale } }: { params: { locale: string } }) {
+  const t = await getTranslations({ locale, namespace: 'BlogPage' });
+  const tPosts = await getTranslations({ locale, namespace: 'BlogPosts' });
+
   return (
     <div className="container py-16">
       <div className="text-center mb-8">
-        <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">Blog & Maintenance Tips</h1>
+        <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary">{t('title')}</h1>
         <p className="text-lg text-muted-foreground mt-4 max-w-3xl mx-auto">
-          Expert advice and insights to help you keep your home in top shape.
+          {t('subtitle')}
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {blogPosts.map((post) => (
-          <Card key={post.slug} className="flex flex-col overflow-hidden hover:shadow-lg transition-shadow">
+        {blogPostKeys.map((postKey) => (
+          <Card key={postKey} className="flex flex-col overflow-hidden hover:shadow-lg transition-shadow">
             <CardHeader className="p-0">
               <div className="relative aspect-video">
-                <Image src={post.image} alt={post.title} fill className="object-cover" data-ai-hint={post.dataAiHint} />
+                <Image src={blogPostImages[postKey].image} alt={tPosts(`${postKey}.title`)} fill className="object-cover" data-ai-hint={blogPostImages[postKey].dataAiHint} />
               </div>
               <div className="p-6">
                 <CardTitle className="font-headline text-xl leading-snug">
-                  <Link href="#" className="hover:text-primary transition-colors">{post.title}</Link>
+                  <Link href="#" className="hover:text-primary transition-colors">{tPosts(`${postKey}.title`)}</Link>
                 </CardTitle>
               </div>
             </CardHeader>
             <CardContent className="flex-grow px-6">
-              <p className="text-muted-foreground">{post.excerpt}</p>
+              <p className="text-muted-foreground">{tPosts(`${postKey}.excerpt`)}</p>
             </CardContent>
             <CardFooter className="px-6 pb-6 flex justify-between items-center text-sm text-muted-foreground">
-              <span>{post.date}</span>
+              <span>{tPosts(`${postKey}.date`)}</span>
               <Link href="#" className="font-semibold text-primary hover:underline">
-                Read More <ArrowRight className="inline h-4 w-4" />
+                {t('readMore')} <ArrowRight className="inline h-4 w-4" />
               </Link>
             </CardFooter>
           </Card>

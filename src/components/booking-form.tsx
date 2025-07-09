@@ -80,6 +80,7 @@ export default function BookingForm() {
   const defaultService = searchParams.get('service') || '';
   const { toast } = useToast();
   const tServices = useTranslations('Services');
+  const t = useTranslations('BookingPage.form');
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isCalendarOpen, setCalendarOpen] = React.useState(false);
   const [isDetectingLocation, setIsDetectingLocation] = React.useState(false);
@@ -120,8 +121,8 @@ export default function BookingForm() {
       const result = await submitBooking(data);
       if (result.success) {
         toast({
-          title: 'Booking Request Sent!',
-          description: 'Thank you! We will contact you shortly to confirm. Redirecting to homepage in 5 seconds.',
+          title: t('successTitle'),
+          description: t('successDescription'),
         });
         form.reset();
         setTimeout(() => {
@@ -130,16 +131,16 @@ export default function BookingForm() {
       } else {
         toast({
           variant: 'destructive',
-          title: 'Submission Failed',
-          description: result.error || 'An unexpected error occurred. Please try again.',
+          title: t('failTitle'),
+          description: result.error || t('failDescription'),
         });
       }
     } catch (error) {
       console.error("Submission Error:", error);
       toast({
         variant: 'destructive',
-        title: 'Submission Error',
-        description: 'Something went wrong. Please check your connection and try again.',
+        title: t('errorTitle'),
+        description: t('errorDescription'),
       });
     } finally {
       setIsSubmitting(false);
@@ -151,7 +152,7 @@ export default function BookingForm() {
     if (!navigator.geolocation) {
       toast({
         variant: 'destructive',
-        title: 'Geolocation not supported',
+        title: t('geoErrorTitle'),
         description: 'Your browser does not support geolocation.',
       });
       setIsDetectingLocation(false);
@@ -181,29 +182,29 @@ export default function BookingForm() {
         } catch (error) {
           toast({
             variant: 'destructive',
-            title: 'Error detecting location',
-            description: 'Could not fetch address details. Please enter manually.',
+            title: t('geoDetectErrorTitle'),
+            description: t('geoDetectErrorDescription'),
           });
         } finally {
           setIsDetectingLocation(false);
         }
       },
       (error) => {
-        let errorMessage = 'An unknown error occurred.';
+        let errorMessage = t('geoErrorUnknown');
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            errorMessage = 'You denied the request for Geolocation.';
+            errorMessage = t('geoErrorDenied');
             break;
           case error.POSITION_UNAVAILABLE:
-            errorMessage = 'Location information is unavailable.';
+            errorMessage = t('geoErrorUnavailable');
             break;
           case error.TIMEOUT:
-            errorMessage = 'The request to get user location timed out.';
+            errorMessage = t('geoErrorTimeout');
             break;
         }
         toast({
           variant: 'destructive',
-          title: 'Geolocation Error',
+          title: t('geoErrorTitle'),
           description: errorMessage,
         });
         setIsDetectingLocation(false);
@@ -218,15 +219,15 @@ export default function BookingForm() {
     form.setValue('building', '', { shouldValidate: false });
     form.setValue('apartmentVilla', '', { shouldValidate: false });
     toast({
-      title: 'Address Cleared',
-      description: 'Please enter your address manually.',
+      title: t('addressClearedTitle'),
+      description: t('addressClearedDescription'),
     });
   }
 
   const handleConfirmAction = () => {
     toast({
-        title: 'Address Confirmed',
-        description: 'Please double-check and fill in any missing details like your apartment number.',
+        title: t('addressConfirmedTitle'),
+        description: t('addressConfirmedDescription'),
     });
   }
 
@@ -241,9 +242,9 @@ export default function BookingForm() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>{t('fullName')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="John Doe" {...field} />
+                      <Input placeholder={t('fullNamePlaceholder')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -254,9 +255,9 @@ export default function BookingForm() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email Address</FormLabel>
+                    <FormLabel>{t('email')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="you@example.com" {...field} />
+                      <Input placeholder={t('emailPlaceholder')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -267,9 +268,9 @@ export default function BookingForm() {
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
+                    <FormLabel>{t('phone')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="+971 50 123 4567" {...field} />
+                      <Input placeholder={t('phonePlaceholder')} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -280,17 +281,17 @@ export default function BookingForm() {
                 name="service"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Service Required</FormLabel>
+                    <FormLabel>{t('service')}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a service" />
+                          <SelectValue placeholder={t('servicePlaceholder')} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
                         {services.map((service) => (
                           <SelectItem key={service.slug} value={service.slug}>
-                            {tServices(service.titleKey)}
+                            {tServices(`${service.slug}.title`)}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -306,7 +307,7 @@ export default function BookingForm() {
               name="propertyType"
               render={({ field }) => (
                 <FormItem className="space-y-3">
-                  <FormLabel>Property Type</FormLabel>
+                  <FormLabel>{t('propertyType')}</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -318,7 +319,7 @@ export default function BookingForm() {
                           <RadioGroupItem value="residential" />
                         </FormControl>
                         <FormLabel className="font-normal">
-                          Residential
+                          {t('residential')}
                         </FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
@@ -326,7 +327,7 @@ export default function BookingForm() {
                           <RadioGroupItem value="commercial" />
                         </FormControl>
                         <FormLabel className="font-normal">
-                          Commercial
+                          {t('commercial')}
                         </FormLabel>
                       </FormItem>
                     </RadioGroup>
@@ -342,11 +343,11 @@ export default function BookingForm() {
                 name="specificPropertyType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>{propertyType === 'residential' ? 'Property Details' : 'Business Type'}</FormLabel>
+                    <FormLabel>{propertyType === 'residential' ? t('propertyDetails') : t('businessType')}</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder={`Select a ${propertyType === 'residential' ? 'property type' : 'business type'}`} />
+                          <SelectValue placeholder={propertyType === 'residential' ? t('propertyDetailsPlaceholder') : t('businessTypePlaceholder')} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -369,7 +370,7 @@ export default function BookingForm() {
                 name="date"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Preferred Date</FormLabel>
+                    <FormLabel>{t('preferredDate')}</FormLabel>
                     <Popover open={isCalendarOpen} onOpenChange={setCalendarOpen}>
                       <PopoverTrigger asChild>
                         <FormControl>
@@ -384,7 +385,7 @@ export default function BookingForm() {
                             {field.value ? (
                               format(field.value, "PPP")
                             ) : (
-                              <span>Pick a date</span>
+                              <span>{t('pickDate')}</span>
                             )}
                           </Button>
                         </FormControl>
@@ -411,11 +412,11 @@ export default function BookingForm() {
                 name="time"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Preferred Time</FormLabel>
+                    <FormLabel>{t('preferredTime')}</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select a time slot" />
+                          <SelectValue placeholder={t('timePlaceholder')} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -434,7 +435,7 @@ export default function BookingForm() {
             
             <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                    <FormLabel>Full Address</FormLabel>
+                    <FormLabel>{t('fullAddress')}</FormLabel>
                     <Button
                       type="button"
                       variant="outline"
@@ -447,7 +448,7 @@ export default function BookingForm() {
                       ) : (
                         <MapPin className="mr-2 h-4 w-4" />
                       )}
-                      Detect
+                      {isDetectingLocation ? t('detectingButton') : t('detectButton')}
                     </Button>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -456,9 +457,9 @@ export default function BookingForm() {
                         name="apartmentVilla"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="text-xs text-muted-foreground">Apt / Villa No.</FormLabel>
+                                <FormLabel className="text-xs text-muted-foreground">{t('aptNo')}</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="e.g. 1204 or Villa 5" {...field} />
+                                    <Input placeholder={t('aptNoPlaceholder')} {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -469,9 +470,9 @@ export default function BookingForm() {
                         name="building"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="text-xs text-muted-foreground">Building / Villa Name</FormLabel>
+                                <FormLabel className="text-xs text-muted-foreground">{t('buildingName')}</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="e.g. Marina Tower" {...field} />
+                                    <Input placeholder={t('buildingNamePlaceholder')} {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -482,9 +483,9 @@ export default function BookingForm() {
                         name="street"
                         render={({ field }) => (
                             <FormItem>
-                                 <FormLabel className="text-xs text-muted-foreground">Street</FormLabel>
+                                 <FormLabel className="text-xs text-muted-foreground">{t('street')}</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="e.g. Al Safa St" {...field} />
+                                    <Input placeholder={t('streetPlaceholder')} {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -495,9 +496,9 @@ export default function BookingForm() {
                         name="area"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="text-xs text-muted-foreground">Area / Community</FormLabel>
+                                <FormLabel className="text-xs text-muted-foreground">{t('area')}</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="e.g. Dubai Marina" {...field} />
+                                    <Input placeholder={t('areaPlaceholder')} {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -508,7 +509,7 @@ export default function BookingForm() {
                         name="city"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel className="text-xs text-muted-foreground">City</FormLabel>
+                                <FormLabel className="text-xs text-muted-foreground">{t('city')}</FormLabel>
 
                                 <FormControl>
                                     <Input {...field} />
@@ -525,9 +526,9 @@ export default function BookingForm() {
               name="instructions"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Special Instructions (Optional)</FormLabel>
+                  <FormLabel>{t('specialInstructions')}</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="e.g., Please call before arrival." {...field} />
+                    <Textarea placeholder={t('specialInstructionsPlaceholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -547,7 +548,11 @@ export default function BookingForm() {
                   </FormControl>
                   <div className="space-y-1 leading-none">
                     <FormLabel>
-                      I agree to the <Link href="/terms-and-conditions" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">Terms and Conditions</Link>.
+                      {t('terms')}{' '}
+                      <Link href="/terms-and-conditions" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+                        {t('termsLink')}
+                      </Link>
+                      .
                     </FormLabel>
                     <FormMessage />
                   </div>
@@ -557,7 +562,7 @@ export default function BookingForm() {
             
             <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
               {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {isSubmitting ? 'Submitting...' : 'Submit Booking Request'}
+              {isSubmitting ? t('submittingButton') : t('submitButton')}
             </Button>
           </form>
         </Form>
@@ -565,20 +570,20 @@ export default function BookingForm() {
       <AlertDialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Confirm Detected Address</AlertDialogTitle>
+            <AlertDialogTitle>{t('addressConfirmTitle')}</AlertDialogTitle>
             <AlertDialogDescription asChild>
               <div>
-                Is the following address approximately correct? Please fill in your specific apartment or villa number manually.
+                {t('addressConfirmDescription')}
                 <div className="font-semibold text-foreground mt-2">{detectedAddressString}</div>
               </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel onClick={handleConfirmCancel}>
-              No, Enter Manually
+              {t('addressConfirmCancel')}
             </AlertDialogCancel>
             <AlertDialogAction onClick={handleConfirmAction}>
-              Yes, Confirm
+              {t('addressConfirmAction')}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
