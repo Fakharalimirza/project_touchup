@@ -19,9 +19,9 @@ export default function ServicesPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="flex flex-wrap justify-center gap-8">
         {services.map((service) => (
-          <Card key={service.slug} className="flex flex-col text-center hover:shadow-xl transition-shadow duration-300">
+          <Card key={service.slug} className="flex flex-col text-center hover:shadow-xl transition-shadow duration-300 w-full sm:w-auto sm:basis-[calc(50%-1rem)] lg:basis-[calc(33.333%-1.34rem)]">
             <CardHeader>
               <div className="mx-auto bg-primary/10 text-primary rounded-full p-4 w-fit mb-4">
                 <service.icon className="w-10 h-10" />
