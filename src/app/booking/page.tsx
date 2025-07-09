@@ -1,15 +1,12 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 import BookingForm from '@/components/booking-form';
+import BookingFormSkeleton from '@/components/booking-form-skeleton';
 
 export const metadata: Metadata = {
   title: 'Book a Service',
   description: 'Schedule your next home maintenance or cleaning service with TouchUp Hub. Our simple booking form makes it easy to get the help you need.',
 };
-
-function BookingFormFallback() {
-  return <div>Loading form...</div>
-}
 
 export default function BookingPage() {
   return (
@@ -22,7 +19,7 @@ export default function BookingPage() {
           </p>
         </div>
         
-        <Suspense fallback={<BookingFormFallback />}>
+        <Suspense fallback={<BookingFormSkeleton />}>
           <BookingForm />
         </Suspense>
       </div>
