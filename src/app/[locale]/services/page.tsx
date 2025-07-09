@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { services } from '@/lib/data';
+import { useTranslations } from 'next-intl';
 
 export const metadata: Metadata = {
   title: 'Our Services',
@@ -10,6 +11,8 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
+  const t = useTranslations();
+  
   return (
     <div className="container py-16">
       <div className="text-center mb-12">
@@ -26,12 +29,12 @@ export default function ServicesPage() {
               <div className="mx-auto bg-primary/10 text-primary rounded-full p-4 w-fit mb-4">
                 <service.icon className="w-10 h-10" />
               </div>
-              <CardTitle className="font-headline text-2xl">{service.title}</CardTitle>
+              <CardTitle className="font-headline text-2xl">{t(service.titleKey)}</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col flex-grow">
-              <p className="text-muted-foreground mb-6 flex-grow">{service.description}</p>
+              <p className="text-muted-foreground mb-6 flex-grow">{t(service.descriptionKey)}</p>
               <Button asChild variant="outline" className="mt-auto">
-                <Link href={`/services/${service.slug}`}>View Details</Link>
+                <Link href={`/services/${service.slug}`}>{t('General.viewDetails')}</Link>
               </Button>
             </CardContent>
           </Card>

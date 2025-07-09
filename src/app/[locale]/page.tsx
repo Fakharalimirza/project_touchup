@@ -11,50 +11,16 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { services } from '@/lib/data';
 import { Users, DollarSign, Clock, LifeBuoy, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
-const whyChooseUs = [
-  {
-    icon: Users,
-    title: 'Experienced Team',
-    description: 'Our team consists of certified and experienced professionals.',
-  },
-  {
-    icon: DollarSign,
-    title: 'Affordable Prices',
-    description: 'We offer competitive pricing without compromising on quality.',
-  },
-  {
-    icon: Clock,
-    title: 'Quick & Reliable',
-    description: 'Punctual and efficient service to fit your busy schedule.',
-  },
-  {
-    icon: LifeBuoy,
-    title: '24/7 Support',
-    description: 'Our support team is always ready to assist you anytime.',
-  },
-];
-
-const testimonials = [
-  {
-    name: 'Ahmed Khan',
-    title: 'Homeowner, Dubai Marina',
-    quote: 'TouchUp Hub\'s team was professional and efficient. My AC has never worked better! Highly recommended for their prompt service.',
-    avatar: 'https://placehold.co/100x100.png',
-  },
-  {
-    name: 'Fatima Al-Jaber',
-    title: 'Business Owner',
-    quote: 'We use TouchUp Hub for all our office maintenance needs. They are reliable, and their deep cleaning service is second to none.',
-    avatar: 'https://placehold.co/100x100.png',
-  },
-  {
-    name: 'John Smith',
-    title: 'Expat Resident',
-    quote: 'I had a plumbing emergency, and they were at my door within an hour. Fast, friendly, and fixed the problem perfectly. Great job!',
-    avatar: 'https://placehold.co/100x100.png',
-  },
-];
+const whyChooseUsKeys = ['experienced', 'affordable', 'reliable', 'support'] as const;
+const testimonialKeys = ['ahmed', 'fatima', 'john'] as const;
+const whyChooseUsIcons = {
+  experienced: Users,
+  affordable: DollarSign,
+  reliable: Clock,
+  support: LifeBuoy,
+};
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -77,6 +43,9 @@ const itemVariants = {
 
 export default function Home() {
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+  const t = useTranslations('Home');
+  const tServices = useTranslations('Services');
+  const tGeneral = useTranslations('General');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -119,17 +88,17 @@ export default function Home() {
                 variants={itemVariants}
                 className="text-4xl md:text-7xl font-bold font-headline mb-4"
             >
-                Reliable Home Maintenance, One Touch Away
+                {t('heroTitle')}
             </motion.h1>
             <motion.p
                  variants={itemVariants}
                 className="text-lg md:text-xl mb-8"
             >
-                Your trusted partner for cleaning, AC, plumbing, and electrical services in Dubai.
+                {t('heroSubtitle')}
             </motion.p>
             <motion.div variants={itemVariants}>
                 <Button asChild size="lg">
-                    <Link href="/booking">Book a Service Now</Link>
+                    <Link href="/booking">{t('heroButton')}</Link>
                 </Button>
             </motion.div>
         </motion.div>
@@ -174,9 +143,9 @@ export default function Home() {
       >
         <div className="container">
           <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">Our Services</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">{t('servicesTitle')}</h2>
             <p className="text-lg text-muted-foreground mt-2 max-w-2xl mx-auto">
-              We offer a wide range of services to keep your home in perfect condition.
+              {t('servicesSubtitle')}
             </p>
           </motion.div>
           <div className="flex flex-wrap justify-center gap-8">
@@ -187,12 +156,12 @@ export default function Home() {
                     <div className="mx-auto bg-primary/10 text-primary rounded-full p-4 w-fit mb-4">
                       <service.icon className="w-8 h-8" />
                     </div>
-                    <CardTitle className="font-headline">{service.title}</CardTitle>
+                    <CardTitle className="font-headline">{tServices(service.titleKey)}</CardTitle>
                   </CardHeader>
                   <CardContent className="flex-grow flex flex-col justify-between">
-                    <p className="text-muted-foreground mb-4">{service.description}</p>
+                    <p className="text-muted-foreground mb-4">{tServices(service.descriptionKey)}</p>
                     <Button asChild variant="outline">
-                      <Link href={`/services/${service.slug}`}>Learn More</Link>
+                      <Link href={`/services/${service.slug}`}>{tGeneral('learnMore')}</Link>
                     </Button>
                   </CardContent>
                 </Card>
@@ -212,21 +181,23 @@ export default function Home() {
       >
         <div className="container">
           <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">Why Choose Us?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">{t('whyChooseUsTitle')}</h2>
             <p className="text-lg text-muted-foreground mt-2">
-              We are committed to providing top-quality service and customer satisfaction.
+              {t('whyChooseUsSubtitle')}
             </p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {whyChooseUs.map((item) => (
-              <motion.div key={item.title} variants={itemVariants} className="flex flex-col items-center text-center p-4 rounded-lg transition-all duration-300 hover:bg-primary/10">
+            {whyChooseUsKeys.map((itemKey) => {
+              const Icon = whyChooseUsIcons[itemKey];
+              return (
+              <motion.div key={itemKey} variants={itemVariants} className="flex flex-col items-center text-center p-4 rounded-lg transition-all duration-300 hover:bg-primary/10">
                 <div className="bg-accent/20 text-accent p-4 rounded-full mb-4 transition-all duration-300 transform-gpu hover:scale-110 hover:shadow-[0_0_20px_hsl(var(--accent))]">
-                  <item.icon className="w-8 h-8" />
+                  <Icon className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-muted-foreground">{item.description}</p>
+                <h3 className="text-xl font-semibold mb-2">{t(`whyChooseUsItems.${itemKey}.title`)}</h3>
+                <p className="text-muted-foreground">{t(`whyChooseUsItems.${itemKey}.description`)}</p>
               </motion.div>
-            ))}
+            )})}
           </div>
         </div>
       </motion.section>
@@ -241,9 +212,9 @@ export default function Home() {
       >
         <div className="container">
           <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">What Our Clients Say</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">{t('testimonialsTitle')}</h2>
             <p className="text-lg text-muted-foreground mt-2">
-              Real stories from our satisfied customers.
+              {t('testimonialsSubtitle')}
             </p>
           </motion.div>
           <Carousel
@@ -251,18 +222,18 @@ export default function Home() {
             className="w-full max-w-4xl mx-auto"
           >
             <CarouselContent>
-              {testimonials.map((testimonial, index) => (
+              {testimonialKeys.map((testimonialKey, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <motion.div className="p-1 h-full" variants={itemVariants} whileHover={{ y: -5, scale: 1.03 }}>
                     <Card className="h-full glow-border bg-card/50 backdrop-blur-sm">
                       <CardContent className="flex flex-col items-center text-center p-6 h-full">
                         <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
-                          <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
-                          <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                          <AvatarImage src={`https://placehold.co/100x100.png?text=${index}`} alt={t(`testimonials.${testimonialKey}.name`)} />
+                          <AvatarFallback>{t(`testimonials.${testimonialKey}.name`).charAt(0)}</AvatarFallback>
                         </Avatar>
-                        <p className="text-muted-foreground italic mb-4 flex-grow">"{testimonial.quote}"</p>
-                        <p className="font-semibold">{testimonial.name}</p>
-                        <p className="text-sm text-muted-foreground">{testimonial.title}</p>
+                        <p className="text-muted-foreground italic mb-4 flex-grow">"{t(`testimonials.${testimonialKey}.quote`)}"</p>
+                        <p className="font-semibold">{t(`testimonials.${testimonialKey}.name`)}</p>
+                        <p className="text-sm text-muted-foreground">{t(`testimonials.${testimonialKey}.title`)}</p>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -284,17 +255,19 @@ export default function Home() {
         viewport={{ once: true, amount: 0.2 }}
         >
         <div className="container text-center">
-          <motion.h2 variants={itemVariants} className="text-3xl font-bold font-headline mb-4">Ready for a Spotless Home?</motion.h2>
+          <motion.h2 variants={itemVariants} className="text-3xl font-bold font-headline mb-4">{t('ctaTitle')}</motion.h2>
           <motion.p variants={itemVariants} className="text-lg mb-8 max-w-2xl mx-auto">
-            Let our experts take care of your home maintenance needs. Get a free quote or book your service online today!
+            {t('ctaSubtitle')}
           </motion.p>
           <motion.div variants={itemVariants}>
             <Button asChild size="lg" variant="secondary">
-              <Link href="/booking">Get Your Free Quote</Link>
+              <Link href="/booking">{t('ctaButton')}</Link>
             </Button>
           </motion.div>
         </div>
-      </motion.section>
+      </section>
     </div>
   );
 }
+
+    

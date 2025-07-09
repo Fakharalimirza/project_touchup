@@ -1,3 +1,4 @@
+
 {
   "Header": {
     "home": "Home",
@@ -7,5 +8,128 @@
     "blog": "Blog",
     "bookNow": "Book Now",
     "whatsApp": "Chat on WhatsApp"
+  },
+  "Home": {
+    "heroTitle": "Reliable Home Maintenance, One Touch Away",
+    "heroSubtitle": "Your trusted partner for cleaning, AC, plumbing, and electrical services in Dubai.",
+    "heroButton": "Book a Service Now",
+    "servicesTitle": "Our Services",
+    "servicesSubtitle": "We offer a wide range of services to keep your home in perfect condition.",
+    "whyChooseUsTitle": "Why Choose Us?",
+    "whyChooseUsSubtitle": "We are committed to providing top-quality service and customer satisfaction.",
+    "whyChooseUsItems": {
+      "experienced": {
+        "title": "Experienced Team",
+        "description": "Our team consists of certified and experienced professionals."
+      },
+      "affordable": {
+        "title": "Affordable Prices",
+        "description": "We offer competitive pricing without compromising on quality."
+      },
+      "reliable": {
+        "title": "Quick & Reliable",
+        "description": "Punctual and efficient service to fit your busy schedule."
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Our support team is always ready to assist you anytime."
+      }
+    },
+    "testimonialsTitle": "What Our Clients Say",
+    "testimonialsSubtitle": "Real stories from our satisfied customers.",
+    "testimonials": {
+      "ahmed": {
+        "name": "Ahmed Khan",
+        "title": "Homeowner, Dubai Marina",
+        "quote": "TouchUp Hub's team was professional and efficient. My AC has never worked better! Highly recommended for their prompt service."
+      },
+      "fatima": {
+        "name": "Fatima Al-Jaber",
+        "title": "Business Owner",
+        "quote": "We use TouchUp Hub for all our office maintenance needs. They are reliable, and their deep cleaning service is second to none."
+      },
+      "john": {
+        "name": "John Smith",
+        "title": "Expat Resident",
+        "quote": "I had a plumbing emergency, and they were at my door within an hour. Fast, friendly, and fixed the problem perfectly. Great job!"
+      }
+    },
+    "ctaTitle": "Ready for a Spotless Home?",
+    "ctaSubtitle": "Let our experts take care of your home maintenance needs. Get a free quote or book your service online today!",
+    "ctaButton": "Get Your Free Quote"
+  },
+  "Services": {
+    "painting": {
+      "title": "Painting Work",
+      "description": "Professional interior and exterior painting services to give your property a fresh new look.",
+      "details": "Transform your space with our professional painting services. We use high-quality paints and materials for a durable and beautiful finish. Our team ensures clean work with proper surface preparation and post-painting cleanup.",
+      "subServices": {
+        "full_studio": "Full Wall Painting – Studio",
+        "full_1bhk": "Full Wall Painting – 1BHK",
+        "full_2bhk": "Full Wall Painting – 2BHK",
+        "touchup_studio": "Touch-Up Painting – Studio",
+        "touchup_1bhk": "Touch-Up Painting – 1BHK",
+        "touchup_2bhk": "Touch-Up Painting – 2BHK",
+        "table_chair": "Painting Table or Chair"
+      }
+    },
+    "electrical": {
+      "title": "Electrical Work",
+      "description": "Safe and reliable electrical services, from minor repairs to complete wiring solutions.",
+      "details": "Our certified electricians handle all types of electrical work, including fixing short circuits, installing new light fixtures, socket replacements, and comprehensive electrical safety checks for your home or office.",
+      "subServices": {
+        "balcony_lock": "Replacement of Balcony Door Lock Set",
+        "spot_light": "Supply and Replacement of Spot Light",
+        "led_light": "Supply and Installation of 8\" LED Light",
+        "light_bulb": "Supply and Installation of Light Bulb",
+        "chandelier": "Chandelier Installation",
+        "chair_repair": "Repair of Chair, Balcony Door, or Toilet Cover",
+        "wood_door": "Wood Door Repair",
+        "fly_mesh": "Supply and Installation of Fly Mesh",
+        "socket_plug": "Installation of Single Socket / Power Plug",
+        "visit_only": "Just Visit (Inspection or consultation only)"
+      }
+    },
+    "plumbing": {
+      "title": "Plumbing",
+      "description": "Comprehensive plumbing solutions for leaks, blockages, installations, and emergency repairs.",
+      "details": "From leaky faucets to major pipe bursts, our skilled plumbers are available 24/7. We offer pipe repair, drain cleaning, water heater installation, and bathroom/kitchen fixture installation services.",
+      "subServices": {
+        "house_pipe": "Supply and Replacement of House Pipe",
+        "water_heater": "Water Heater Replacement",
+        "toilet_block": "Toilet Seat Block Work",
+        "sink_block": "Sink or Wash Basin Block Work",
+        "angle_valve": "Supply and Installation of Angle Valve",
+        "silicone": "Silicone Work",
+        "hand_spray": "Replacement of Hand Spray",
+        "shower_set": "Replacement of Full Shower Set",
+        "shower_head": "Replacement of Shower Head or Pipe"
+      }
+    },
+    "cleaning": {
+      "title": "Cleaning Services",
+      "description": "Thorough cleaning services for homes and offices, leaving your space spotless and fresh.",
+      "details": "Our cleaning service covers every nook and cranny of your property. We use eco-friendly products and professional equipment to ensure a healthy environment.",
+      "subServices": {
+        "normal_studio": "Normal Cleaning – Studio",
+        "normal_1bhk": "Normal Cleaning – 1BHK",
+        "normal_2bhk": "Normal Cleaning – 2BHK",
+        "hourly": "Hourly Cleaning (1 Hour)"
+      }
+    },
+    "pest_control": {
+      "title": "Pest Control",
+      "description": "Effective and safe pest control solutions to protect your home from unwanted intruders.",
+      "details": "We provide comprehensive pest control services for common pests in Dubai like cockroaches, ants, bed bugs, and rodents. Our treatments are safe for your family and pets, ensuring a pest-free environment.",
+      "subServices": {}
+    }
+  },
+  "General": {
+    "learnMore": "Learn More",
+    "viewDetails": "View Details",
+    "backToServices": "Back to Services",
+    "service": "SERVICE",
+    "ourOfferings": "Our Offerings",
+    "bookThisService": "Book This Service"
   }
 }

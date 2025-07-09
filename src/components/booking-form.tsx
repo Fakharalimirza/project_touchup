@@ -9,6 +9,7 @@ import * as z from 'zod';
 import { format } from 'date-fns';
 import { Calendar as CalendarIcon, MapPin, Loader2 } from 'lucide-react';
 import * as React from 'react';
+import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
@@ -78,6 +79,7 @@ export default function BookingForm() {
   const router = useRouter();
   const defaultService = searchParams.get('service') || '';
   const { toast } = useToast();
+  const t = useTranslations();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isCalendarOpen, setCalendarOpen] = React.useState(false);
   const [isDetectingLocation, setIsDetectingLocation] = React.useState(false);
@@ -288,7 +290,7 @@ export default function BookingForm() {
                       <SelectContent>
                         {services.map((service) => (
                           <SelectItem key={service.slug} value={service.slug}>
-                            {service.title}
+                            {t(service.titleKey)}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -583,4 +585,3 @@ export default function BookingForm() {
     </Card>
   );
 }
-    

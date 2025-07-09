@@ -1,16 +1,18 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { services, Service } from '@/lib/data';
+import { services } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Check } from 'lucide-react';
 import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 
 type Props = {
-  params: { slug: string };
+  params: { slug: string, locale: string };
 };
 
-export async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
+export async function generateMetadata({ params: { slug, locale } }: Props): Promise<Metadata> {
+  const t = await getTranslations({ locale, namespace: 'Services' });
   const service = services.find(s => s.slug === slug);
 
   if (!service) {
@@ -20,8 +22,8 @@ export async function generateMetadata({ params: { slug } }: Props): Promise<Met
   }
 
   return {
-    title: service.title,
-    description: service.description,
+    title: t(service.titleKey),
+    description: t(service.descriptionKey),
   };
 }
 
@@ -31,7 +33,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function ServiceDetailPage({ params: { slug } }: { params: { slug: string } }) {
+export default async function ServiceDetailPage({ params: { slug, locale } }: Props) {
+  const t = await getTranslations();
   const service = services.find(s => s.slug === slug);
 
   if (!service) {
@@ -45,7 +48,7 @@ export default function ServiceDetailPage({ params: { slug } }: { params: { slug
           <Button asChild variant="ghost">
             <Link href="/services" className="flex items-center gap-2 text-muted-foreground">
               <ArrowLeft className="w-4 h-4" />
-              Back to Services
+              {t('General.backToServices')}
             </Link>
           </Button>
         </div>
@@ -54,7 +57,7 @@ export default function ServiceDetailPage({ params: { slug } }: { params: { slug
             <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg">
               <Image
                 src={service.image}
-                alt={service.title}
+                alt={t(service.titleKey)}
                 fill
                 className="object-cover"
                 data-ai-hint={service.dataAiHint}
@@ -62,18 +65,18 @@ export default function ServiceDetailPage({ params: { slug } }: { params: { slug
             </div>
           </div>
           <div className="space-y-6">
-            <span className="text-primary font-semibold">SERVICE</span>
-            <h1 className="text-4xl md:text-5xl font-bold font-headline">{service.title}</h1>
-            <p className="text-lg text-muted-foreground">{service.details}</p>
+            <span className="text-primary font-semibold">{t('General.service')}</span>
+            <h1 className="text-4xl md:text-5xl font-bold font-headline">{t(service.titleKey)}</h1>
+            <p className="text-lg text-muted-foreground">{t(service.detailsKey)}</p>
 
-            {service.subServices && service.subServices.length > 0 && (
+            {service.subServiceKeys && service.subServiceKeys.length > 0 && (
               <div className="pt-4 space-y-4">
-                <h3 className="text-2xl font-semibold font-headline text-primary">Our Offerings</h3>
+                <h3 className="text-2xl font-semibold font-headline text-primary">{t('General.ourOfferings')}</h3>
                 <ul className="space-y-3">
-                  {service.subServices.map((sub, index) => (
+                  {service.subServiceKeys.map((subKey, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-accent mt-1 shrink-0" />
-                      <span className="text-muted-foreground">{sub}</span>
+                      <span className="text-muted-foreground">{t(subKey)}</span>
                     </li>
                   ))}
                 </ul>
@@ -81,7 +84,7 @@ export default function ServiceDetailPage({ params: { slug } }: { params: { slug
             )}
             
             <Button asChild size="lg">
-              <Link href={`/booking?service=${service.slug}`}>Book This Service</Link>
+              <Link href={`/booking?service=${service.slug}`}>{t('General.bookThisService')}</Link>
             </Button>
           </div>
         </div>

@@ -2,11 +2,11 @@ import { type LucideIcon, Sparkles, Wrench, Zap, PaintRoller, Bug } from 'lucide
 
 export interface Service {
   slug: string;
-  title: string;
-  description: string;
+  titleKey: `Services.${string}.title`;
+  descriptionKey: `Services.${string}.description`;
   icon: LucideIcon;
-  details: string;
-  subServices: string[];
+  detailsKey: `Services.${string}.details`;
+  subServiceKeys: `Services.${string}.subServices.${string}`[];
   image: string;
   dataAiHint: string;
 }
@@ -14,85 +14,85 @@ export interface Service {
 export const services: Service[] = [
   {
     slug: 'painting',
-    title: 'Painting Work',
-    description: 'Professional interior and exterior painting services to give your property a fresh new look.',
+    titleKey: 'Services.painting.title',
+    descriptionKey: 'Services.painting.description',
     icon: PaintRoller,
-    details: 'Transform your space with our professional painting services. We use high-quality paints and materials for a durable and beautiful finish. Our team ensures clean work with proper surface preparation and post-painting cleanup.',
-    subServices: [
-        'Full Wall Painting – Studio',
-        'Full Wall Painting – 1BHK',
-        'Full Wall Painting – 2BHK',
-        'Touch-Up Painting – Studio',
-        'Touch-Up Painting – 1BHK',
-        'Touch-Up Painting – 2BHK',
-        'Painting Table or Chair',
+    detailsKey: 'Services.painting.details',
+    subServiceKeys: [
+        'Services.painting.subServices.full_studio',
+        'Services.painting.subServices.full_1bhk',
+        'Services.painting.subServices.full_2bhk',
+        'Services.painting.subServices.touchup_studio',
+        'Services.painting.subServices.touchup_1bhk',
+        'Services.painting.subServices.touchup_2bhk',
+        'Services.painting.subServices.table_chair',
     ],
     image: 'https://placehold.co/1200x600.png',
     dataAiHint: 'wall painting',
   },
   {
     slug: 'electrical-repair',
-    title: 'Electrical Work',
-    description: 'Safe and reliable electrical services, from minor repairs to complete wiring solutions.',
+    titleKey: 'Services.electrical.title',
+    descriptionKey: 'Services.electrical.description',
     icon: Zap,
-    details: 'Our certified electricians handle all types of electrical work, including fixing short circuits, installing new light fixtures, socket replacements, and comprehensive electrical safety checks for your home or office.',
-    subServices: [
-        'Replacement of Balcony Door Lock Set',
-        'Supply and Replacement of Spot Light',
-        'Supply and Installation of 8" LED Light',
-        'Supply and Installation of Light Bulb',
-        'Chandelier Installation',
-        'Repair of Chair, Balcony Door, or Toilet Cover',
-        'Wood Door Repair',
-        'Supply and Installation of Fly Mesh',
-        'Installation of Single Socket / Power Plug',
-        'Just Visit (Inspection or consultation only)',
+    detailsKey: 'Services.electrical.details',
+    subServiceKeys: [
+        'Services.electrical.subServices.balcony_lock',
+        'Services.electrical.subServices.spot_light',
+        'Services.electrical.subServices.led_light',
+        'Services.electrical.subServices.light_bulb',
+        'Services.electrical.subServices.chandelier',
+        'Services.electrical.subServices.chair_repair',
+        'Services.electrical.subServices.wood_door',
+        'Services.electrical.subServices.fly_mesh',
+        'Services.electrical.subServices.socket_plug',
+        'Services.electrical.subServices.visit_only',
     ],
     image: 'https://placehold.co/1200x600.png',
     dataAiHint: 'electrical repair',
   },
   {
     slug: 'plumbing',
-    title: 'Plumbing',
-    description: 'Comprehensive plumbing solutions for leaks, blockages, installations, and emergency repairs.',
+    titleKey: 'Services.plumbing.title',
+    descriptionKey: 'Services.plumbing.description',
     icon: Wrench,
-    details: 'From leaky faucets to major pipe bursts, our skilled plumbers are available 24/7. We offer pipe repair, drain cleaning, water heater installation, and bathroom/kitchen fixture installation services.',
-    subServices: [
-        'Supply and Replacement of House Pipe',
-        'Water Heater Replacement',
-        'Toilet Seat Block Work',
-        'Sink or Wash Basin Block Work',
-        'Supply and Installation of Angle Valve',
-        'Silicone Work',
-        'Replacement of Hand Spray',
-        'Replacement of Full Shower Set',
-        'Replacement of Shower Head or Pipe',
+    detailsKey: 'Services.plumbing.details',
+    subServiceKeys: [
+        'Services.plumbing.subServices.house_pipe',
+        'Services.plumbing.subServices.water_heater',
+        'Services.plumbing.subServices.toilet_block',
+        'Services.plumbing.subServices.sink_block',
+        'Services.plumbing.subServices.angle_valve',
+        'Services.plumbing.subServices.silicone',
+        'Services.plumbing.subServices.hand_spray',
+        'Services.plumbing.subServices.shower_set',
+        'Services.plumbing.subServices.shower_head',
     ],
     image: 'https://placehold.co/1200x600.png',
     dataAiHint: 'plumbing work',
   },
   {
     slug: 'cleaning-services',
-    title: 'Cleaning Services',
-    description: 'Thorough cleaning services for homes and offices, leaving your space spotless and fresh.',
+    titleKey: 'Services.cleaning.title',
+    descriptionKey: 'Services.cleaning.description',
     icon: Sparkles,
-    details: 'Our cleaning service covers every nook and cranny of your property. We use eco-friendly products and professional equipment to ensure a healthy environment.',
-    subServices: [
-        'Normal Cleaning – Studio',
-        'Normal Cleaning – 1BHK',
-        'Normal Cleaning – 2BHK',
-        'Hourly Cleaning (1 Hour)',
+    detailsKey: 'Services.cleaning.details',
+    subServiceKeys: [
+        'Services.cleaning.subServices.normal_studio',
+        'Services.cleaning.subServices.normal_1bhk',
+        'Services.cleaning.subServices.normal_2bhk',
+        'Services.cleaning.subServices.hourly',
     ],
     image: 'https://placehold.co/1200x600.png',
     dataAiHint: 'deep cleaning',
   },
   {
     slug: 'pest-control',
-    title: 'Pest Control',
-    description: 'Effective and safe pest control solutions to protect your home from unwanted intruders.',
+    titleKey: 'Services.pest_control.title',
+    descriptionKey: 'Services.pest_control.description',
     icon: Bug,
-    details: 'We provide comprehensive pest control services for common pests in Dubai like cockroaches, ants, bed bugs, and rodents. Our treatments are safe for your family and pets, ensuring a pest-free environment.',
-    subServices: [],
+    detailsKey: 'Services.pest_control.details',
+    subServiceKeys: [],
     image: 'https://placehold.co/1200x600.png',
     dataAiHint: 'pest control',
   }
