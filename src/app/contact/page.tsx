@@ -30,7 +30,7 @@ export default function ContactPage() {
         {/* Contact Form */}
         <Card className="flex flex-col">
           <CardHeader>
-            <CardTitle className="font-headline text-2xl">Send Us a Message</CardTitle>
+            <CardTitle className="font-headline text-2xl text-center">Send Us a Message</CardTitle>
           </CardHeader>
           <CardContent className="flex-grow flex flex-col">
             <form className="space-y-4 flex flex-col flex-grow">
