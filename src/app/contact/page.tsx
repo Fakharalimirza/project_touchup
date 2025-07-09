@@ -68,12 +68,11 @@ export default function ContactPage() {
                 <li><strong>Sunday:</strong> Closed</li>
                 </ul>
               </div>
+              <Button asChild size="lg" className="w-full bg-green-500 hover:bg-green-600 !mt-6">
+                <a href="https://wa.me/+971545314170" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+              </Button>
             </CardContent>
           </Card>
-
-          <Button asChild size="lg" className="w-full bg-green-500 hover:bg-green-600">
-            <a href="https://wa.me/+971545314170" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
-          </Button>
           
           <div className="rounded-lg overflow-hidden shadow-md">
             <iframe 
