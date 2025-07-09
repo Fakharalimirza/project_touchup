@@ -43,7 +43,7 @@ export default function Footer() {
           {/* Quick Links */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Quick Links</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2 inline-block text-left">
               {quickLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-muted-foreground hover:text-primary transition-colors">
@@ -57,16 +57,16 @@ export default function Footer() {
           {/* Contact Info */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Contact Us</h3>
-            <ul className="space-y-3 text-muted-foreground">
-              <li className="flex items-start gap-3 justify-center md:justify-start">
+            <ul className="space-y-3 text-muted-foreground inline-block text-left">
+              <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-1 shrink-0" />
-                <a href="https://maps.app.goo.gl/j2K9xckTiutBcczi7" className="hover:text-primary text-left">A202 - Sport Society Mall - Mirdif - Dubai</a>
+                <a href="https://maps.app.goo.gl/j2K9xckTiutBcczi7" className="hover:text-primary">A202 - Sport Society Mall - Mirdif - Dubai</a>
               </li>
-              <li className="flex items-center gap-3 justify-center md:justify-start">
+              <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 shrink-0" />
                 <a href="mailto:info@touchup.ae" className="hover:text-primary">info@touchup.ae</a>
               </li>
-              <li className="flex items-center gap-3 justify-center md:justify-start">
+              <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 shrink-0" />
                 <a href="tel:+971545314170" className="hover:text-primary">+971 54 531 4170</a>
               </li>
@@ -76,7 +76,7 @@ export default function Footer() {
           {/* Office Hours */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Office Hours</h3>
-            <ul className="space-y-2 text-muted-foreground">
+            <ul className="space-y-2 text-muted-foreground inline-block text-left">
                 <li><strong>Mon - Fri:</strong> 10:00 AM - 6:30 PM</li>
                 <li><strong>Saturday:</strong> 10:00 AM - 3:00 PM</li>
                 <li><strong>Sunday:</strong> Closed</li>
@@ -84,7 +84,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t pt-6 text-center text-sm text-muted-foreground">
+        <div className="mt-8 border-t pt-6 text-center text-xs text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} TouchUp.ae. All Rights Reserved.</p>
         </div>
       </div>
