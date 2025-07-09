@@ -1,0 +1,11 @@
+{
+  "Header": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About Us",
+    "contact": "Contact",
+    "blog": "Blog",
+    "bookNow": "Book Now",
+    "whatsApp": "Chat on WhatsApp"
+  }
+}
