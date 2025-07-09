@@ -180,6 +180,7 @@
     "subjectPlaceholder": "الموضوع",
     "messagePlaceholder": "رسالتك",
     "sendButton": "إرسال الرسالة",
+    "sendingButton": "جارٍ الإرسال...",
     "infoTitle": "معلومات الاتصال",
     "workHours": {
       "mon_fri": "الاثنين - الجمعة:",
@@ -191,7 +192,19 @@
       "sat": "10:00 صباحًا - 3:00 مساءً",
       "sun": "مغلق"
     },
-    "chatOnWhatsApp": "تحدث عبر الواتساب"
+    "chatOnWhatsApp": "تحدث عبر الواتساب",
+    "formValidation": {
+      "nameRequired": "يجب أن يتكون الاسم من حرفين على الأقل.",
+      "emailInvalid": "يرجى إدخال بريد إلكتروني صالح.",
+      "subjectRequired": "يجب أن يتكون الموضوع من 3 أحرف على الأقل.",
+      "messageRequired": "يجب أن تتكون الرسالة من 10 أحرف على الأقل."
+    },
+    "formStatus": {
+      "successTitle": "تم إرسال الرسالة!",
+      "successDescription": "شكراً لتواصلك معنا. سنرد عليك قريباً.",
+      "errorTitle": "فشل الإرسال",
+      "errorDescription": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى."
+    }
   },
   "BookingPage": {
     "title": "احجز خدمة",

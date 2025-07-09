@@ -1,19 +1,19 @@
-import { Metadata } from 'next';
+'use client';
+
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { useTranslations } from 'next-intl';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
-import { getTranslations } from 'next-intl/server';
-
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: 'ContactPage' });
- 
-  return {
-    title: t('title'),
-    description: t('subtitle'),
-  };
-}
+import { Phone, Mail, MapPin, Clock, Loader2 } from 'lucide-react';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { useToast } from '@/hooks/use-toast';
+import { submitContactForm } from './actions';
 
 const contactDetails = [
   { icon: Phone, text: '+971 54 531 4170', href: 'tel:+971545314170' },
@@ -21,8 +21,52 @@ const contactDetails = [
   { icon: MapPin, text: 'A202 - Sport Society Mall - Mirdif - Dubai', href: 'https://maps.app.goo.gl/j2K9xckTiutBcczi7' },
 ];
 
-export default async function ContactPage({ params: { locale } }: { params: { locale: string } }) {
-  const t = await getTranslations({ locale, namespace: 'ContactPage' });
+export default function ContactPage() {
+  const t = useTranslations('ContactPage');
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  const formSchema = z.object({
+    name: z.string().min(2, { message: t('formValidation.nameRequired') }),
+    email: z.string().email({ message: t('formValidation.emailInvalid') }),
+    subject: z.string().min(3, { message: t('formValidation.subjectRequired') }),
+    message: z.string().min(10, { message: t('formValidation.messageRequired') }),
+  });
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    try {
+      const result = await submitContactForm(values);
+      if (result.success) {
+        toast({
+          title: t('formStatus.successTitle'),
+          description: t('formStatus.successDescription'),
+        });
+        form.reset();
+      } else {
+        throw new Error(result.error);
+      }
+    } catch (error) {
+      toast({
+        variant: 'destructive',
+        title: t('formStatus.errorTitle'),
+        description: t('formStatus.errorDescription'),
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <div className="container py-16">
       <div className="text-center mb-12">
@@ -38,14 +82,63 @@ export default async function ContactPage({ params: { locale } }: { params: { lo
           <CardHeader>
             <CardTitle className="font-headline text-2xl text-center">{t('formTitle')}</CardTitle>
           </CardHeader>
-          <CardContent className="flex-grow flex flex-col">
-            <form className="space-y-4 flex flex-col flex-grow">
-              <Input placeholder={t('namePlaceholder')} />
-              <Input type="email" placeholder={t('emailPlaceholder')} />
-              <Input placeholder={t('subjectPlaceholder')} />
-              <Textarea placeholder={t('messagePlaceholder')} rows={5} className="flex-grow" />
-              <Button type="submit" className="w-full" size="lg">{t('sendButton')}</Button>
-            </form>
+          <CardContent className="flex-grow flex flex-col p-6 pt-0">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 flex flex-col flex-grow">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder={t('namePlaceholder')} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input type="email" placeholder={t('emailPlaceholder')} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="subject"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder={t('subjectPlaceholder')} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem className="flex-grow flex flex-col">
+                      <FormControl>
+                        <Textarea placeholder={t('messagePlaceholder')} className="flex-grow" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" size="lg" disabled={isSubmitting}>
+                  {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  {isSubmitting ? t('sendingButton') : t('sendButton')}
+                </Button>
+              </form>
+            </Form>
           </CardContent>
         </Card>
 
@@ -56,9 +149,9 @@ export default async function ContactPage({ params: { locale } }: { params: { lo
           </CardHeader>
           <CardContent className="flex-grow flex flex-col items-center justify-around p-6 text-lg">
             {contactDetails.map((item, index) => (
-              <a key={index} href={item.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors">
+              <a key={index} href={item.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors text-start w-full">
                 <item.icon className="h-8 w-8 text-primary shrink-0" />
-                <span className="text-start">{item.text}</span>
+                <span>{item.text}</span>
               </a>
             ))}
             <div className="flex flex-col items-center gap-3 text-muted-foreground">

@@ -180,6 +180,7 @@
     "subjectPlaceholder": "Subject",
     "messagePlaceholder": "Your Message",
     "sendButton": "Send Message",
+    "sendingButton": "Sending...",
     "infoTitle": "Contact Information",
     "workHours": {
       "mon_fri": "Mon - Fri:",
@@ -191,7 +192,19 @@
       "sat": "10:00 AM - 3:00 PM",
       "sun": "Closed"
     },
-    "chatOnWhatsApp": "Chat on WhatsApp"
+    "chatOnWhatsApp": "Chat on WhatsApp",
+    "formValidation": {
+      "nameRequired": "Name must be at least 2 characters.",
+      "emailInvalid": "Please enter a valid email address.",
+      "subjectRequired": "Subject must be at least 3 characters.",
+      "messageRequired": "Message must be at least 10 characters."
+    },
+    "formStatus": {
+      "successTitle": "Message Sent!",
+      "successDescription": "Thank you for contacting us. We'll be in touch soon.",
+      "errorTitle": "Submission Failed",
+      "errorDescription": "Something went wrong. Please try again."
+    }
   },
   "BookingPage": {
     "title": "Book a Service",
