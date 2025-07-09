@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -14,7 +13,7 @@ export const metadata: Metadata = {
 const contactDetails = [
   { icon: Phone, text: '+971 54 531 4170', href: 'tel:+971545314170' },
   { icon: Mail, text: 'info@touchup.ae', href: 'mailto:info@touchup.ae' },
-  { icon: MapPin, text: <a href="https://maps.app.goo.gl/j2K9xckTiutBcczi7" className="hover:text-primary">A202 - Sport Society Mall - Mirdif - Dubai</a> },
+  { icon: MapPin, text: 'A202 - Sport Society Mall - Mirdif - Dubai', href: 'https://maps.app.goo.gl/j2K9xckTiutBcczi7' },
 ];
 
 export default function ContactPage() {
@@ -55,7 +54,7 @@ export default function ContactPage() {
                 <div key={index} className="flex items-center gap-4">
                   <item.icon className="h-6 w-6 text-primary" />
                   {item.href ? (
-                    <a href={item.href} className="text-muted-foreground hover:text-primary">{item.text}</a>
+                    <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">{item.text}</a>
                   ) : (
                     <span className="text-muted-foreground">{item.text}</span>
                   )}
@@ -76,8 +75,16 @@ export default function ContactPage() {
             <a href="https://wa.me/+971545314170" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
           </Button>
           
-          <div className="relative aspect-video rounded-lg overflow-hidden shadow-md">
-             <Image src="https://placehold.co/600x400.png" alt="Map location" fill className="object-cover" data-ai-hint="map location" />
+          <div className="rounded-lg overflow-hidden shadow-md">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1804.720140556507!2d55.4071128318501!3d25.222091595902192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f610690b32a1b%3A0xe12a1ef297e8c056!2sSport%20Society!5e0!3m2!1sen!2sae!4v1752040962765!5m2!1sen!2sae" 
+              width="100%" 
+              height="450" 
+              style={{border:0}} 
+              allowFullScreen 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade">
+            </iframe>
           </div>
         </div>
       </div>
