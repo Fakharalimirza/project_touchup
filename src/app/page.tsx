@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { services } from '@/lib/data';
-import { Users, DollarSign, Clock, LifeBuoy } from 'lucide-react';
+import { Users, DollarSign, Clock, LifeBuoy, ChevronDown } from 'lucide-react';
 
 const whyChooseUs = [
   {
@@ -117,6 +117,29 @@ export default function Home() {
                     <Link href="/booking">Book a Service Now</Link>
                 </Button>
             </motion.div>
+        </motion.div>
+
+        <motion.div
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 5, duration: 1 }}
+        >
+          <motion.div
+            animate={{
+              y: [0, 15, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          >
+            <a href="#services">
+              <ChevronDown className="h-10 w-10 text-white/70 hover:text-white transition-colors" />
+              <span className="sr-only">Scroll to services</span>
+            </a>
+          </motion.div>
         </motion.div>
       </section>
 
