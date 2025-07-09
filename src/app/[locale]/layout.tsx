@@ -1,5 +1,5 @@
 import type {Metadata} from 'next';
-import './globals.css';
+import '../globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
@@ -14,13 +14,19 @@ export const metadata: Metadata = {
   keywords: ['cleaning', 'maintenance', 'dubai', 'ac repair', 'plumbing', 'electrical', 'painting', 'pest control'],
 };
 
+export function generateStaticParams() {
+  return [{locale: 'en'}, {locale: 'ar'}];
+}
+
 export default function RootLayout({
   children,
+  params: { locale }
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
