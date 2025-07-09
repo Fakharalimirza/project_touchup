@@ -58,6 +58,10 @@
     "ctaSubtitle": "Let our experts take care of your home maintenance needs. Get a free quote or book your service online today!",
     "ctaButton": "Get Your Free Quote"
   },
+  "ServicesPage": {
+    "title": "Our Professional Services",
+    "subtitle": "At TouchUp Hub, we provide a comprehensive suite of high-quality services to ensure your home or office is in pristine condition."
+  },
   "Services": {
     "painting": {
       "title": "Painting Work",

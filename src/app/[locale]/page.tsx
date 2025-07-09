@@ -43,7 +43,7 @@ const itemVariants = {
 
 export default function Home() {
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
-  const t = useTranslations('Home');
+  const tHome = useTranslations('Home');
   const tServices = useTranslations('Services');
   const tGeneral = useTranslations('General');
 
@@ -88,17 +88,17 @@ export default function Home() {
                 variants={itemVariants}
                 className="text-4xl md:text-7xl font-bold font-headline mb-4"
             >
-                {t('heroTitle')}
+                {tHome('heroTitle')}
             </motion.h1>
             <motion.p
                  variants={itemVariants}
                 className="text-lg md:text-xl mb-8"
             >
-                {t('heroSubtitle')}
+                {tHome('heroSubtitle')}
             </motion.p>
             <motion.div variants={itemVariants}>
                 <Button asChild size="lg">
-                    <Link href="/booking">{t('heroButton')}</Link>
+                    <Link href="/booking">{tHome('heroButton')}</Link>
                 </Button>
             </motion.div>
         </motion.div>
@@ -143,9 +143,9 @@ export default function Home() {
       >
         <div className="container">
           <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">{t('servicesTitle')}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">{tHome('servicesTitle')}</h2>
             <p className="text-lg text-muted-foreground mt-2 max-w-2xl mx-auto">
-              {t('servicesSubtitle')}
+              {tHome('servicesSubtitle')}
             </p>
           </motion.div>
           <div className="flex flex-wrap justify-center gap-8">
@@ -181,9 +181,9 @@ export default function Home() {
       >
         <div className="container">
           <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">{t('whyChooseUsTitle')}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">{tHome('whyChooseUsTitle')}</h2>
             <p className="text-lg text-muted-foreground mt-2">
-              {t('whyChooseUsSubtitle')}
+              {tHome('whyChooseUsSubtitle')}
             </p>
           </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -194,8 +194,8 @@ export default function Home() {
                 <div className="bg-accent/20 text-accent p-4 rounded-full mb-4 transition-all duration-300 transform-gpu hover:scale-110 hover:shadow-[0_0_20px_hsl(var(--accent))]">
                   <Icon className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2">{t(`whyChooseUsItems.${itemKey}.title`)}</h3>
-                <p className="text-muted-foreground">{t(`whyChooseUsItems.${itemKey}.description`)}</p>
+                <h3 className="text-xl font-semibold mb-2">{tHome(`whyChooseUsItems.${itemKey}.title`)}</h3>
+                <p className="text-muted-foreground">{tHome(`whyChooseUsItems.${itemKey}.description`)}</p>
               </motion.div>
             )})}
           </div>
@@ -212,9 +212,9 @@ export default function Home() {
       >
         <div className="container">
           <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">{t('testimonialsTitle')}</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">{tHome('testimonialsTitle')}</h2>
             <p className="text-lg text-muted-foreground mt-2">
-              {t('testimonialsSubtitle')}
+              {tHome('testimonialsSubtitle')}
             </p>
           </motion.div>
           <Carousel
@@ -228,12 +228,12 @@ export default function Home() {
                     <Card className="h-full glow-border bg-card/50 backdrop-blur-sm">
                       <CardContent className="flex flex-col items-center text-center p-6 h-full">
                         <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
-                          <AvatarImage src={`https://placehold.co/100x100.png?text=${index}`} alt={t(`testimonials.${testimonialKey}.name`)} />
-                          <AvatarFallback>{t(`testimonials.${testimonialKey}.name`).charAt(0)}</AvatarFallback>
+                          <AvatarImage src={`https://placehold.co/100x100.png?text=${index}`} alt={tHome(`testimonials.${testimonialKey}.name`)} />
+                          <AvatarFallback>{tHome(`testimonials.${testimonialKey}.name`).charAt(0)}</AvatarFallback>
                         </Avatar>
-                        <p className="text-muted-foreground italic mb-4 flex-grow">"{t(`testimonials.${testimonialKey}.quote`)}"</p>
-                        <p className="font-semibold">{t(`testimonials.${testimonialKey}.name`)}</p>
-                        <p className="text-sm text-muted-foreground">{t(`testimonials.${testimonialKey}.title`)}</p>
+                        <p className="text-muted-foreground italic mb-4 flex-grow">"{tHome(`testimonials.${testimonialKey}.quote`)}"</p>
+                        <p className="font-semibold">{tHome(`testimonials.${testimonialKey}.name`)}</p>
+                        <p className="text-sm text-muted-foreground">{tHome(`testimonials.${testimonialKey}.title`)}</p>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -255,13 +255,13 @@ export default function Home() {
         viewport={{ once: true, amount: 0.2 }}
         >
         <div className="container text-center">
-          <motion.h2 variants={itemVariants} className="text-3xl font-bold font-headline mb-4">{t('ctaTitle')}</motion.h2>
+          <motion.h2 variants={itemVariants} className="text-3xl font-bold font-headline mb-4">{tHome('ctaTitle')}</motion.h2>
           <motion.p variants={itemVariants} className="text-lg mb-8 max-w-2xl mx-auto">
-            {t('ctaSubtitle')}
+            {tHome('ctaSubtitle')}
           </motion.p>
           <motion.div variants={itemVariants}>
             <Button asChild size="lg" variant="secondary">
-              <Link href="/booking">{t('ctaButton')}</Link>
+              <Link href="/booking">{tHome('ctaButton')}</Link>
             </Button>
           </motion.div>
         </div>
@@ -269,5 +269,3 @@ export default function Home() {
     </div>
   );
 }
-
-    

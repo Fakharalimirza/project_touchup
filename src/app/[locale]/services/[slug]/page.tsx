@@ -34,7 +34,8 @@ export async function generateStaticParams() {
 }
 
 export default async function ServiceDetailPage({ params: { slug, locale } }: Props) {
-  const t = await getTranslations();
+  const tServices = await getTranslations({ locale, namespace: 'Services' });
+  const tGeneral = await getTranslations({ locale, namespace: 'General' });
   const service = services.find(s => s.slug === slug);
 
   if (!service) {
@@ -48,7 +49,7 @@ export default async function ServiceDetailPage({ params: { slug, locale } }: Pr
           <Button asChild variant="ghost">
             <Link href="/services" className="flex items-center gap-2 text-muted-foreground">
               <ArrowLeft className="w-4 h-4" />
-              {t('General.backToServices')}
+              {tGeneral('backToServices')}
             </Link>
           </Button>
         </div>
@@ -57,7 +58,7 @@ export default async function ServiceDetailPage({ params: { slug, locale } }: Pr
             <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg">
               <Image
                 src={service.image}
-                alt={t(service.titleKey)}
+                alt={tServices(service.titleKey)}
                 fill
                 className="object-cover"
                 data-ai-hint={service.dataAiHint}
@@ -65,18 +66,18 @@ export default async function ServiceDetailPage({ params: { slug, locale } }: Pr
             </div>
           </div>
           <div className="space-y-6">
-            <span className="text-primary font-semibold">{t('General.service')}</span>
-            <h1 className="text-4xl md:text-5xl font-bold font-headline">{t(service.titleKey)}</h1>
-            <p className="text-lg text-muted-foreground">{t(service.detailsKey)}</p>
+            <span className="text-primary font-semibold">{tGeneral('service')}</span>
+            <h1 className="text-4xl md:text-5xl font-bold font-headline">{tServices(service.titleKey)}</h1>
+            <p className="text-lg text-muted-foreground">{tServices(service.detailsKey)}</p>
 
             {service.subServiceKeys && service.subServiceKeys.length > 0 && (
               <div className="pt-4 space-y-4">
-                <h3 className="text-2xl font-semibold font-headline text-primary">{t('General.ourOfferings')}</h3>
+                <h3 className="text-2xl font-semibold font-headline text-primary">{tGeneral('ourOfferings')}</h3>
                 <ul className="space-y-3">
                   {service.subServiceKeys.map((subKey, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <Check className="w-5 h-5 text-accent mt-1 shrink-0" />
-                      <span className="text-muted-foreground">{t(subKey)}</span>
+                      <span className="text-muted-foreground">{tServices(subKey)}</span>
                     </li>
                   ))}
                 </ul>
@@ -84,7 +85,7 @@ export default async function ServiceDetailPage({ params: { slug, locale } }: Pr
             )}
             
             <Button asChild size="lg">
-              <Link href={`/booking?service=${service.slug}`}>{t('General.bookThisService')}</Link>
+              <Link href={`/booking?service=${service.slug}`}>{tGeneral('bookThisService')}</Link>
             </Button>
           </div>
         </div>

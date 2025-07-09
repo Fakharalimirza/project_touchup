@@ -79,7 +79,7 @@ export default function BookingForm() {
   const router = useRouter();
   const defaultService = searchParams.get('service') || '';
   const { toast } = useToast();
-  const t = useTranslations();
+  const tServices = useTranslations('Services');
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isCalendarOpen, setCalendarOpen] = React.useState(false);
   const [isDetectingLocation, setIsDetectingLocation] = React.useState(false);
@@ -290,7 +290,7 @@ export default function BookingForm() {
                       <SelectContent>
                         {services.map((service) => (
                           <SelectItem key={service.slug} value={service.slug}>
-                            {t(service.titleKey)}
+                            {tServices(service.titleKey)}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -509,6 +509,7 @@ export default function BookingForm() {
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel className="text-xs text-muted-foreground">City</FormLabel>
+
                                 <FormControl>
                                     <Input {...field} />
                                 </FormControl>
