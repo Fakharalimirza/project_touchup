@@ -28,64 +28,59 @@ export default function ContactPage() {
 
       <div className="grid lg:grid-cols-2 gap-12">
         {/* Contact Form */}
-        <Card>
+        <Card className="flex flex-col">
           <CardHeader>
             <CardTitle className="font-headline text-2xl">Send Us a Message</CardTitle>
           </CardHeader>
-          <CardContent>
-            <form className="space-y-4">
+          <CardContent className="flex-grow flex flex-col">
+            <form className="space-y-4 flex flex-col flex-grow">
               <Input placeholder="Your Name" />
               <Input type="email" placeholder="Your Email" />
               <Input placeholder="Subject" />
-              <Textarea placeholder="Your Message" rows={5} />
+              <Textarea placeholder="Your Message" rows={5} className="flex-grow" />
               <Button type="submit" className="w-full" size="lg">Send Message</Button>
             </form>
           </CardContent>
         </Card>
 
-        {/* Contact Details & Map */}
-        <div className="space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="font-headline text-2xl">Contact Information</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {contactDetails.map((item, index) => (
-                <div key={index} className="flex items-center gap-4">
-                  <item.icon className="h-6 w-6 text-primary" />
-                  {item.href ? (
-                    <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">{item.text}</a>
-                  ) : (
-                    <span className="text-muted-foreground">{item.text}</span>
-                  )}
-                </div>
-              ))}
-              <div className="flex items-center gap-4">
-                <Clock className="h-6 w-6 text-primary" />
-                <ul>
-                <li><strong>Mon - Fri:</strong> 10:00 AM - 6:30 PM</li>
-                <li><strong>Saturday:</strong> 10:00 AM - 3:00 PM</li>
-                <li><strong>Sunday:</strong> Closed</li>
-                </ul>
+        {/* Contact Details */}
+        <Card className="flex flex-col">
+          <CardHeader>
+            <CardTitle className="font-headline text-2xl">Contact Information</CardTitle>
+          </CardHeader>
+          <CardContent className="flex-grow flex flex-col space-y-4">
+            {contactDetails.map((item, index) => (
+              <div key={index} className="flex items-center gap-4">
+                <item.icon className="h-6 w-6 text-primary" />
+                <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary">{item.text}</a>
               </div>
-              <Button asChild size="lg" className="w-full bg-green-500 hover:bg-green-600 !mt-6">
-                <a href="https://wa.me/+971545314170" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
-              </Button>
-            </CardContent>
-          </Card>
-          
-          <div className="rounded-lg overflow-hidden shadow-md">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1804.720140556507!2d55.4071128318501!3d25.222091595902192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f610690b32a1b%3A0xe12a1ef297e8c056!2sSport%20Society!5e0!3m2!1sen!2sae!4v1752040962765!5m2!1sen!2sae" 
-              width="100%" 
-              height="450" 
-              style={{border:0}} 
-              allowFullScreen 
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade">
-            </iframe>
-          </div>
-        </div>
+            ))}
+            <div className="flex items-center gap-4">
+              <Clock className="h-6 w-6 text-primary" />
+              <ul>
+              <li><strong>Mon - Fri:</strong> 10:00 AM - 6:30 PM</li>
+              <li><strong>Saturday:</strong> 10:00 AM - 3:00 PM</li>
+              <li><strong>Sunday:</strong> Closed</li>
+              </ul>
+            </div>
+            <Button asChild size="lg" className="w-full bg-green-500 hover:bg-green-600 !mt-auto">
+              <a href="https://wa.me/+971545314170" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+      
+      {/* Map */}
+      <div className="mt-12 rounded-lg overflow-hidden shadow-md">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1804.720140556507!2d55.4071128318501!3d25.222091595902192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f610690b32a1b%3A0xe12a1ef297e8c056!2sSport%20Society!5e0!3m2!1sen!2sae!4v1752040962765!5m2!1sen!2sae" 
+          width="100%" 
+          height="450" 
+          style={{border:0}} 
+          allowFullScreen 
+          loading="lazy" 
+          referrerPolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
     </div>
   );
