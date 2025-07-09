@@ -29,7 +29,8 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-primary">
-          <Image src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" alt="TouchUp Hub Logo" width={50} height={40} className="object-contain" />
+          <Image src="https://touchup.ae/wp-content/uploads/2025/07/black-logo-en.png" alt="TouchUp Hub Logo" width={120} height={40} className="object-contain dark:hidden" />
+          <Image src="https://touchup.ae/wp-content/uploads/2025/07/white-logo-en.png" alt="TouchUp Hub Logo" width={120} height={40} className="object-contain hidden dark:block" />
         </Link>
         <nav className="hidden md:flex items-center gap-16">
           {navLinks.map((link) => (
@@ -63,7 +64,8 @@ export default function Header() {
               <SheetHeader>
                 <SheetTitle>
                    <Link href="/" className="flex items-center gap-2 font-bold text-primary mb-4" onClick={closeSheet}>
-                     <Image src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" alt="TouchUp Logo" width={150} height={40} className="object-contain" />
+                     <Image src="https://touchup.ae/wp-content/uploads/2025/07/black-logo-en.png" alt="TouchUp Logo" width={150} height={40} className="object-contain dark:hidden" />
+                     <Image src="https://touchup.ae/wp-content/uploads/2025/07/white-logo-en.png" alt="TouchUp Logo" width={150} height={40} className="object-contain hidden dark:block" />
                   </Link>
                 </SheetTitle>
                 <SheetDescription className="sr-only">Main navigation menu</SheetDescription>

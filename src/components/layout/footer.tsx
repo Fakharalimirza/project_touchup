@@ -21,16 +21,23 @@ export default function Footer() {
   return (
     <footer className="bg-card border-t text-muted-foreground text-sm">
       <div className="container max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
           {/* About */}
           <div className="space-y-6 text-left">
             <Link href="/" className="flex items-center gap-2 font-bold text-primary">
               <Image
-                src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png"
+                src="https://touchup.ae/wp-content/uploads/2025/07/black-logo-en.png"
                 alt="TouchUp Hub Logo"
-                width={100}
+                width={120}
                 height={40}
-                className="object-contain"
+                className="object-contain dark:hidden"
+              />
+              <Image
+                src="https://touchup.ae/wp-content/uploads/2025/07/white-logo-en.png"
+                alt="TouchUp Hub Logo"
+                width={120}
+                height={40}
+                className="object-contain hidden dark:block"
               />
             </Link>
             <p>
