@@ -10,8 +10,8 @@ type Props = {
   params: { slug: string };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const service = services.find(s => s.slug === params.slug);
+export async function generateMetadata({ params: { slug } }: Props): Promise<Metadata> {
+  const service = services.find(s => s.slug === slug);
 
   if (!service) {
     return {
@@ -31,8 +31,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
-  const service = services.find(s => s.slug === params.slug);
+export default function ServiceDetailPage({ params: { slug } }: { params: { slug: string } }) {
+  const service = services.find(s => s.slug === slug);
 
   if (!service) {
     notFound();
