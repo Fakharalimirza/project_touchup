@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, Twitter, Facebook, Instagram } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const socialLinks = [
   { icon: Twitter, href: '#', name: 'Twitter' },
@@ -9,21 +12,24 @@ const socialLinks = [
 ];
 
 const quickLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/services', label: 'Services' },
-  { href: '/about', label: 'About Us' },
-  { href: '/contact', label: 'Contact' },
-  { href: '/booking', label: 'Book Now' },
-  { href: '/blog', label: 'Blog' },
-];
+  { href: '/', labelKey: 'home' },
+  { href: '/services', labelKey: 'services' },
+  { href: '/about', labelKey: 'about' },
+  { href: '/contact', labelKey: 'contact' },
+  { href: '/booking', labelKey: 'bookNow' },
+  { href: '/blog', labelKey: 'blog' },
+] as const;
 
 export default function Footer() {
+  const t = useTranslations('Footer');
+  const tHeader = useTranslations('Header');
+
   return (
     <footer className="bg-card border-t text-muted-foreground text-sm">
       <div className="container max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-start">
           {/* About */}
-          <div className="space-y-6 text-left">
+          <div className="space-y-6 text-start">
             <Link href="/" className="flex items-center gap-2 font-bold text-primary">
               <Image
                 src="https://touchup.ae/wp-content/uploads/2025/07/black-logo-en.png"
@@ -41,18 +47,18 @@ export default function Footer() {
               />
             </Link>
             <p>
-              Your trusted partner for all home maintenance and cleaning needs in Dubai. Quality service, guaranteed.
+              {t('about')}
             </p>
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-4 text-left">
-            <h3 className="text-lg font-semibold text-foreground">Quick Links</h3>
+          <div className="space-y-4 text-start">
+            <h3 className="text-lg font-semibold text-foreground">{t('quickLinks')}</h3>
             <ul className="space-y-2">
               {quickLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-primary transition-colors">
-                    {link.label}
+                    {tHeader(link.labelKey)}
                   </Link>
                 </li>
               ))}
@@ -60,8 +66,8 @@ export default function Footer() {
           </div>
 
           {/* Contact Info */}
-          <div className="space-y-4 text-left">
-            <h3 className="text-lg font-semibold text-foreground">Contact Us</h3>
+          <div className="space-y-4 text-start">
+            <h3 className="text-lg font-semibold text-foreground">{t('contactUs')}</h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-1 shrink-0" />
@@ -100,17 +106,17 @@ export default function Footer() {
           </div>
 
           {/* Office Hours + Socials */}
-          <div className="space-y-4 text-left">
-            <h3 className="text-lg font-semibold text-foreground">Office Hours</h3>
+          <div className="space-y-4 text-start">
+            <h3 className="text-lg font-semibold text-foreground">{t('officeHours')}</h3>
             <ul className="space-y-2">
               <li>
-                <strong>Mon - Fri:</strong> 10:00 AM - 6:30 PM
+                <strong>{t('hours.mon_fri')}</strong> {t('times.mon_fri')}
               </li>
               <li>
-                <strong>Saturday:</strong> 10:00 AM - 3:00 PM
+                <strong>{t('hours.sat')}</strong> {t('times.sat')}
               </li>
               <li>
-                <strong>Sunday:</strong> Closed
+                <strong>{t('hours.sun')}</strong> {t('times.sun')}
               </li>
             </ul>
             
@@ -119,7 +125,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-10 border-t pt-6 text-center text-xs">
-          <p>&copy; {new Date().getFullYear()} TouchUp.ae. All Rights Reserved.</p>
+          <p>{t('copyright', { year: new Date().getFullYear() })}</p>
         </div>
       </div>
     </footer>

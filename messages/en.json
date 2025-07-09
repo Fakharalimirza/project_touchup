@@ -256,5 +256,22 @@
       "addressConfirmedTitle": "Address Confirmed",
       "addressConfirmedDescription": "Please double-check and fill in any missing details like your apartment number."
     }
+  },
+  "Footer": {
+    "about": "Your trusted partner for all home maintenance and cleaning needs in Dubai. Quality service, guaranteed.",
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "officeHours": "Office Hours",
+    "hours": {
+      "mon_fri": "Mon - Fri:",
+      "sat": "Saturday:",
+      "sun": "Sunday:"
+    },
+    "times": {
+      "mon_fri": "10:00 AM - 6:30 PM",
+      "sat": "10:00 AM - 3:00 PM",
+      "sun": "Closed"
+    },
+    "copyright": "© {year} TouchUp.ae. All Rights Reserved."
   }
 }

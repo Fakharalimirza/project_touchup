@@ -58,7 +58,7 @@ export default async function ContactPage({ params: { locale } }: { params: { lo
             {contactDetails.map((item, index) => (
               <a key={index} href={item.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors">
                 <item.icon className="h-8 w-8 text-primary shrink-0" />
-                <span className="text-left">{item.text}</span>
+                <span className="text-start">{item.text}</span>
               </a>
             ))}
             <div className="flex flex-col items-center gap-3 text-muted-foreground">
