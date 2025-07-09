@@ -2,13 +2,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { services } from '@/lib/data';
 import { Users, DollarSign, Clock, LifeBuoy, ChevronDown } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const whyChooseUs = [
   {
@@ -74,6 +75,19 @@ const itemVariants = {
 
 
 export default function Home() {
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setShowScrollIndicator(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -119,28 +133,33 @@ export default function Home() {
             </motion.div>
         </motion.div>
 
-        <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 5, duration: 1 }}
-        >
-          <motion.div
-            animate={{
-              y: [0, 15, 0],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          >
-            <a href="#services">
-              <ChevronDown className="h-10 w-10 text-white/70 hover:text-white transition-colors" />
-              <span className="sr-only">Scroll to services</span>
-            </a>
-          </motion.div>
-        </motion.div>
+        <AnimatePresence>
+          {showScrollIndicator && (
+            <motion.div
+              className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 5, duration: 1 }}
+            >
+              <motion.div
+                animate={{
+                  y: [0, 15, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <a href="#services">
+                  <ChevronDown className="h-10 w-10 text-white/70 hover:text-white transition-colors" />
+                  <span className="sr-only">Scroll to services</span>
+                </a>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
 
       {/* Services Overview */}
