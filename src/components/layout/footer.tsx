@@ -21,16 +21,16 @@ export default function Footer() {
   return (
     <footer className="bg-card border-t">
       <div className="container py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center justify-center md:justify-start gap-2 font-bold text-primary">
+            <Link href="/" className="flex items-center justify-start gap-2 font-bold text-primary">
                <Image src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" alt="TouchUp Hub Logo" width={150} height={40} className="object-contain" />
             </Link>
             <p className="text-muted-foreground">
               Your trusted partner for all home maintenance and cleaning needs in Dubai. Quality service, guaranteed.
             </p>
-            <div className="flex space-x-4 justify-center md:justify-start">
+            <div className="flex space-x-4 justify-start">
               {socialLinks.map((social) => (
                 <Link key={social.name} href={social.href} className="text-muted-foreground hover:text-primary">
                   <social.icon className="h-5 w-5" />
@@ -43,7 +43,7 @@ export default function Footer() {
           {/* Quick Links */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Quick Links</h3>
-            <ul className="space-y-2 inline-block text-left">
+            <ul className="space-y-2">
               {quickLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-muted-foreground hover:text-primary transition-colors">
@@ -57,7 +57,7 @@ export default function Footer() {
           {/* Contact Info */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Contact Us</h3>
-            <ul className="space-y-3 text-muted-foreground inline-block text-left">
+            <ul className="space-y-3 text-muted-foreground">
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 mt-1 shrink-0" />
                 <a href="https://maps.app.goo.gl/j2K9xckTiutBcczi7" className="hover:text-primary">A202 - Sport Society Mall - Mirdif - Dubai</a>
@@ -76,7 +76,7 @@ export default function Footer() {
           {/* Office Hours */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Office Hours</h3>
-            <ul className="space-y-2 text-muted-foreground inline-block text-left">
+            <ul className="space-y-2 text-muted-foreground">
                 <li><strong>Mon - Fri:</strong> 10:00 AM - 6:30 PM</li>
                 <li><strong>Saturday:</strong> 10:00 AM - 3:00 PM</li>
                 <li><strong>Sunday:</strong> Closed</li>
