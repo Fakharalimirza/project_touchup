@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -178,9 +179,9 @@ export default function Home() {
               We offer a wide range of services to keep your home in perfect condition.
             </p>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="flex flex-wrap justify-center gap-8">
             {services.map((service) => (
-              <motion.div key={service.slug} variants={itemVariants} whileHover={{ y: -8, scale: 1.03 }}>
+              <motion.div key={service.slug} variants={itemVariants} whileHover={{ y: -8, scale: 1.03 }} className="w-full sm:basis-[calc(50%-1rem)] lg:basis-[calc(33.333%-1.34rem)]">
                 <Card className="text-center transition-all duration-300 glow-border bg-card/50 backdrop-blur-sm h-full flex flex-col">
                   <CardHeader>
                     <div className="mx-auto bg-primary/10 text-primary rounded-full p-4 w-fit mb-4">
