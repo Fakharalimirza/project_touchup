@@ -12,6 +12,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params: { slug, locale } }: Props): Promise<Metadata> {
+  unstable_setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'Services' });
   const service = services.find(s => s.slug === slug);
 
