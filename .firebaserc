@@ -2,9 +2,13 @@
   "projects": {
     "default": "touchup-42i8o"
   },
-  "backends": {
-    "touchup-web": {
-      "project": "touchup-42i8o"
+  "targets": {
+    "touchup-42i8o": {
+      "apphosting": {
+        "touchup-web": [
+          "touchup-web"
+        ]
+      }
     }
   }
 }
