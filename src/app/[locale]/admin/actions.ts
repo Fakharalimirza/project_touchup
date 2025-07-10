@@ -1,5 +1,6 @@
-'use server';
 
+'use server';
+import 'dotenv/config';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -32,7 +33,6 @@ export async function login(prevState: any, formData: FormData) {
   try {
     const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
     if (!apiKey) {
-      // This is a clear check to ensure the key is loaded.
       return { error: "Firebase API Key is not configured. Please check your environment variables." };
     }
 
@@ -46,7 +46,6 @@ export async function login(prevState: any, formData: FormData) {
 
     if (!response.ok) {
       console.error('Firebase Auth Error:', result.error.message);
-      // Return the specific error from Firebase to the user interface.
       return { error: result.error?.message || 'An unknown authentication error occurred.' };
     }
 

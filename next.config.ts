@@ -1,8 +1,6 @@
 
 import type {NextConfig} from 'next';
 
-require('dotenv').config({ path: './.env' });
-
 const withNextIntl = require('next-intl/plugin')('./src/i18n.ts');
 
 const nextConfig: NextConfig = {
