@@ -1,3 +1,4 @@
+
 import * as admin from 'firebase-admin';
 
 export function initializeAdminApp() {
@@ -10,7 +11,7 @@ export function initializeAdminApp() {
     : undefined;
 
   if (!process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || !process.env.FIREBASE_CLIENT_EMAIL || !privateKey) {
-    throw new Error('Firebase Admin SDK credentials are not set in environment variables.');
+    throw new Error('Firebase Admin SDK credentials are not set in environment variables. Make sure FIREBASE_CLIENT_EMAIL and FIREBASE_PRIVATE_KEY are set as secrets.');
   }
 
   admin.initializeApp({
