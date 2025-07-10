@@ -1,5 +1,6 @@
 
 'use server';
+
 import 'dotenv/config';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
@@ -14,7 +15,16 @@ const loginSchema = z.object({
 });
 
 export async function createSession(idToken: string) {
-  await initializeAdminApp();
+  try {
+    initializeAdminApp();
+  } catch (error) {
+    if (error instanceof Error) {
+        console.error('Firebase Admin Initialization Error:', error.message);
+        throw new Error(`Firebase Admin initialization failed: ${error.message}. Make sure FIREBASE_CLIENT_EMAIL and FIREBASE_PRIVATE_KEY are set correctly.`);
+    }
+    throw new Error('An unknown error occurred during Firebase Admin initialization.');
+  }
+
   const expiresIn = 60 * 60 * 24 * 5 * 1000; // 5 days
   const sessionCookie = await getAuth().createSessionCookie(idToken, { expiresIn });
   cookies().set('session', sessionCookie, { maxAge: expiresIn, httpOnly: true, secure: true });
