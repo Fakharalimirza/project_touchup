@@ -8,6 +8,7 @@ const contactSchema = z.object({
   email: z.string().email(),
   subject: z.string().min(3),
   message: z.string().min(10),
+  terms: z.literal(true),
 });
 
 export type ContactFormValues = z.infer<typeof contactSchema>;

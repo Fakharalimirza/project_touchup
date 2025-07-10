@@ -244,7 +244,7 @@
       "specialInstructions": "تعليمات خاصة (اختياري)",
       "specialInstructionsPlaceholder": "مثال: يرجى الاتصال قبل الوصول.",
       "terms": "أوافق على",
-      "termsLink": "الشروط والأحكام",
+      "termsLink": "الشروط والأحكام وسياسة الخصوصية",
       "submitButton": "إرسال طلب الحجز",
       "submittingButton": "جاري الإرسال...",
       "successTitle": "تم إرسال طلب الحجز!",
@@ -288,7 +288,7 @@
     "copyright": "© {year} Touchup.ae. جميع الحقوق محفوظة."
   },
   "TermsPage": {
-    "title": "الشروط والأحكام",
+    "title": "الشروط والأحكام وسياسة الخصوصية",
     "subtitle": "مرحبًا بك في تتش أب لصيانة المباني",
     "description": "من خلال تسجيل حساب على touchup.ae، فإنك توافق على الالتزام بالشروط والأحكام التالية.",
     "acceptance": {

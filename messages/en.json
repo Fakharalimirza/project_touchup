@@ -244,7 +244,7 @@
       "specialInstructions": "Special Instructions (Optional)",
       "specialInstructionsPlaceholder": "e.g., Please call before arrival.",
       "terms": "I agree to the",
-      "termsLink": "Terms and Conditions",
+      "termsLink": "Terms and Conditions & Privacy Policy",
       "submitButton": "Submit Booking Request",
       "submittingButton": "Submitting...",
       "successTitle": "Booking Request Sent!",
@@ -288,7 +288,7 @@
     "copyright": "© {year} Touchup.ae. All Rights Reserved."
   },
   "TermsPage": {
-    "title": "Terms & Conditions",
+    "title": "Terms & Conditions & Privacy Policy",
     "subtitle": "Welcome to Touchup Building Maintenance",
     "description": "By signing up for an account on touchup.ae, you agree to be bound by the following terms and conditions.",
     "acceptance": {
