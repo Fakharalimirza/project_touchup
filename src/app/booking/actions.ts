@@ -3,6 +3,8 @@
 
 import { z } from 'zod';
 import nodemailer from 'nodemailer';
+import { db } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const bookingSchema = z.object({
   name: z.string().min(2),
@@ -66,8 +68,8 @@ function getCustomerEmailHtml(name: string, data: BookingFormValues) {
     const baseUrl = 'https://touchup.ae';
     return `
     <div style="font-family: Arial, sans-serif; line-height: 1.6; text-align: center;">
-        <img src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" width="150" alt="TouchUp Hub" style="margin: 0 auto;" />
-        <h1 style="color: #1d1c1d;">Thank you for choosing TouchUp Hub!</h1>
+        <img src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" width="150" alt="Touchup Building Maintenance" style="margin: 0 auto;" />
+        <h1 style="color: #1d1c1d;">Thank you for choosing Touchup Building Maintenance!</h1>
         <div style="text-align: left; padding: 0 24px;">
             <p>Hi ${name},</p>
             <p>We have received your booking request and a member of our team will contact you shortly to confirm the details.</p>
@@ -82,7 +84,7 @@ function getCustomerEmailHtml(name: string, data: BookingFormValues) {
             <p>We look forward to serving you!</p>
         </div>
         <a href="${baseUrl}" style="background-color: #1890ff; border-radius: 3px; color: #fff; display: inline-block; padding: 12px 24px; text-decoration: none; margin: 24px auto;">Visit Our Website</a>
-        <p style="color: #8898aa; font-size: 12px; text-align: center;">TouchUp Hub, A202 - Sport Society Mall - Mirdif - Dubai</p>
+        <p style="color: #8898aa; font-size: 12px; text-align: center;">Touchup Building Maintenance, A202 - Sport Society Mall - Mirdif - Dubai</p>
     </div>
     `;
 }
@@ -94,11 +96,20 @@ export async function submitBooking(data: BookingFormValues) {
     console.error('Server-side validation failed:', validatedData.error);
     return { success: false, error: 'Invalid data provided.' };
   }
-
-  const adminEmailHtml = getAdminEmailHtml(validatedData.data);
-  const customerEmailHtml = getCustomerEmailHtml(validatedData.data.name, validatedData.data);
+  
+  const { terms, ...bookingData } = validatedData.data;
 
   try {
+    // Save to Firestore
+    await addDoc(collection(db, "bookings"), {
+      ...bookingData,
+      createdAt: serverTimestamp(),
+      status: 'new'
+    });
+
+    const adminEmailHtml = getAdminEmailHtml(validatedData.data);
+    const customerEmailHtml = getCustomerEmailHtml(validatedData.data.name, validatedData.data);
+
     // Send email to admin
     await transporter.sendMail({
       from: `"TouchUp Booking" <${process.env.SMTP_FROM_EMAIL}>`,
@@ -109,15 +120,18 @@ export async function submitBooking(data: BookingFormValues) {
 
     // Send confirmation email to customer
     await transporter.sendMail({
-      from: `"TouchUp Hub" <${process.env.SMTP_FROM_EMAIL}>`,
+      from: `"Touchup Building Maintenance" <${process.env.SMTP_FROM_EMAIL}>`,
       to: validatedData.data.email,
-      subject: 'Your Booking Request with TouchUp Hub has been received!',
+      subject: 'Your Booking Request with Touchup Building Maintenance has been received!',
       html: customerEmailHtml,
     });
 
     return { success: true };
   } catch (error) {
-    console.error('Email sending failed:', error);
-    return { success: false, error: 'Failed to send emails.' };
+    console.error('Error during submission:', error);
+    if (error instanceof Error) {
+        return { success: false, error: `Failed to submit booking: ${error.message}` };
+    }
+    return { success: false, error: 'An unknown error occurred.' };
   }
 }
