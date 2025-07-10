@@ -49,7 +49,7 @@ export async function submitContactForm(data: ContactFormValues) {
   try {
     await transporter.sendMail({
       from: `"TouchUp Contact Form" <${process.env.SMTP_FROM_EMAIL || 'noreply@touchup.ae'}>`,
-      to: 'info@touchup.ae',
+      to: process.env.ADMIN_EMAIL_CONTACT,
       replyTo: email,
       subject: `New Contact Form Message: ${subject}`,
       html: emailHtml,

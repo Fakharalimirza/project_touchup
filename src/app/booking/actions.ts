@@ -102,7 +102,7 @@ export async function submitBooking(data: BookingFormValues) {
     // Send email to admin
     await transporter.sendMail({
       from: `"TouchUp Booking" <${process.env.SMTP_FROM_EMAIL}>`,
-      to: process.env.ADMIN_EMAIL,
+      to: process.env.ADMIN_EMAIL_BOOKING,
       subject: `New Booking Request - ${validatedData.data.service}`,
       html: adminEmailHtml,
     });
