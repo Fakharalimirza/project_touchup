@@ -15,7 +15,6 @@ runConfig:
 # Secret Manager.
 # https://firebase.google.com/docs/app-hosting/configure#environment-variables
 secretEnvironmentVariables:
-  - secret: FIREBASE_CLIENT_EMAIL
   - secret: NEXT_PUBLIC_FIREBASE_API_KEY
   - secret: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
   - secret: NEXT_PUBLIC_FIREBASE_PROJECT_ID
@@ -29,6 +28,9 @@ secretEnvironmentVariables:
   - secret: SMTP_FROM_EMAIL
   - secret: ADMIN_EMAIL_BOOKING
   - secret: ADMIN_EMAIL_CONTACT
+
 env:
   - variable: ADMIN_PRIVATE_KEY
     secret: FIREBASE_PRIVATE_KEY
+  - variable: FIREBASE_CLIENT_EMAIL
+    secret: FIREBASE_CLIENT_EMAIL
