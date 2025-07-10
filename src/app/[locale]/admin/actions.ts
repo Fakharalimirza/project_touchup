@@ -19,7 +19,7 @@ export async function createSession(idToken: string) {
   cookies().set('session', sessionCookie, { maxAge: expiresIn, httpOnly: true, secure: true });
 }
 
-export async function login(formData: FormData) {
+export async function login(prevState: any, formData: FormData) {
   const values = Object.fromEntries(formData.entries());
   const validatedFields = loginSchema.safeParse(values);
 
