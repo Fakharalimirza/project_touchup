@@ -3,29 +3,13 @@
 
 This is a Next.js starter project built in Firebase Studio.
 
-## DEPLOYMENT FIX: How to Reset and Deploy
+## DEPLOYMENT FIX: How to Deploy
 
-If you are having deployment issues where the CLI cannot find your backend, your local Firebase configuration is likely out of sync. Follow these steps precisely to fix it.
+If you are having deployment issues, your local Firebase configuration is likely out of sync. A `.firebaserc` file has been created for you to fix this.
 
-### Step 1: Re-Initialize Your Project
+### Step 1: Deploy Your Application
 
-Run the following command from your project's root directory:
-
-```bash
-firebase init apphosting
-```
-
-The CLI will guide you through the process:
-
-1.  It will confirm you are using the correct project (`touchup-42i8o`).
-2.  When prompted to **"Create a new backend"** or **"Link to an existing backend"**, choose **"Link to an existing backend"**.
-3.  When it asks which backend to link, it should now list `touchup-web`. Select it. If it lists `studio` or something else, there is a deeper issue, but this re-initialization should fix it.
-
-This process will create or update a `.firebaserc` file and correctly link your local directory to the `touchup-web` backend on Firebase.
-
-### Step 2: Deploy Your Application
-
-Once initialization is complete, you can deploy your application with a single command. This command specifically targets App Hosting and will now work correctly:
+You can now deploy your application with a single command. This command specifically targets App Hosting and should now work correctly:
 
 ```bash
 firebase deploy --only apphosting
