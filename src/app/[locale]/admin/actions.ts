@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { getAuth } from 'firebase-admin/auth';
 import { initializeAdminApp } from '@/lib/firebase/admin';
 
+// Explicitly load environment variables at the top of the file
 require('dotenv').config({ path: './.env' });
 
 const loginSchema = z.object({
@@ -32,7 +33,12 @@ export async function login(prevState: any, formData: FormData) {
   const { email, password } = validatedFields.data;
 
   try {
-    const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.NEXT_PUBLIC_FIREBASE_API_KEY}`, {
+    const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
+    if (!apiKey) {
+      throw new Error("Firebase API Key is not configured. Please check your environment variables.");
+    }
+
+    const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password, returnSecureToken: true }),
@@ -43,7 +49,7 @@ export async function login(prevState: any, formData: FormData) {
     if (!response.ok) {
       console.error('Firebase Auth Error:', result.error.message);
       // Return the specific error from Firebase to the user interface.
-      return { error: result.error.message || 'An unknown authentication error occurred.' };
+      return { error: result.error?.message || 'An unknown authentication error occurred.' };
     }
 
     await createSession(result.idToken);
