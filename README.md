@@ -1,55 +1,80 @@
 # Firebase Studio
 
-This is a NextJS starter in Firebase Studio.
+This is a Next.js starter project built in Firebase Studio.
 
-To get started, take a look at src/app/page.tsx.
+## Deployment to Firebase App Hosting
 
-## Deployment to cPanel
+Deploying your Next.js application to Firebase App Hosting is a streamlined process that leverages the Firebase CLI.
 
-Deploying a Next.js application to cPanel requires using the **Node.js Selector** or a similar feature. Here is a general guide:
+### Prerequisites
 
-### 1. Build Your Project
+1.  **Install the Firebase CLI:** If you haven't already, install the Firebase Command Line Interface on your machine.
+    ```bash
+    npm install -g firebase-tools
+    ```
 
-First, you need to create a production-ready version of your app. Run the following command in your local terminal:
+2.  **Log in to Firebase:** Authenticate with your Firebase account.
+    ```bash
+    firebase login
+    ```
+
+### Step 1: Initialize Firebase in Your Project
+
+If your project isn't already set up with Firebase, you need to initialize it. Run the following command from your project's root directory:
 
 ```bash
-npm run build
+firebase init apphosting
 ```
 
-This command will create an optimized build in a `.next` folder.
+The CLI will guide you through the process:
+-   Select an existing Firebase project or create a new one.
+-   It will detect your `apphosting.yaml` file and set up the backend.
 
-### 2. Prepare and Upload Files
+### Step 2: Deploy Your Application
 
-Next, you need to upload your project files to your hosting server. Create a ZIP archive containing the following:
+Once initialization is complete, you can deploy your application with a single command:
 
-- The `.next` folder (created in the previous step)
-- The `public` folder
-- The `node_modules` folder
-- `package.json`
-- `package-lock.json`
-- `next.config.ts`
-- `messages` folder
-- `.env` (if you have any environment variables)
+```bash
+firebase apphosting:backends:deploy
+```
 
-Upload this ZIP file to your desired directory on the server using the cPanel **File Manager** and then extract it.
+This command will:
+1.  Build your Next.js application for production.
+2.  Package the build output into a container image.
+3.  Push the image to a secure registry.
+4.  Deploy the image to Firebase App Hosting, making it live.
 
-### 3. Set Up the Node.js Application in cPanel
+After the deployment finishes, the CLI will provide you with the URL where your application is running.
 
-1.  Log in to your cPanel and find the **"Setup Node.js App"** tool.
-2.  Click **"Create Application"**.
-3.  Set the **"Application root"** to the folder where you extracted your files (e.g., `/home/youruser/my-app`).
-4.  The **"Application startup file"** should be configured to run your app. Your `package.json` has a `start` script (`next start`), which is what cPanel will use. You can often leave the startup file field blank if cPanel correctly identifies your `package.json`.
-5.  Click **"Create"**.
+### Environment Variables
 
-### 4. Install Dependencies and Start the App
+For any environment variables in your `.env` file (like email credentials), you must add them as secrets in Firebase so they are available to your live application.
 
-Once the application is created in the cPanel interface:
+1.  **Set a secret:**
+    ```bash
+    firebase apphosting:secrets:set SECRET_NAME
+    ```
+    The CLI will prompt you to enter the secret value. Repeat this for each variable (e.g., `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, etc.).
 
-1.  You will see an option to **"Run NPM Install"**. Click this to install all the dependencies from your `package.json` on the server.
-2.  After the installation is complete, click the **"Start App"** button. This will run the `npm start` command and get your application running.
+2.  **Grant access to the secret:** In your `apphosting.yaml` file, you need to grant your backend access to these secrets:
+    ```yaml
+    # apphosting.yaml
+    backendId: touchup-web
+    runConfig:
+      # ...
+    secretEnvironmentVariables:
+      - secret: SMTP_HOST
+      - secret: SMTP_PORT
+      - secret: SMTP_USER
+      - secret: SMTP_PASS
+      - secret: SMTP_FROM_EMAIL
+      - secret: ADMIN_EMAIL_BOOKING
+      - secret: ADMIN_EMAIL_CONTACT
+    ```
 
-### 5. Point Your Domain
+3.  **Redeploy:** After adding secrets to your `apphosting.yaml`, you must redeploy your backend for the changes to take effect.
+    ```bash
+    firebase apphosting:backends:deploy
+    ```
 
-Finally, you need to associate your domain with the running Node.js application. This is typically done within the **"Domains"** section of cPanel or might be an option directly within the Node.js App setup page.
-
-That's it! Your Next.js site should now be live on your domain. Keep in mind that the exact steps can vary slightly between hosting providers, so it's always a good idea to check their specific documentation if you run into any issues.
+That's it! Your Next.js site will be live and running on Firebase's scalable infrastructure.
