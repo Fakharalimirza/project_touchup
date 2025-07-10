@@ -1,7 +1,6 @@
 
 'use server';
 
-import 'dotenv/config';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';

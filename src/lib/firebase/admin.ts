@@ -6,19 +6,30 @@ export function initializeAdminApp() {
     return;
   }
   
-  // When deployed, the private key is available via the ADMIN_PRIVATE_KEY env var.
-  // For local development, it falls back to FIREBASE_PRIVATE_KEY from the .env file.
-  const privateKey = (process.env.ADMIN_PRIVATE_KEY || process.env.FIREBASE_PRIVATE_KEY)?.replace(/\\n/g, '\n');
+  const privateKey = process.env.ADMIN_PRIVATE_KEY;
+  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+  const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
 
-  if (!process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || !process.env.FIREBASE_CLIENT_EMAIL || !privateKey) {
-    throw new Error('Firebase Admin SDK credentials are not set in environment variables. Make sure FIREBASE_CLIENT_EMAIL and a private key (ADMIN_PRIVATE_KEY or FIREBASE_PRIVATE_KEY) are set as secrets.');
+  if (!projectId) {
+    throw new Error('Firebase Admin SDK Error: NEXT_PUBLIC_FIREBASE_PROJECT_ID is not set in environment variables. Please check your App Hosting secrets and configuration.');
+  }
+  if (!clientEmail) {
+    throw new Error('Firebase Admin SDK Error: FIREBASE_CLIENT_EMAIL is not set in environment variables. Please check your App Hosting secrets and configuration.');
+  }
+  if (!privateKey) {
+    throw new Error('Firebase Admin SDK Error: ADMIN_PRIVATE_KEY is not set in environment variables. Please check your App Hosting secrets and configuration.');
   }
 
-  admin.initializeApp({
-    credential: admin.credential.cert({
-        projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-        privateKey: privateKey,
-    }),
-  });
+  try {
+    admin.initializeApp({
+      credential: admin.credential.cert({
+          projectId: projectId,
+          clientEmail: clientEmail,
+          privateKey: privateKey.replace(/\\n/g, '\n'),
+      }),
+    });
+  } catch (error: any) {
+    // Throw a more descriptive error to help with debugging
+    throw new Error(`Firebase Admin initialization failed: ${error.message}. Make sure the service account credentials (client email and private key) are set correctly as secrets.`);
+  }
 }
