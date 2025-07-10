@@ -7,9 +7,6 @@ import { z } from 'zod';
 import { getAuth } from 'firebase-admin/auth';
 import { initializeAdminApp } from '@/lib/firebase/admin';
 
-// Explicitly load environment variables at the top of the file
-require('dotenv').config({ path: './.env' });
-
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
