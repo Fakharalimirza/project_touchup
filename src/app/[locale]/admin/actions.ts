@@ -7,6 +7,8 @@ import { z } from 'zod';
 import { getAuth } from 'firebase-admin/auth';
 import { initializeAdminApp } from '@/lib/firebase/admin';
 
+require('dotenv').config({ path: './.env' });
+
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
