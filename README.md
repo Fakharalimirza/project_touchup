@@ -35,7 +35,7 @@ The CLI will guide you through the process:
 Once initialization is complete, you can deploy your application with a single command:
 
 ```bash
-firebase apphosting:backends:deploy
+firebase deploy --only apphosting
 ```
 
 This command will:
@@ -54,7 +54,7 @@ For any environment variables in your `.env` file (like email credentials), you 
     ```bash
     firebase apphosting:secrets:set SECRET_NAME
     ```
-    The CLI will prompt you to enter the secret value. Repeat this for each variable (e.g., `SMTP_HOST`, `SMTP_USER`, `SMTP_PASS`, etc.).
+    The CLI will prompt you to enter the secret value. Repeat this for each variable. For this project, you will need to set `FIREBASE_CLIENT_EMAIL` and `FIREBASE_PRIVATE_KEY`.
 
 2.  **Grant access to the secret:** In your `apphosting.yaml` file, you need to grant your backend access to these secrets:
     ```yaml
@@ -62,19 +62,21 @@ For any environment variables in your `.env` file (like email credentials), you 
     backendId: touchup-web
     runConfig:
       # ...
+    # Grant access to secrets
+    env:
+      - variable: ADMIN_PRIVATE_KEY
+        secret: FIREBASE_PRIVATE_KEY
+      - variable: FIREBASE_CLIENT_EMAIL
+        secret: FIREBASE_CLIENT_EMAIL
     secretEnvironmentVariables:
-      - secret: SMTP_HOST
-      - secret: SMTP_PORT
-      - secret: SMTP_USER
-      - secret: SMTP_PASS
-      - secret: SMTP_FROM_EMAIL
-      - secret: ADMIN_EMAIL_BOOKING
-      - secret: ADMIN_EMAIL_CONTACT
+      - secret: NEXT_PUBLIC_FIREBASE_API_KEY
+      - secret: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+      # ... and so on for other secrets
     ```
 
 3.  **Redeploy:** After adding secrets to your `apphosting.yaml`, you must redeploy your backend for the changes to take effect.
     ```bash
-    firebase apphosting:backends:deploy
+    firebase deploy --only apphosting
     ```
 
 That's it! Your Next.js site will be live and running on Firebase's scalable infrastructure.
