@@ -5,7 +5,7 @@ import { services } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Check } from 'lucide-react';
 import type { Metadata } from 'next';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 
 type Props = {
   params: { slug: string, locale: string };
@@ -34,6 +34,7 @@ export async function generateStaticParams() {
 }
 
 export default async function ServiceDetailPage({ params: { slug, locale } }: Props) {
+  unstable_setRequestLocale(locale);
   const tServices = await getTranslations({ locale, namespace: 'Services' });
   const tGeneral = await getTranslations({ locale, namespace: 'General' });
   const service = services.find(s => s.slug === slug);

@@ -1,6 +1,6 @@
 import type {Metadata} from 'next';
 import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
+import {getMessages, unstable_setRequestLocale} from 'next-intl/server';
 import '../globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import Header from '@/components/layout/header';
@@ -27,6 +27,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
+  unstable_setRequestLocale(locale);
   const messages = await getMessages();
 
   return (

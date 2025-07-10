@@ -1,9 +1,13 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { Target, Eye, Heart } from 'lucide-react';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+type Props = {
+  params: { locale: string };
+};
+
+export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'AboutPage' });
  
   return {
@@ -30,7 +34,8 @@ const values = [
   }
 ];
 
-export default async function AboutPage({ params: { locale } }: { params: { locale: string } }) {
+export default async function AboutPage({ params: { locale } }: Props) {
+  unstable_setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'AboutPage' });
 
   return (

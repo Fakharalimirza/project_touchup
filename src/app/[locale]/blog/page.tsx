@@ -3,7 +3,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
+
+type Props = {
+  params: { locale: string };
+};
 
 const blogPostKeys = ['ac_maintenance_tips', 'choosing_paint', 'common_plumbing_issues'];
 const blogPostImages: Record<string, { image: string, dataAiHint: string }> = {
@@ -12,7 +16,7 @@ const blogPostImages: Record<string, { image: string, dataAiHint: string }> = {
   common_plumbing_issues: { image: 'https://placehold.co/400x250.png', dataAiHint: 'leaky faucet' },
 };
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'BlogPage' });
  
   return {
@@ -21,7 +25,8 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
-export default async function BlogPage({ params: { locale } }: { params: { locale: string } }) {
+export default async function BlogPage({ params: { locale } }: Props) {
+  unstable_setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'BlogPage' });
   const tPosts = await getTranslations({ locale, namespace: 'BlogPosts' });
 

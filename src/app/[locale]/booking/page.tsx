@@ -2,9 +2,13 @@ import { Suspense } from 'react';
 import { Metadata } from 'next';
 import BookingForm from '@/components/booking-form';
 import BookingFormSkeleton from '@/components/booking-form-skeleton';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+type Props = {
+  params: { locale: string };
+};
+
+export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'BookingPage' });
  
   return {
@@ -13,7 +17,8 @@ export async function generateMetadata({ params: { locale } }: { params: { local
   };
 }
 
-export default async function BookingPage({ params: { locale } }: { params: { locale: string } }) {
+export default async function BookingPage({ params: { locale } }: Props) {
+  unstable_setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'BookingPage' });
 
   return (
