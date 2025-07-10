@@ -9,11 +9,11 @@ import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
   title: {
-    default: 'TouchUp Hub - Your Home Maintenance Partner',
-    template: '%s | TouchUp Hub',
+    default: 'Touchup Building Maintenance - Home & Building Maintenance Services in Dubai',
+    template: '%s | Touchup Building Maintenance',
   },
-  description: 'Professional cleaning, AC maintenance, plumbing, electrical, and painting services in Dubai. Book online today!',
-  keywords: ['cleaning', 'maintenance', 'dubai', 'ac repair', 'plumbing', 'electrical', 'painting', 'pest control'],
+  description: 'Professional building maintenance, cleaning, AC repair, plumbing, electrical, and painting services in Dubai. Book online today!',
+  keywords: ['building maintenance dubai', 'home maintenance dubai', 'cleaning services dubai', 'ac repair dubai', 'plumbing services dubai', 'electrical services dubai', 'painting services dubai', 'pest control dubai', 'handyman services dubai', 'property maintenance'],
 };
 
 export function generateStaticParams() {

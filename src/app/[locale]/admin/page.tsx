@@ -7,7 +7,7 @@ import { Wrench } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Admin Login',
-  description: 'Admin login page for TouchUp Hub.',
+  description: 'Admin login page for Touchup Building Maintenance.',
 };
 
 export default function AdminPage() {
@@ -20,7 +20,7 @@ export default function AdminPage() {
         <Card>
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold font-headline">Admin Login</CardTitle>
-            <CardDescription>Access the TouchUp Hub Dashboard</CardDescription>
+            <CardDescription>Access the Touchup Building Maintenance Dashboard</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">

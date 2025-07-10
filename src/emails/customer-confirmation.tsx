@@ -33,10 +33,10 @@ export default function CustomerConfirmationEmail({ name, data }: CustomerConfir
             src={`${baseUrl}/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png`}
             width="150"
             height="50"
-            alt="TouchUp Hub"
+            alt="Touchup Building Maintenance Logo"
             style={logo}
           />
-          <Heading style={h1}>Thank you for choosing TouchUp Hub!</Heading>
+          <Heading style={h1}>Thank you for choosing Touchup Building Maintenance!</Heading>
           <Text style={text}>
             Hi {name},
           </Text>
@@ -60,7 +60,7 @@ export default function CustomerConfirmationEmail({ name, data }: CustomerConfir
           </Button>
 
           <Text style={footer}>
-            TouchUp Hub, A202 - Sport Society Mall - Mirdif - Dubai
+            Touchup Building Maintenance, A202 - Sport Society Mall - Mirdif - Dubai
           </Text>
         </Container>
       </Body>

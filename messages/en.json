@@ -41,12 +41,12 @@
       "ahmed": {
         "name": "Ahmed Khan",
         "title": "Homeowner, Dubai Marina",
-        "quote": "TouchUp Hub's team was professional and efficient. My AC has never worked better! Highly recommended for their prompt service."
+        "quote": "Touchup Building Maintenance's team was professional and efficient. My AC has never worked better! Highly recommended for their prompt service."
       },
       "fatima": {
         "name": "Fatima Al-Jaber",
         "title": "Business Owner",
-        "quote": "We use TouchUp Hub for all our office maintenance needs. They are reliable, and their deep cleaning service is second to none."
+        "quote": "We use Touchup Building Maintenance for all our office maintenance needs. They are reliable, and their deep cleaning service is second to none."
       },
       "john": {
         "name": "John Smith",
@@ -60,7 +60,7 @@
   },
   "ServicesPage": {
     "title": "Our Professional Services",
-    "subtitle": "At TouchUp Hub, we provide a comprehensive suite of high-quality services to ensure your home or office is in pristine condition."
+    "subtitle": "At Touchup Building Maintenance, we provide a comprehensive suite of high-quality services to ensure your home or office is in pristine condition."
   },
   "Services": {
     "painting": {
@@ -137,10 +137,10 @@
     "bookThisService": "Book This Service"
   },
   "AboutPage": {
-    "title": "About TouchUp",
+    "title": "About Touchup Building Maintenance",
     "subtitle": "Your dedicated partner in home maintenance, committed to quality and excellence.",
     "whoWeAreTitle": "Who We Are",
-    "whoWeAreP1": "TouchUp was founded with a simple mission: to make professional home maintenance services accessible and hassle-free for everyone in Dubai. With years of experience in the industry, our founders noticed a gap in the market for a reliable, customer-centric service provider that homeowners and businesses could truly depend on.",
+    "whoWeAreP1": "Touchup Building Maintenance was founded with a simple mission: to make professional home maintenance services accessible and hassle-free for everyone in Dubai. With years of experience in the industry, our founders noticed a gap in the market for a reliable, customer-centric service provider that homeowners and businesses could truly depend on.",
     "whoWeAreP2": "Today, we are a leading name in home maintenance, with a growing team of skilled, certified, and passionate technicians. We are proud to have served over 500 homes and businesses, building a reputation for quality, integrity, and exceptional customer care.",
     "missionTitle": "Our Mission",
     "missionText": "To provide reliable, high-quality, and affordable home maintenance and cleaning solutions that exceed our clients' expectations, ensuring their spaces are safe, comfortable, and pristine.",
@@ -167,7 +167,7 @@
     },
     "common_plumbing_issues": {
       "title": "DIY Fixes for Common Plumbing Issues (and When to Call a Pro)",
-      "excerpt": "A leaky faucet? A slow drain? Here are some simple fixes you can try yourself, and how to know when it's time to call TouchUp Hub.",
+      "excerpt": "A leaky faucet? A slow drain? Here are some simple fixes you can try yourself, and how to know when it's time to call Touchup Building Maintenance.",
       "date": "July 5, 2024"
     }
   },
@@ -285,15 +285,15 @@
       "sat": "10:00 AM - 3:00 PM",
       "sun": "Closed"
     },
-    "copyright": "© {year} TouchUp.ae. All Rights Reserved."
+    "copyright": "© {year} Touchup.ae. All Rights Reserved."
   },
   "TermsPage": {
     "title": "Terms & Conditions",
-    "subtitle": "Welcome to TouchUp",
+    "subtitle": "Welcome to Touchup Building Maintenance",
     "description": "By signing up for an account on touchup.ae, you agree to be bound by the following terms and conditions.",
     "acceptance": {
       "title": "Acceptance of Terms",
-      "content": "By accessing or using the services provided by TouchUp, you agree to be bound by these Terms and Conditions, as well as our Privacy Policy. If you do not agree with any part of these terms, you may not access the service."
+      "content": "By accessing or using the services provided by Touchup Building Maintenance, you agree to be bound by these Terms and Conditions, as well as our Privacy Policy. If you do not agree with any part of these terms, you may not access the service."
     },
     "accounts": {
       "title": "User Accounts",
@@ -305,7 +305,7 @@
     },
     "content": {
       "title": "User Content",
-      "content": "By submitting any content (text, images, videos, etc.) to TouchUp, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, adapt, publish, translate, and distribute such content."
+      "content": "By submitting any content (text, images, videos, etc.) to Touchup Building Maintenance, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, adapt, publish, translate, and distribute such content."
     },
     "info": {
       "title": "Information We Collect",
@@ -340,19 +340,19 @@
     },
     "termination": {
       "title": "Termination of Services",
-      "content": "TouchUp reserves the right to terminate or suspend your account and access to the service at any time, with or without cause, and without prior notice."
+      "content": "Touchup Building Maintenance reserves the right to terminate or suspend your account and access to the service at any time, with or without cause, and without prior notice."
     },
     "modifications": {
       "title": "Modifications to Terms",
-      "content": "TouchUp reserves the right to modify these terms and conditions at any time. It is your responsibility to review these terms periodically for changes. Your continued use of the service following the posting of any changes constitutes acceptance of those changes."
+      "content": "Touchup Building Maintenance reserves the right to modify these terms and conditions at any time. It is your responsibility to review these terms periodically for changes. Your continued use of the service following the posting of any changes constitutes acceptance of those changes."
     },
     "disclaimer": {
       "title": "Disclaimer of Warranties",
-      "content": "The service is provided on an “as is” and “as available” basis. TouchUp makes no warranties, expressed or implied, regarding the reliability, accuracy, completeness, or timeliness of the service."
+      "content": "The service is provided on an “as is” and “as available” basis. Touchup Building Maintenance makes no warranties, expressed or implied, regarding the reliability, accuracy, completeness, or timeliness of the service."
     },
     "liability": {
       "title": "Limitation of Liability",
-      "content": "In no event shall TouchUp be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of or in any way connected with your use of the service."
+      "content": "In no event shall Touchup Building Maintenance be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of or in any way connected with your use of the service."
     },
     "governing": {
       "title": "Governing Law",
