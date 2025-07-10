@@ -17,11 +17,19 @@ const quickLinks = [
   { href: '/services', labelKey: 'services' },
   { href: '/contact', labelKey: 'contact' },
   { href: '/booking', labelKey: 'bookNow' },
+  { href: '/privacy-policy', labelKey: 'privacyPolicy' },
 ] as const;
 
 export default function Footer() {
   const t = useTranslations('Footer');
   const tHeader = useTranslations('Header');
+
+  const getTranslation = (key: string) => {
+    if (key === 'privacyPolicy') {
+      return t('privacyPolicy');
+    }
+    return tHeader(key as any);
+  };
 
   return (
     <footer className="bg-card border-t text-muted-foreground text-sm">
@@ -57,7 +65,7 @@ export default function Footer() {
               {quickLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-primary transition-colors">
-                    {tHeader(link.labelKey)}
+                    {getTranslation(link.labelKey)}
                   </Link>
                 </li>
               ))}

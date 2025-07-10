@@ -285,7 +285,8 @@
       "sat": "10:00 AM - 3:00 PM",
       "sun": "Closed"
     },
-    "copyright": "© {year} Touchup.ae. All Rights Reserved."
+    "copyright": "© {year} Touchup.ae. All Rights Reserved.",
+    "privacyPolicy": "Privacy Policy"
   },
   "TermsPage": {
     "title": "Terms & Conditions & Privacy Policy",

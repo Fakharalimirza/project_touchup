@@ -285,7 +285,8 @@
       "sat": "10:00 صباحًا - 3:00 مساءً",
       "sun": "مغلق"
     },
-    "copyright": "© {year} Touchup.ae. جميع الحقوق محفوظة."
+    "copyright": "© {year} Touchup.ae. جميع الحقوق محفوظة.",
+    "privacyPolicy": "سياسة الخصوصية"
   },
   "TermsPage": {
     "title": "الشروط والأحكام وسياسة الخصوصية",
