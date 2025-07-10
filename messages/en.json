@@ -286,5 +286,81 @@
       "sun": "Closed"
     },
     "copyright": "© {year} TouchUp.ae. All Rights Reserved."
+  },
+  "TermsPage": {
+    "title": "Terms & Conditions",
+    "subtitle": "Welcome to TouchUp",
+    "description": "By signing up for an account on touchup.ae, you agree to be bound by the following terms and conditions.",
+    "acceptance": {
+      "title": "Acceptance of Terms",
+      "content": "By accessing or using the services provided by TouchUp, you agree to be bound by these Terms and Conditions, as well as our Privacy Policy. If you do not agree with any part of these terms, you may not access the service."
+    },
+    "accounts": {
+      "title": "User Accounts",
+      "content": "You are responsible for maintaining the confidentiality of your account and password. You agree to accept responsibility for all activities that occur under your account."
+    },
+    "prohibited": {
+      "title": "Prohibited Activities",
+      "content": "You agree not to engage in any activity that interferes with or disrupts the service or servers or networks connected to the service. This includes but is not limited to attempting to gain unauthorized access to the service."
+    },
+    "content": {
+      "title": "User Content",
+      "content": "By submitting any content (text, images, videos, etc.) to TouchUp, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, adapt, publish, translate, and distribute such content."
+    },
+    "info": {
+      "title": "Information We Collect",
+      "list": {
+        "personal": "Personal Data: name, email address, phone number, mailing address.",
+        "technical": "Technical Data: IP address, browser type and version, operating system, device identifiers.",
+        "usage": "Usage Data: pages visited, time spent on pages, referral source.",
+        "cookies": "Cookies & Tracking: we use cookies and similar technologies to enhance your experience and analyze traffic. We securely save data on secure servers, and we do not sell any data."
+      }
+    },
+    "usage": {
+      "title": "How We Use Your Information",
+      "list": {
+        "provide": "Provide, maintain, and improve our website and apps.",
+        "respond": "Respond to your inquiries and fulfill booking requests.",
+        "send": "Send administrative and, where you’ve opted in, promotional communications.",
+        "analyze": "Analyze usage patterns and monitor performance.",
+        "comply": "Comply with legal obligations and resolve disputes."
+      }
+    },
+    "sharing": {
+      "title": "Sharing Your Information",
+      "list": {
+        "providers": "Service providers who process data on our behalf (hosting, email, analytics).",
+        "law": "Law enforcement or regulators, if required by law or to protect our rights.",
+        "thirdParties": "Third parties in connection with a corporate transaction (merger, sale)."
+      }
+    },
+    "payment": {
+      "title": "Payment and Billing",
+      "content": "If you choose to purchase any paid features or services, you agree to pay all fees and charges incurred through your account. All fees are non-refundable."
+    },
+    "termination": {
+      "title": "Termination of Services",
+      "content": "TouchUp reserves the right to terminate or suspend your account and access to the service at any time, with or without cause, and without prior notice."
+    },
+    "modifications": {
+      "title": "Modifications to Terms",
+      "content": "TouchUp reserves the right to modify these terms and conditions at any time. It is your responsibility to review these terms periodically for changes. Your continued use of the service following the posting of any changes constitutes acceptance of those changes."
+    },
+    "disclaimer": {
+      "title": "Disclaimer of Warranties",
+      "content": "The service is provided on an “as is” and “as available” basis. TouchUp makes no warranties, expressed or implied, regarding the reliability, accuracy, completeness, or timeliness of the service."
+    },
+    "liability": {
+      "title": "Limitation of Liability",
+      "content": "In no event shall TouchUp be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of or in any way connected with your use of the service."
+    },
+    "governing": {
+      "title": "Governing Law",
+      "content": "These terms and conditions shall be governed by and construed in accordance with the laws of the United Arab Emirates."
+    },
+    "final": {
+      "title": "Final Agreement",
+      "content": "By signing up for an account on touchup.ae, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions. If you have any questions or concerns, please contact us at info@touchup.ae."
+    }
   }
 }
