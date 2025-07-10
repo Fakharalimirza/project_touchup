@@ -2,10 +2,9 @@
   "projects": {
     "default": "touchup-42i8o"
   },
-  "apphosting": {
-    "backends": [
-      "touchup-web"
-    ],
-    "id": "touchup-web"
+  "backends": {
+    "touchup-web": {
+      "project": "touchup-42i8o"
+    }
   }
 }
