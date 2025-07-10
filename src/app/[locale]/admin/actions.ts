@@ -20,7 +20,7 @@ export async function createSession(idToken: string) {
   } catch (error) {
     if (error instanceof Error) {
         console.error('Firebase Admin Initialization Error:', error.message);
-        throw new Error(`Firebase Admin initialization failed: ${error.message}. Make sure FIREBASE_CLIENT_EMAIL and FIREBASE_PRIVATE_KEY are set correctly.`);
+        throw new Error(`Firebase Admin initialization failed: ${error.message}. Make sure FIREBASE_CLIENT_EMAIL and ADMIN_PRIVATE_KEY secrets are set correctly.`);
     }
     throw new Error('An unknown error occurred during Firebase Admin initialization.');
   }
