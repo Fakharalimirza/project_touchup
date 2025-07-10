@@ -40,14 +40,18 @@ export async function login(prevState: any, formData: FormData) {
 
     if (!response.ok) {
       console.error('Firebase Auth Error:', result.error.message);
-      return { error: 'Invalid email or password.' };
+      // Return the specific error from Firebase to the user interface.
+      return { error: result.error.message || 'An unknown authentication error occurred.' };
     }
 
     await createSession(result.idToken);
     
   } catch (error) {
     console.error(error);
-    return { error: 'An unexpected error occurred.' };
+    if (error instanceof Error) {
+        return { error: error.message };
+    }
+    return { error: 'An unexpected error occurred during login.' };
   }
   
   redirect('/admin/dashboard');
