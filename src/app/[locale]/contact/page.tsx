@@ -154,7 +154,7 @@ export default function ContactPage() {
                       <div className="space-y-1 leading-none">
                         <FormLabel>
                           {tBooking('terms')}{' '}
-                          <Link href="/terms-and-conditions" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+                          <Link href="/privacy-policy" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
                             {tBooking('termsLink')}
                           </Link>
                           .

@@ -549,7 +549,7 @@ export default function BookingForm() {
                   <div className="space-y-1 leading-none">
                     <FormLabel>
                       {t('terms')}{' '}
-                      <Link href="/terms-and-conditions" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+                      <Link href="/privacy-policy" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
                         {t('termsLink')}
                       </Link>
                       .
