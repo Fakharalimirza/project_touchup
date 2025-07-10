@@ -20,15 +20,15 @@ Deploying your Next.js application to Firebase App Hosting is a streamlined proc
 
 ### Step 1: Initialize Firebase in Your Project
 
-If your project isn't already set up with Firebase, you need to initialize it. Run the following command from your project's root directory:
+If you are having deployment issues, you may need to re-initialize your project. Run the following command from your project's root directory:
 
 ```bash
 firebase init apphosting
 ```
 
 The CLI will guide you through the process:
--   Select an existing Firebase project or create a new one.
--   It will detect your `apphosting.yaml` file and set up the backend.
+-   Select your existing Firebase project (`touchup-42i8o`).
+-   It will detect your `apphosting.yaml` file and set up the `touchup-web` backend. This will fix the link between your local project and Firebase.
 
 ### Step 2: Deploy Your Application
 
