@@ -32,7 +32,8 @@ export async function login(prevState: any, formData: FormData) {
   try {
     const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY;
     if (!apiKey) {
-      throw new Error("Firebase API Key is not configured. Please check your environment variables.");
+      // This is a clear check to ensure the key is loaded.
+      return { error: "Firebase API Key is not configured. Please check your environment variables." };
     }
 
     const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`, {
