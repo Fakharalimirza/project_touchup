@@ -1,11 +1,33 @@
 import createMiddleware from 'next-intl/middleware';
+import { NextRequest, NextResponse } from 'next/server';
  
-export default createMiddleware({
+const intlMiddleware = createMiddleware({
   locales: ['en', 'ar'],
   defaultLocale: 'en'
 });
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  
+  if (pathname.includes('/admin')) {
+    const sessionCookie = request.cookies.get('session');
+
+    if (pathname.startsWith('/en/admin/dashboard') || pathname.startsWith('/ar/admin/dashboard')) {
+      if (!sessionCookie) {
+        const locale = pathname.split('/')[1];
+        return NextResponse.redirect(new URL(`/${locale}/admin`, request.url));
+      }
+    }
+    
+    // Allow access to /admin login page regardless of session
+    if (pathname === '/en/admin' || pathname === '/ar/admin') {
+      return intlMiddleware(request);
+    }
+  }
+
+  return intlMiddleware(request);
+}
  
 export const config = {
-  // Skip all paths that should not be internationalized
   matcher: ['/((?!api|_next|.*\\..*).*)']
 };
