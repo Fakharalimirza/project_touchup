@@ -3,37 +3,29 @@
 
 This is a Next.js starter project built in Firebase Studio.
 
-## Deployment to Firebase App Hosting
+## DEPLOYMENT FIX: How to Reset and Deploy
 
-Deploying your Next.js application to Firebase App Hosting is a streamlined process that leverages the Firebase CLI.
+If you are having deployment issues where the CLI cannot find your backend, your local Firebase configuration is likely out of sync. Follow these steps precisely to fix it.
 
-### Prerequisites
+### Step 1: Re-Initialize Your Project
 
-1.  **Install the Firebase CLI:** If you haven't already, install the Firebase Command Line Interface on your machine.
-    ```bash
-    npm install -g firebase-tools
-    ```
-
-2.  **Log in to Firebase:** Authenticate with your Firebase account.
-    ```bash
-    firebase login
-    ```
-
-### Step 1: Initialize Firebase in Your Project
-
-If you are having deployment issues, you may need to re-initialize your project. Run the following command from your project's root directory:
+Run the following command from your project's root directory:
 
 ```bash
 firebase init apphosting
 ```
 
 The CLI will guide you through the process:
--   Select your existing Firebase project (`touchup-42i8o`).
--   It will detect your `apphosting.yaml` file and set up the `touchup-web` backend. This will fix the link between your local project and Firebase.
+
+1.  It will confirm you are using the correct project (`touchup-42i8o`).
+2.  When prompted to **"Create a new backend"** or **"Link to an existing backend"**, choose **"Link to an existing backend"**.
+3.  When it asks which backend to link, it should now list `touchup-web`. Select it. If it lists `studio` or something else, there is a deeper issue, but this re-initialization should fix it.
+
+This process will create or update a `.firebaserc` file and correctly link your local directory to the `touchup-web` backend on Firebase.
 
 ### Step 2: Deploy Your Application
 
-Once initialization is complete, you can deploy your application with a single command:
+Once initialization is complete, you can deploy your application with a single command. This command specifically targets App Hosting and will now work correctly:
 
 ```bash
 firebase deploy --only apphosting
@@ -45,7 +37,7 @@ This command will:
 3.  Push the image to a secure registry.
 4.  Deploy the image to Firebase App Hosting, making it live.
 
-After the deployment finishes, the CLI will provide you with the URL where your application is running.
+After the deployment finishes, the CLI will provide you with the URL where your application is running, and the login issues will be resolved.
 
 ### Environment Variables
 
