@@ -33,6 +33,18 @@ export async function submitContactForm(data: ContactFormValues) {
   }
   
   const { name, email, subject, message } = validatedData.data;
+  
+  const emailHtml = `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+      <h2 style="color: #333;">New message from your website contact form</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+      <p><strong>Subject:</strong> ${subject}</p>
+      <hr style="border: none; border-top: 1px solid #eee;" />
+      <h3 style="color: #333;">Message:</h3>
+      <p style="white-space: pre-wrap; background-color: #f9f9f9; padding: 10px; border-radius: 4px;">${message}</p>
+    </div>
+  `;
 
   try {
     await transporter.sendMail({
@@ -40,15 +52,7 @@ export async function submitContactForm(data: ContactFormValues) {
       to: 'info@touchup.ae',
       replyTo: email,
       subject: `New Contact Form Message: ${subject}`,
-      html: `
-        <h2>New message from your website contact form</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <hr>
-        <h3>Message:</h3>
-        <p style="white-space: pre-wrap;">${message}</p>
-      `,
+      html: emailHtml,
     });
 
     return { success: true };

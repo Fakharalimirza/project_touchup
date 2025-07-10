@@ -3,10 +3,6 @@
 
 import { z } from 'zod';
 import nodemailer from 'nodemailer';
-import { render } from '@react-email/render';
-
-import AdminBookingNoticeEmail from '@/emails/admin-booking-notice';
-import CustomerConfirmationEmail from '@/emails/customer-confirmation';
 
 const bookingSchema = z.object({
   name: z.string().min(2),
@@ -39,6 +35,58 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+function getAdminEmailHtml(data: BookingFormValues) {
+    return `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+        <h1 style="color: #333;">New Booking Request</h1>
+        
+        <h2 style="border-bottom: 1px solid #eee; padding-bottom: 5px; color: #555;">Customer Details</h2>
+        <p><strong>Name:</strong> ${data.name}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+        <p><strong>Phone:</strong> ${data.phone}</p>
+
+        <h2 style="border-bottom: 1px solid #eee; padding-bottom: 5px; color: #555;">Booking Details</h2>
+        <p><strong>Service:</strong> ${data.service}</p>
+        <p><strong>Date & Time:</strong> ${new Date(data.date).toLocaleDateString()} at ${data.time}</p>
+
+        <h2 style="border-bottom: 1px solid #eee; padding-bottom: 5px; color: #555;">Property Details</h2>
+        <p><strong>Property Type:</strong> ${data.propertyType}</p>
+        <p><strong>Specifics:</strong> ${data.specificPropertyType}</p>
+        <p><strong>Address:</strong> ${data.apartmentVilla}, ${data.building}, ${data.street}, ${data.area}, ${data.city}</p>
+
+        ${data.instructions ? `
+        <h2 style="border-bottom: 1px solid #eee; padding-bottom: 5px; color: #555;">Special Instructions</h2>
+        <p>${data.instructions}</p>
+        ` : ''}
+    </div>
+    `;
+}
+
+function getCustomerEmailHtml(name: string, data: BookingFormValues) {
+    const baseUrl = 'https://touchup.ae';
+    return `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; text-align: center;">
+        <img src="https://touchup.ae/wp-content/uploads/2021/08/Screenshot_2024-03-27_125327-removebg-preview.png" width="150" alt="TouchUp Hub" style="margin: 0 auto;" />
+        <h1 style="color: #1d1c1d;">Thank you for choosing TouchUp Hub!</h1>
+        <div style="text-align: left; padding: 0 24px;">
+            <p>Hi ${name},</p>
+            <p>We have received your booking request and a member of our team will contact you shortly to confirm the details.</p>
+        </div>
+        <div style="margin: 24px; padding: 16px; border: 1px solid #eee; border-radius: 5px; background-color: #fafafa; text-align: left;">
+            <h2 style="font-size: 16px; margin-top: 0;">Your Request Summary:</h2>
+            <p><strong>Service:</strong> ${data.service}</p>
+            <p><strong>Date:</strong> ${new Date(data.date).toLocaleDateString()}</p>
+            <p><strong>Time:</strong> ${data.time}</p>
+        </div>
+        <div style="text-align: left; padding: 0 24px;">
+            <p>We look forward to serving you!</p>
+        </div>
+        <a href="${baseUrl}" style="background-color: #1890ff; border-radius: 3px; color: #fff; display: inline-block; padding: 12px 24px; text-decoration: none; margin: 24px auto;">Visit Our Website</a>
+        <p style="color: #8898aa; font-size: 12px; text-align: center;">TouchUp Hub, A202 - Sport Society Mall - Mirdif - Dubai</p>
+    </div>
+    `;
+}
+
 export async function submitBooking(data: BookingFormValues) {
   const validatedData = bookingSchema.safeParse(data);
 
@@ -47,8 +95,8 @@ export async function submitBooking(data: BookingFormValues) {
     return { success: false, error: 'Invalid data provided.' };
   }
 
-  const adminEmailHtml = render(AdminBookingNoticeEmail({ data: validatedData.data }));
-  const customerEmailHtml = render(CustomerConfirmationEmail({ name: validatedData.data.name, data: validatedData.data }));
+  const adminEmailHtml = getAdminEmailHtml(validatedData.data);
+  const customerEmailHtml = getCustomerEmailHtml(validatedData.data.name, validatedData.data);
 
   try {
     // Send email to admin
