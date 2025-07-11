@@ -1,0 +1,15 @@
+# Settings to manage and configure a Firebase App Hosting backend.
+# https://firebase.google.com/docs/app-hosting/configure
+
+# A unique identifier for your backend. This is used to identify your backend
+# in the Firebase console and in Firebase CLI commands.
+backendId: touchup-web
+
+# The location of your backend's source code.
+# This is relative to the root of your repository.
+sourceDir: .
+
+runConfig:
+  # Increase this value if you'd like to automatically spin up
+  # more instances in response to increased traffic.
+  maxInstances: 1
