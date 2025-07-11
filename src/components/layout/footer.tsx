@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, Twitter, Facebook, Instagram } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const socialLinks = [
   { icon: Twitter, href: '#', name: 'Twitter' },
@@ -20,9 +20,22 @@ const quickLinks = [
   { href: '/privacy-policy', labelKey: 'privacyPolicy' },
 ] as const;
 
+const logos = {
+  en: {
+    light: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20black%20en.png?alt=media&token=74ca5c3b-ee14-4188-a000-8f3b4f91bca4',
+    dark: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20white%20en.png?alt=media&token=652355d2-af45-4c5a-a112-71d79a85c10d'
+  },
+  ar: {
+    light: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20black%20ar.png?alt=media&token=a7fa8eef-e242-4275-be0a-8171a99f1d2e',
+    dark: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20white%20ar.png?alt=media&token=c3bf3614-1d8c-49df-99d8-98b181d2ce36'
+  }
+}
+
 export default function Footer() {
   const t = useTranslations('Footer');
   const tHeader = useTranslations('Header');
+  const locale = useLocale() as 'en' | 'ar';
+
 
   const getTranslation = (key: string) => {
     if (key === 'privacyPolicy') {
@@ -39,16 +52,16 @@ export default function Footer() {
           <div className="space-y-6 text-start">
             <Link href="/" className="flex items-center gap-2 font-bold text-primary">
               <Image
-                src="https://touchup.ae/wp-content/uploads/2025/07/black-logo-en.png"
-                alt="TouchUp Hub Logo"
+                src={logos[locale].light}
+                alt="Touchup Building Maintenance Logo"
                 width={120}
                 height={40}
                 className="object-contain dark:hidden"
                 style={{ height: 'auto' }}
               />
               <Image
-                src="https://touchup.ae/wp-content/uploads/2025/07/white-logo-en.png"
-                alt="TouchUp Hub Logo"
+                src={logos[locale].dark}
+                alt="Touchup Building Maintenance Logo"
                 width={120}
                 height={40}
                 className="object-contain hidden dark:block"

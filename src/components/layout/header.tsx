@@ -21,10 +21,21 @@ const navLinks = [
   { href: '/blog', key: 'blog' },
 ] as const;
 
+const logos = {
+  en: {
+    light: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20black%20en.png?alt=media&token=74ca5c3b-ee14-4188-a000-8f3b4f91bca4',
+    dark: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20white%20en.png?alt=media&token=652355d2-af45-4c5a-a112-71d79a85c10d'
+  },
+  ar: {
+    light: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20black%20ar.png?alt=media&token=a7fa8eef-e242-4275-be0a-8171a99f1d2e',
+    dark: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20white%20ar.png?alt=media&token=c3bf3614-1d8c-49df-99d8-98b181d2ce36'
+  }
+}
+
 export default function Header() {
   const t = useTranslations('Header');
   const pathname = usePathname();
-  const locale = useLocale();
+  const locale = useLocale() as 'en' | 'ar';
   const [isSheetOpen, setSheetOpen] = useState(false);
 
   const closeSheet = () => setSheetOpen(false);
@@ -44,8 +55,8 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-20 items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-bold text-primary">
-          <Image src="https://touchup.ae/wp-content/uploads/2025/07/black-logo-en.png" alt="TouchUp Hub Logo" width={120} height={40} className="object-contain dark:hidden" style={{ height: 'auto' }} />
-          <Image src="https://touchup.ae/wp-content/uploads/2025/07/white-logo-en.png" alt="TouchUp Hub Logo" width={120} height={40} className="object-contain hidden dark:block" style={{ height: 'auto' }}/>
+          <Image src={logos[locale].light} alt="Touchup Building Maintenance Logo" width={120} height={40} className="object-contain dark:hidden" style={{ height: 'auto' }} />
+          <Image src={logos[locale].dark} alt="Touchup Building Maintenance Logo" width={120} height={40} className="object-contain hidden dark:block" style={{ height: 'auto' }}/>
         </Link>
         <nav className="hidden md:flex items-center gap-16">
           {navLinks.map((link) => (
@@ -97,8 +108,8 @@ export default function Header() {
               <SheetHeader>
                 <SheetTitle>
                    <Link href="/" className="flex items-center gap-2 font-bold text-primary mb-4" onClick={closeSheet}>
-                     <Image src="https://touchup.ae/wp-content/uploads/2025/07/black-logo-en.png" alt="TouchUp Logo" width={150} height={40} className="object-contain dark:hidden" style={{ height: 'auto' }}/>
-                     <Image src="https://touchup.ae/wp-content/uploads/2025/07/white-logo-en.png" alt="TouchUp Logo" width={150} height={40} className="object-contain hidden dark:block" style={{ height: 'auto' }}/>
+                     <Image src={logos[locale].light} alt="Touchup Building Maintenance Logo" width={150} height={40} className="object-contain dark:hidden" style={{ height: 'auto' }}/>
+                     <Image src={logos[locale].dark} alt="Touchup Building Maintenance Logo" width={150} height={40} className="object-contain hidden dark:block" style={{ height: 'auto' }}/>
                   </Link>
                 </SheetTitle>
                 <SheetDescription className="sr-only">Main navigation menu</SheetDescription>
