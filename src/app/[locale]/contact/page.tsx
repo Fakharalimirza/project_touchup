@@ -178,9 +178,9 @@ export default function ContactPage() {
           <CardHeader className="text-center">
             <CardTitle className="font-headline text-2xl">{t('infoTitle')}</CardTitle>
           </CardHeader>
-          <CardContent className="flex-grow flex flex-col items-center justify-around p-6 text-lg">
+          <CardContent className="flex-grow flex flex-col items-center justify-around p-6 text-lg text-center">
             {contactDetails.map((item, index) => (
-              <a key={index} href={item.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-4 text-muted-foreground hover:text-primary transition-colors text-start w-full">
+              <a key={index} href={item.href} target="_blank" rel="noopener noreferrer" className="inline-flex flex-col sm:flex-row items-center gap-4 text-muted-foreground hover:text-primary transition-colors">
                 <item.icon className="h-8 w-8 text-primary shrink-0" />
                 <span>{item.text}</span>
               </a>
