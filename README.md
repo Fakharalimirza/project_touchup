@@ -1,4 +1,3 @@
-
 # Firebase Studio
 
 This is a Next.js starter project built in Firebase Studio.
@@ -31,7 +30,7 @@ For any environment variables in your `.env` file (like email credentials), you 
     ```bash
     firebase apphosting:secrets:set SECRET_NAME
     ```
-    The CLI will prompt you to enter the secret value. Repeat this for each variable. For this project, you will need to set `FIREBASE_CLIENT_EMAIL` and `ADMIN_PRIVATE_KEY`.
+    The CLI will prompt you to enter the secret value. Repeat this for each variable. For this project, you will need to set `FIREBASE_CLIENT_EMAIL` and `FIREBASE_PRIVATE_KEY`.
 
 2.  **Grant access to the secret:** In your `apphosting.yaml` file, you need to grant your backend access to these secrets:
     ```yaml
@@ -40,15 +39,10 @@ For any environment variables in your `.env` file (like email credentials), you 
     runConfig:
       # ...
     # Grant access to secrets
-    env:
-      - variable: ADMIN_PRIVATE_KEY
-        secret: FIREBASE_PRIVATE_KEY
-      - variable: FIREBASE_CLIENT_EMAIL
-        secret: FIREBASE_CLIENT_EMAIL
     secretEnvironmentVariables:
-      - secret: NEXT_PUBLIC_FIREBASE_API_KEY
-      - secret: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-      # ... and so on for other secrets
+      - secret: FIREBASE_PRIVATE_KEY
+      - secret: FIREBASE_CLIENT_EMAIL
+    # ... and so on for other secrets
     ```
 
 3.  **Redeploy:** After adding secrets to your `apphosting.yaml`, you must redeploy your backend for the changes to take effect.
