@@ -48,7 +48,7 @@ export const services: Service[] = [
         'electrical-repair.subServices.socket_plug',
         'electrical-repair.subServices.visit_only',
     ],
-    image: 'https://placehold.co/1200x600.png',
+    image: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/electric.png?alt=media&token=8e5ce6f7-f008-431c-9ae6-5e2364aeef4d',
     dataAiHint: 'electrical repair',
   },
   {
