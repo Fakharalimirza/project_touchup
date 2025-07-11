@@ -1,9 +1,11 @@
 # Settings to manage and configure a Firebase App Hosting backend.
 # https://firebase.google.com/docs/app-hosting/configure
 backendId: studio
+
 runConfig:
   minInstances: 0
   maxInstances: 100
+
 secretEnvironmentVariables:
   - secret: ADMIN_EMAIL
   - secret: ADMIN_PASSWORD
@@ -17,8 +19,3 @@ secretEnvironmentVariables:
   - secret: SESSION_COOKIE_PASSWORD
   - secret: admin_private_key
   - secret: firebase_client_email
-env:
-  - variable: ADMIN_PRIVATE_KEY
-    secret: admin_private_key
-  - variable: FIREBASE_CLIENT_EMAIL
-    secret: firebase_client_email
