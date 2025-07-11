@@ -42,6 +42,7 @@ export default function Home() {
                 data-ai-hint="painting wall"
             />
         </div>
+        <div className="absolute inset-0 bg-black/20 dark:bg-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
         <div
             className="relative z-10 max-w-4xl mx-auto px-4 flex flex-col items-center"
