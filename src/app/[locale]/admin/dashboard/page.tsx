@@ -1,11 +1,9 @@
 import { getDocs, collection, query, orderBy } from 'firebase/firestore';
 import { unstable_setRequestLocale } from 'next-intl/server';
 import { db } from '@/lib/firebase';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { logout } from '../actions';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -34,9 +32,7 @@ export default async function AdminDashboard({ params: { locale } }: { params: {
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold font-headline text-primary">Admin Dashboard</h1>
-          <form action={logout}>
-            <Button type="submit" variant="outline">Sign Out</Button>
-          </form>
+          {/* Sign Out button removed as backend functionality is disabled */}
         </div>
 
         <Tabs defaultValue="bookings">

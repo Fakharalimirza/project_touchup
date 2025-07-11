@@ -6,9 +6,5 @@
       "**/.*",
       "**/node_modules/**"
     ]
-  },
-  "apphosting": {
-    "backend": "studio",
-    "region": "us-central1"
   }
 }
