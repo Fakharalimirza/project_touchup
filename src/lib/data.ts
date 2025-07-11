@@ -68,7 +68,7 @@ export const services: Service[] = [
         'plumbing.subServices.shower_set',
         'plumbing.subServices.shower_head',
     ],
-    image: 'https://placehold.co/1200x600.png',
+    image: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/Plumbing.png?alt=media&token=902780c5-b755-474c-b01c-4b7938a54227',
     dataAiHint: 'plumbing work',
   },
   {
