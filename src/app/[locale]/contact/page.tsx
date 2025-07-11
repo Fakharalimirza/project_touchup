@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -17,17 +18,17 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
 import { submitContactForm } from './actions';
 
-const contactDetails = [
-  { icon: Phone, text: '+971 54 531 4170', href: 'tel:+971545314170' },
-  { icon: Mail, text: 'info@touchup.ae', href: 'mailto:info@touchup.ae' },
-  { icon: MapPin, text: 'A202 - Sport Society Mall - Mirdif - Dubai', href: 'https://maps.app.goo.gl/j2K9xckTiutBcczi7' },
-];
-
 export default function ContactPage() {
   const t = useTranslations('ContactPage');
   const tBooking = useTranslations('BookingPage.form');
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+
+  const contactDetails = [
+    { icon: Phone, text: t('phone'), href: `tel:${t('phone').replace(/\s/g, '')}` },
+    { icon: Mail, text: t('email'), href: `mailto:${t('email')}` },
+    { icon: MapPin, text: t('address'), href: 'https://maps.app.goo.gl/j2K9xckTiutBcczi7' },
+  ];
 
   const formSchema = z.object({
     name: z.string().min(2, { message: t('formValidation.nameRequired') }),
@@ -182,7 +183,7 @@ export default function ContactPage() {
             {contactDetails.map((item, index) => (
               <a key={index} href={item.href} target="_blank" rel="noopener noreferrer" className="inline-flex flex-col sm:flex-row items-center gap-4 text-muted-foreground hover:text-primary transition-colors">
                 <item.icon className="h-8 w-8 text-primary shrink-0" />
-                <span>{item.text}</span>
+                <span className={item.icon === Phone ? 'tracking-wider' : ''} dir="ltr">{item.text}</span>
               </a>
             ))}
             <div className="flex flex-col items-center gap-3 text-muted-foreground">
@@ -230,3 +231,5 @@ export default function ContactPage() {
     </div>
   );
 }
+
+    

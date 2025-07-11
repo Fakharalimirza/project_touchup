@@ -1,0 +1,372 @@
+
+{
+  "Header": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About Us",
+    "contact": "Contact",
+    "blog": "Blog",
+    "bookNow": "Book Now",
+    "whatsApp": "Chat on WhatsApp"
+  },
+  "Home": {
+    "heroTitle": "Reliable Home Maintenance, One Touch Away",
+    "heroSubtitle": "Your trusted partner for cleaning, AC, plumbing, and electrical services in Dubai.",
+    "heroButton": "Book a Service Now",
+    "servicesTitle": "Our Services",
+    "servicesSubtitle": "We offer a wide range of services to keep your home in perfect condition.",
+    "whyChooseUsTitle": "Why Choose Us?",
+    "whyChooseUsSubtitle": "We are committed to providing top-quality service and customer satisfaction.",
+    "whyChooseUsItems": {
+      "experienced": {
+        "title": "Experienced Team",
+        "description": "Our team consists of certified and experienced professionals."
+      },
+      "affordable": {
+        "title": "Affordable Prices",
+        "description": "We offer competitive pricing without compromising on quality."
+      },
+      "reliable": {
+        "title": "Quick & Reliable",
+        "description": "Punctual and efficient service to fit your busy schedule."
+      },
+      "support": {
+        "title": "24/7 Support",
+        "description": "Our support team is always ready to assist you anytime."
+      }
+    },
+    "testimonialsTitle": "What Our Clients Say",
+    "testimonialsSubtitle": "Real stories from our satisfied customers.",
+    "testimonials": {
+      "ahmed": {
+        "name": "Ahmed Khan",
+        "title": "Homeowner, Dubai Marina",
+        "quote": "Touchup Building Maintenance's team was professional and efficient. My AC has never worked better! Highly recommended for their prompt service."
+      },
+      "fatima": {
+        "name": "Fatima Al-Jaber",
+        "title": "Business Owner",
+        "quote": "We use Touchup Building Maintenance for all our office maintenance needs. They are reliable, and their deep cleaning service is second to none."
+      },
+      "john": {
+        "name": "John Smith",
+        "title": "Expat Resident",
+        "quote": "I had a plumbing emergency, and they were at my door within an hour. Fast, friendly, and fixed the problem perfectly. Great job!"
+      }
+    },
+    "ctaTitle": "Ready for a Spotless Home?",
+    "ctaSubtitle": "Let our experts take care of your home maintenance needs. Get a free quote or book your service online today!",
+    "ctaButton": "Get Your Free Quote"
+  },
+  "ServicesPage": {
+    "title": "Our Professional Services",
+    "subtitle": "At Touchup Building Maintenance, we provide a comprehensive suite of high-quality services to ensure your home or office is in pristine condition."
+  },
+  "Services": {
+    "painting": {
+      "title": "Painting Work",
+      "description": "Professional interior and exterior painting services to give your property a fresh new look.",
+      "details": "Transform your space with our professional painting services. We use high-quality paints and materials for a durable and beautiful finish. Our team ensures clean work with proper surface preparation and post-painting cleanup.",
+      "subServices": {
+        "full_studio": "Full Wall Painting – Studio",
+        "full_1bhk": "Full Wall Painting – 1BHK",
+        "full_2bhk": "Full Wall Painting – 2BHK",
+        "touchup_studio": "Touch-Up Painting – Studio",
+        "touchup_1bhk": "Touch-Up Painting – 1BHK",
+        "touchup_2bhk": "Touch-Up Painting – 2BHK",
+        "table_chair": "Painting Table or Chair"
+      }
+    },
+    "electrical-repair": {
+      "title": "Electrical Work",
+      "description": "Safe and reliable electrical services, from minor repairs to complete wiring solutions.",
+      "details": "Our certified electricians handle all types of electrical work, including fixing short circuits, installing new light fixtures, socket replacements, and comprehensive electrical safety checks for your home or office.",
+      "subServices": {
+        "balcony_lock": "Replacement of Balcony Door Lock Set",
+        "spot_light": "Supply and Replacement of Spot Light",
+        "led_light": "Supply and Installation of 8\" LED Light",
+        "light_bulb": "Supply and Installation of Light Bulb",
+        "chandelier": "Chandelier Installation",
+        "chair_repair": "Repair of Chair, Balcony Door, or Toilet Cover",
+        "wood_door": "Wood Door Repair",
+        "fly_mesh": "Supply and Installation of Fly Mesh",
+        "socket_plug": "Installation of Single Socket / Power Plug",
+        "visit_only": "Just Visit (Inspection or consultation only)"
+      }
+    },
+    "plumbing": {
+      "title": "Plumbing",
+      "description": "Comprehensive plumbing solutions for leaks, blockages, installations, and emergency repairs.",
+      "details": "From leaky faucets to major pipe bursts, our skilled plumbers are available 24/7. We offer pipe repair, drain cleaning, water heater installation, and bathroom/kitchen fixture installation services.",
+      "subServices": {
+        "house_pipe": "Supply and Replacement of House Pipe",
+        "water_heater": "Water Heater Replacement",
+        "toilet_block": "Toilet Seat Block Work",
+        "sink_block": "Sink or Wash Basin Block Work",
+        "angle_valve": "Supply and Installation of Angle Valve",
+        "silicone": "Silicone Work",
+        "hand_spray": "Replacement of Hand Spray",
+        "shower_set": "Replacement of Full Shower Set",
+        "shower_head": "Replacement of Shower Head or Pipe"
+      }
+    },
+    "cleaning-services": {
+      "title": "Cleaning Services",
+      "description": "Thorough cleaning services for homes and offices, leaving your space spotless and fresh.",
+      "details": "Our cleaning service covers every nook and cranny of your property. We use eco-friendly products and professional equipment to ensure a healthy environment.",
+      "subServices": {
+        "normal_studio": "Normal Cleaning – Studio",
+        "normal_1bhk": "Normal Cleaning – 1BHK",
+        "normal_2bhk": "Normal Cleaning – 2BHK",
+        "hourly": "Hourly Cleaning (1 Hour)"
+      }
+    },
+    "pest-control": {
+      "title": "Pest Control",
+      "description": "Effective and safe pest control solutions to protect your home from unwanted intruders.",
+      "details": "We provide comprehensive pest control services for common pests in Dubai like cockroaches, ants, bed bugs, and rodents. Our treatments are safe for your family and pets, ensuring a pest-free environment.",
+      "subServices": {}
+    }
+  },
+  "General": {
+    "learnMore": "Learn More",
+    "viewDetails": "View Details",
+    "backToServices": "Back to Services",
+    "service": "SERVICE",
+    "ourOfferings": "Our Offerings",
+    "bookThisService": "Book This Service"
+  },
+  "AboutPage": {
+    "title": "About Touchup Building Maintenance",
+    "subtitle": "Your dedicated partner in home maintenance, committed to quality and excellence.",
+    "whoWeAreTitle": "Who We Are",
+    "whoWeAreP1": "Touchup Building Maintenance was founded with a simple mission: to make professional home maintenance services accessible and hassle-free for everyone in Dubai. With years of experience in the industry, our founders noticed a gap in the market for a reliable, customer-centric service provider that homeowners and businesses could truly depend on.",
+    "whoWeAreP2": "Today, we are a leading name in home maintenance, with a growing team of skilled, certified, and passionate technicians. We are proud to have served over 500 homes and businesses, building a reputation for quality, integrity, and exceptional customer care.",
+    "missionTitle": "Our Mission",
+    "missionText": "To provide reliable, high-quality, and affordable home maintenance and cleaning solutions that exceed our clients' expectations, ensuring their spaces are safe, comfortable, and pristine.",
+    "visionTitle": "Our Vision",
+    "visionText": "To be Dubai's most trusted and sought-after home services company, known for our professionalism, efficiency, and unwavering commitment to customer satisfaction.",
+    "valuesTitle": "Our Values",
+    "valuesText": "We operate with integrity, professionalism, and a strong work ethic. We believe in building long-term relationships with our clients based on trust and exceptional service."
+  },
+  "BlogPage": {
+    "title": "Blog & Maintenance Tips",
+    "subtitle": "Expert advice and insights to help you keep your home in top shape.",
+    "readMore": "Read More"
+  },
+  "BlogPosts": {
+    "ac_maintenance_tips": {
+      "title": "Top 5 AC Maintenance Tips for the Dubai Heat",
+      "excerpt": "Keep your cool this summer with these essential tips for maintaining your air conditioning unit. A little care goes a long way!",
+      "date": "July 15, 2024"
+    },
+    "choosing_paint": {
+      "title": "How to Choose the Right Paint for Your Dubai Home",
+      "excerpt": "Picking the right paint is more than just color. Learn about different types of paint and what works best for the local climate.",
+      "date": "July 10, 2024"
+    },
+    "common_plumbing_issues": {
+      "title": "DIY Fixes for Common Plumbing Issues (and When to Call a Pro)",
+      "excerpt": "A leaky faucet? A slow drain? Here are some simple fixes you can try yourself, and how to know when it's time to call Touchup Building Maintenance.",
+      "date": "July 5, 2024"
+    }
+  },
+  "ContactPage": {
+    "title": "Get In Touch",
+    "subtitle": "We're here to help with all your maintenance needs. Reach out to us via phone, email, or the form below.",
+    "formTitle": "Send Us a Message",
+    "namePlaceholder": "Your Name",
+    "emailPlaceholder": "Your Email",
+    "subjectPlaceholder": "Subject",
+    "messagePlaceholder": "Your Message",
+    "sendButton": "Send Message",
+    "sendingButton": "Sending...",
+    "infoTitle": "Contact Information",
+    "address": "A202 - Sport Society Mall - Mirdif - Dubai",
+    "phone": "+971 54 531 4170",
+    "email": "info@touchup.ae",
+    "workHours": {
+      "mon_fri": "Mon - Fri:",
+      "sat": "Saturday:",
+      "sun": "Sunday:"
+    },
+    "workHoursTime": {
+      "mon_fri": "10:00 AM - 6:30 PM",
+      "sat": "10:00 AM - 3:00 PM",
+      "sun": "Closed"
+    },
+    "chatOnWhatsApp": "Chat on WhatsApp",
+    "formValidation": {
+      "nameRequired": "Name must be at least 2 characters.",
+      "emailInvalid": "Please enter a valid email address.",
+      "subjectRequired": "Subject must be at least 3 characters.",
+      "messageRequired": "Message must be at least 10 characters."
+    },
+    "formStatus": {
+      "successTitle": "Message Sent!",
+      "successDescription": "Thank you for contacting us. We'll be in touch soon.",
+      "errorTitle": "Submission Failed",
+      "errorDescription": "Something went wrong. Please try again."
+    }
+  },
+  "BookingPage": {
+    "title": "Book a Service",
+    "subtitle": "Fill out the form below to schedule your service. We'll get back to you to confirm your appointment.",
+    "form": {
+      "fullName": "Full Name",
+      "fullNamePlaceholder": "John Doe",
+      "email": "Email Address",
+      "emailPlaceholder": "you@example.com",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+971 50 123 4567",
+      "service": "Service Required",
+      "servicePlaceholder": "Select a service",
+      "propertyType": "Property Type",
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "propertyDetails": "Property Details",
+      "businessType": "Business Type",
+      "propertyDetailsPlaceholder": "Select a property type",
+      "businessTypePlaceholder": "Select a business type",
+      "preferredDate": "Preferred Date",
+      "pickDate": "Pick a date",
+      "preferredTime": "Preferred Time",
+      "timePlaceholder": "Select a time slot",
+      "fullAddress": "Full Address",
+      "detectButton": "Detect",
+      "detectingButton": "Detecting...",
+      "aptNo": "Apt / Villa No.",
+      "aptNoPlaceholder": "e.g. 1204 or Villa 5",
+      "buildingName": "Building / Villa Name",
+      "buildingNamePlaceholder": "e.g. Marina Tower",
+      "street": "Street",
+      "streetPlaceholder": "e.g. Al Safa St",
+      "area": "Area / Community",
+      "areaPlaceholder": "e.g. Dubai Marina",
+      "city": "City",
+      "specialInstructions": "Special Instructions (Optional)",
+      "specialInstructionsPlaceholder": "e.g., Please call before arrival.",
+      "terms": "I agree to the",
+      "termsLink": "Terms and Conditions & Privacy Policy",
+      "submitButton": "Submit Booking Request",
+      "submittingButton": "Submitting...",
+      "successTitle": "Booking Request Sent!",
+      "successDescription": "Thank you! We will contact you shortly to confirm. Redirecting to homepage in 5 seconds.",
+      "failTitle": "Submission Failed",
+      "failDescription": "An unexpected error occurred. Please try again.",
+      "errorTitle": "Submission Error",
+      "errorDescription": "Something went wrong. Please check your connection and try again.",
+      "geoErrorTitle": "Geolocation Error",
+      "geoErrorDenied": "You denied the request for Geolocation.",
+      "geoErrorUnavailable": "Location information is unavailable.",
+      "geoErrorTimeout": "The request to get user location timed out.",
+      "geoErrorUnknown": "An unknown error occurred.",
+      "geoDetectErrorTitle": "Error detecting location",
+      "geoDetectErrorDescription": "Could not fetch address details. Please enter manually.",
+      "addressConfirmTitle": "Confirm Detected Address",
+      "addressConfirmDescription": "Is the following address approximately correct? Please fill in any specific apartment or villa number manually.",
+      "addressConfirmCancel": "No, Enter Manually",
+      "addressConfirmAction": "Yes, Confirm",
+      "addressClearedTitle": "Address Cleared",
+      "addressClearedDescription": "Please enter your address manually.",
+      "addressConfirmedTitle": "Address Confirmed",
+      "addressConfirmedDescription": "Please double-check and fill in any missing details like your apartment number."
+    }
+  },
+  "Footer": {
+    "about": "Your trusted partner for all home maintenance and cleaning needs in Dubai. Quality service, guaranteed.",
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "officeHours": "Office Hours",
+    "hours": {
+      "mon_fri": "Mon - Fri:",
+      "sat": "Saturday:",
+      "sun": "Sunday:"
+    },
+    "times": {
+      "mon_fri": "10:00 AM - 6:30 PM",
+      "sat": "10:00 AM - 3:00 PM",
+      "sun": "Closed"
+    },
+    "copyright": "© {year} Touchup.ae. All Rights Reserved.",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "TermsPage": {
+    "title": "Terms & Conditions & Privacy Policy",
+    "subtitle": "Welcome to Touchup Building Maintenance",
+    "description": "By signing up for an account on touchup.ae, you agree to be bound by the following terms and conditions.",
+    "acceptance": {
+      "title": "Acceptance of Terms",
+      "content": "By accessing or using the services provided by Touchup Building Maintenance, you agree to be bound by these Terms and Conditions, as well as our Privacy Policy. If you do not agree with any part of these terms, you may not access the service."
+    },
+    "accounts": {
+      "title": "User Accounts",
+      "content": "You are responsible for maintaining the confidentiality of your account and password. You agree to accept responsibility for all activities that occur under your account."
+    },
+    "prohibited": {
+      "title": "Prohibited Activities",
+      "content": "You agree not to engage in any activity that interferes with or disrupts the service or servers or networks connected to the service. This includes but is not limited to attempting to gain unauthorized access to the service."
+    },
+    "content": {
+      "title": "User Content",
+      "content": "By submitting any content (text, images, videos, etc.) to Touchup Building Maintenance, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, adapt, publish, translate, and distribute such content."
+    },
+    "info": {
+      "title": "Information We Collect",
+      "list": {
+        "personal": "Personal Data: name, email address, phone number, mailing address.",
+        "technical": "Technical Data: IP address, browser type and version, operating system, device identifiers.",
+        "usage": "Usage Data: pages visited, time spent on pages, referral source.",
+        "cookies": "Cookies & Tracking: we use cookies and similar technologies to enhance your experience and analyze traffic. We securely save data on secure servers, and we do not sell any data."
+      }
+    },
+    "usage": {
+      "title": "How We Use Your Information",
+      "list": {
+        "provide": "Provide, maintain, and improve our website and apps.",
+        "respond": "Respond to your inquiries and fulfill booking requests.",
+        "send": "Send administrative and, where you’ve opted in, promotional communications.",
+        "analyze": "Analyze usage patterns and monitor performance.",
+        "comply": "Comply with legal obligations and resolve disputes."
+      }
+    },
+    "sharing": {
+      "title": "Sharing Your Information",
+      "list": {
+        "providers": "Service providers who process data on our behalf (hosting, email, analytics).",
+        "law": "Law enforcement or regulators, if required by law or to protect our rights.",
+        "thirdParties": "Third parties in connection with a corporate transaction (merger, sale)."
+      }
+    },
+    "payment": {
+      "title": "Payment and Billing",
+      "content": "If you choose to purchase any paid features or services, you agree to pay all fees and charges incurred through your account. All fees are non-refundable."
+    },
+    "termination": {
+      "title": "Termination of Services",
+      "content": "Touchup Building Maintenance reserves the right to terminate or suspend your account and access to the service at any time, with or without cause, and without prior notice."
+    },
+    "modifications": {
+      "title": "Modifications to Terms",
+      "content": "Touchup Building Maintenance reserves the right to modify these terms and conditions at any time. It is your responsibility to review these terms periodically for changes. Your continued use of the service following the posting of any changes constitutes acceptance of those changes."
+    },
+    "disclaimer": {
+      "title": "Disclaimer of Warranties",
+      "content": "The service is provided on an “as is” and “as available” basis. Touchup Building Maintenance makes no warranties, expressed or implied, regarding the reliability, accuracy, completeness, or timeliness of the service."
+    },
+    "liability": {
+      "title": "Limitation of Liability",
+      "content": "In no event shall Touchup Building Maintenance be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of or in any way connected with your use of the service."
+    },
+    "governing": {
+      "title": "Governing Law",
+      "content": "These terms and conditions shall be governed by and construed in accordance with the laws of the United Arab Emirates."
+    },
+    "final": {
+      "title": "Final Agreement",
+      "content": "By signing up for an account on touchup.ae, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions. If you have any questions or concerns, please contact us at info@touchup.ae."
+    }
+  }
+}
+
+    
