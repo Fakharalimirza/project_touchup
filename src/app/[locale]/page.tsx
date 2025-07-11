@@ -33,12 +33,12 @@ export default function Home() {
             className="absolute inset-0"
         >
             <Image
-                src="https://placehold.co/1920x1080.png"
+                src="https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/painting.png?alt=media&token=cd8e0f87-467e-433f-9ce8-2060f7e8345e"
                 alt="Technician working on an air conditioner"
                 fill
                 className="object-cover"
                 priority
-                data-ai-hint="cleaning team"
+                data-ai-hint="painting wall"
             />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
