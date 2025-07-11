@@ -18,7 +18,8 @@ export async function createSession(idToken: string) {
   } catch (error) {
     if (error instanceof Error) {
         console.error('Firebase Admin Initialization Error:', error.message);
-        throw new Error(`Firebase Admin initialization failed: ${error.message}. Make sure FIREBASE_CLIENT_EMAIL and ADMIN_PRIVATE_KEY secrets are set correctly.`);
+        // Return a clearer, more user-friendly error message.
+        return { error: `Admin login is not configured. Please set the FIREBASE_CLIENT_EMAIL and ADMIN_PRIVATE_KEY secrets in your App Hosting backend settings and redeploy.` };
     }
     throw new Error('An unknown error occurred during Firebase Admin initialization.');
   }
@@ -26,6 +27,7 @@ export async function createSession(idToken: string) {
   const expiresIn = 60 * 60 * 24 * 5 * 1000; // 5 days
   const sessionCookie = await getAuth().createSessionCookie(idToken, { expiresIn });
   cookies().set('session', sessionCookie, { maxAge: expiresIn, httpOnly: true, secure: true });
+  return { success: true };
 }
 
 export async function login(prevState: any, formData: FormData) {
@@ -38,14 +40,10 @@ export async function login(prevState: any, formData: FormData) {
 
   const { idToken } = validatedFields.data;
 
-  try {
-    await createSession(idToken);
-  } catch (error) {
-    console.error(error);
-    if (error instanceof Error) {
-        return { error: error.message };
-    }
-    return { error: 'An unexpected error occurred during session creation.' };
+  const result = await createSession(idToken);
+
+  if (result?.error) {
+    return { error: result.error };
   }
   
   redirect('/admin/dashboard');
