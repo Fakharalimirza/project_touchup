@@ -1,4 +1,3 @@
-
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import type { Metadata } from 'next';
 
