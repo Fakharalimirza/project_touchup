@@ -33,7 +33,7 @@ export default function Home() {
             className="absolute inset-0"
         >
             <Image
-                src="https://firebasestorage.googleapis.com/v0/b/touchup-42i8o/o/images%2Fhero-background.jpg?alt=media"
+                src="https://placehold.co/1920x1080.png"
                 alt="Technician working on an air conditioner"
                 fill
                 className="object-cover"
