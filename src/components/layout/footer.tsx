@@ -44,6 +44,7 @@ export default function Footer() {
                 width={120}
                 height={40}
                 className="object-contain dark:hidden"
+                style={{ height: 'auto' }}
               />
               <Image
                 src="https://touchup.ae/wp-content/uploads/2025/07/white-logo-en.png"
@@ -51,6 +52,7 @@ export default function Footer() {
                 width={120}
                 height={40}
                 className="object-contain hidden dark:block"
+                style={{ height: 'auto' }}
               />
             </Link>
             <p>
