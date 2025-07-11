@@ -93,7 +93,7 @@ export const services: Service[] = [
     icon: Bug,
     detailsKey: 'pest-control.details',
     subServiceKeys: [],
-    image: 'https://placehold.co/1200x600.png',
+    image: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/Pest%20Control.png?alt=media&token=b34b0647-a179-42f0-9ed5-65fb30dc6e9c',
     dataAiHint: 'pest control',
   }
 ];
