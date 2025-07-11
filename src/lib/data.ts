@@ -83,7 +83,7 @@ export const services: Service[] = [
         'cleaning-services.subServices.normal_2bhk',
         'cleaning-services.subServices.hourly',
     ],
-    image: 'https://placehold.co/1200x600.png',
+    image: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/Cleaning%20Services.png?alt=media&token=5e369248-1ee9-40ad-bddf-cc80bdfb20d9',
     dataAiHint: 'deep cleaning',
   },
   {
