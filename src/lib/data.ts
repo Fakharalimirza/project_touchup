@@ -27,7 +27,7 @@ export const services: Service[] = [
         'painting.subServices.touchup_2bhk',
         'painting.subServices.table_chair',
     ],
-    image: 'https://placehold.co/1200x600.png',
+    image: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/painting.png?alt=media&token=cd8e0f87-467e-433f-9ce8-2060f7e8345e',
     dataAiHint: 'wall painting',
   },
   {
