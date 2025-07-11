@@ -6,8 +6,5 @@
       "**/.*",
       "**/node_modules/**"
     ]
-  },
-  "apphosting": {
-    "backend": "touchup-web"
   }
 }
