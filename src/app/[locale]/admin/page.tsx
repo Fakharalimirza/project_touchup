@@ -1,8 +1,8 @@
 
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useState, useEffect, useRef, useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { login } from './actions';
 import { app } from '@/lib/firebase';
@@ -24,7 +24,7 @@ function SubmitButton() {
 }
 
 export default function AdminPage() {
-  const [state, formAction] = useFormState(login, undefined);
+  const [state, formAction] = useActionState(login, undefined);
   const { toast } = useToast();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
