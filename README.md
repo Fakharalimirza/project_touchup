@@ -31,7 +31,7 @@ For any environment variables in your `.env` file (like email credentials), you 
     ```bash
     firebase apphosting:secrets:set SECRET_NAME
     ```
-    The CLI will prompt you to enter the secret value. Repeat this for each variable. For this project, you will need to set `FIREBASE_CLIENT_EMAIL` and `FIREBASE_PRIVATE_KEY`.
+    The CLI will prompt you to enter the secret value. Repeat this for each variable. For this project, you will need to set `FIREBASE_CLIENT_EMAIL` and `ADMIN_PRIVATE_KEY`.
 
 2.  **Grant access to the secret:** In your `apphosting.yaml` file, you need to grant your backend access to these secrets:
     ```yaml
