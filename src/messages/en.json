@@ -182,9 +182,6 @@
     "sendButton": "Send Message",
     "sendingButton": "Sending...",
     "infoTitle": "Contact Information",
-    "address": "A202 - Sport Society Mall - Mirdif - Dubai",
-    "phone": "+971 54 531 4170",
-    "email": "info@touchup.ae",
     "workHours": {
       "mon_fri": "Mon - Fri:",
       "sat": "Saturday:",
@@ -316,7 +313,7 @@
       "list": {
         "personal": "Personal Data: name, email address, phone number, mailing address.",
         "technical": "Technical Data: IP address, browser type and version, operating system, device identifiers.",
-        "usage": "Usage Data: pages visited, time spent on pages, referral source.",
+        "usage": "Data: pages visited, time spent on pages, referral source.",
         "cookies": "Cookies & Tracking: we use cookies and similar technologies to enhance your experience and analyze traffic. We securely save data on secure servers, and we do not sell any data."
       }
     },
@@ -368,5 +365,3 @@
     }
   }
 }
-
-    

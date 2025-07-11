@@ -22,19 +22,18 @@ const quickLinks = [
 
 const logos = {
   en: {
-    light: '/black-logo-en.png',
-    dark: '/white-logo-en.png'
+    light: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20black%20en.png?alt=media&token=74ca5c3b-ee14-4188-a000-8f3b4f91bca4',
+    dark: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20white%20en.png?alt=media&token=652355d2-af45-4c5a-a112-71d79a85c10d'
   },
   ar: {
-    light: '/black-logo-ar.png',
-    dark: '/white-logo-ar.png'
+    light: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20black%20ar.png?alt=media&token=a7fa8eef-e242-4275-be0a-8171a99f1d2e',
+    dark: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20white%20ar.png?alt=media&token=c3bf3614-1d8c-49df-99d8-98b181d2ce36'
   }
 }
 
 export default function Footer() {
   const t = useTranslations('Footer');
   const tHeader = useTranslations('Header');
-  const tContact = useTranslations('ContactPage');
   const locale = useLocale() as 'en' | 'ar';
 
 
@@ -98,19 +97,19 @@ export default function Footer() {
                   href="https://maps.app.goo.gl/j2K9xckTiutBcczi7"
                   className="hover:text-primary transition-colors"
                 >
-                  {tContact('address')}
+                  A202 - Sport Society Mall - Mirdif - Dubai
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 shrink-0" />
-                <a href={`mailto:${tContact('email')}`} className="hover:text-primary transition-colors">
-                  <span dir="ltr">{tContact('email')}</span>
+                <a href="mailto:info@touchup.ae" className="hover:text-primary transition-colors">
+                  <span dir="ltr">info@touchup.ae</span>
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 shrink-0" />
-                <a href={`tel:${tContact('phone').replace(/\s/g, '')}`} className="hover:text-primary transition-colors">
-                  <span className="tracking-wider" dir="ltr">{tContact('phone')}</span>
+                <a href="tel:+971545314170" className="hover:text-primary transition-colors">
+                  <span className="tracking-wider" dir="ltr">+971 54 531 4170</span>
                 </a>
               </li>
             </ul>
