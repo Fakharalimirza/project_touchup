@@ -1,6 +1,6 @@
 
 import { genkit, type GenkitError } from 'genkit';
-import { googleAI } from 'genkit/googleai';
+import { googleAI } from '@genkit-googleai';
 
 const googleApiKey = process.env.GOOGLE_API_KEY;
 if (!googleApiKey) {
