@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -42,7 +43,7 @@ export default function Home() {
             />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/40" />
         <div
             className="relative z-10 max-w-4xl mx-auto px-4 flex flex-col items-center"
         >
