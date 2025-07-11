@@ -7,8 +7,6 @@ runConfig:
 secretEnvironmentVariables:
   - secret: ADMIN_EMAIL
   - secret: ADMIN_PASSWORD
-  - secret: FIREBASE_CLIENT_EMAIL
-  - secret: FIREBASE_PRIVATE_KEY
   - secret: NEXT_PUBLIC_FIREBASE_API_KEY
   - secret: NEXT_PUBLIC_FIREBASE_APP_ID
   - secret: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
@@ -17,8 +15,10 @@ secretEnvironmentVariables:
   - secret: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
   - secret: SESSION_COOKIE_NAME
   - secret: SESSION_COOKIE_PASSWORD
+  - secret: admin_private_key
+  - secret: firebase_client_email
 env:
   - variable: ADMIN_PRIVATE_KEY
-    secret: FIREBASE_PRIVATE_KEY
+    secret: admin_private_key
   - variable: FIREBASE_CLIENT_EMAIL
-    secret: FIREBASE_CLIENT_EMAIL
+    secret: firebase_client_email

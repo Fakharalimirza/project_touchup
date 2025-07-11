@@ -6,18 +6,19 @@ export function initializeAdminApp() {
     return;
   }
   
-  const privateKey = process.env.ADMIN_PRIVATE_KEY;
-  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+  // Use lowercase secret names as required by the hosting environment.
+  const privateKey = process.env.admin_private_key;
+  const clientEmail = process.env.firebase_client_email;
   const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
 
   if (!projectId) {
     throw new Error('Firebase Admin SDK Error: NEXT_PUBLIC_FIREBASE_PROJECT_ID is not set in environment variables. Please check your App Hosting secrets and configuration.');
   }
   if (!clientEmail) {
-    throw new Error('Firebase Admin SDK Error: FIREBASE_CLIENT_EMAIL is not set in environment variables. Please check your App Hosting secrets and configuration.');
+    throw new Error('Firebase Admin SDK Error: firebase_client_email is not set in environment variables. Please check your App Hosting secrets and configuration.');
   }
   if (!privateKey) {
-    throw new Error('Firebase Admin SDK Error: ADMIN_PRIVATE_KEY is not set in environment variables. Please check your App Hosting secrets and configuration.');
+    throw new Error('Firebase Admin SDK Error: admin_private_key is not set in environment variables. Please check your App Hosting secrets and configuration.');
   }
 
   try {
