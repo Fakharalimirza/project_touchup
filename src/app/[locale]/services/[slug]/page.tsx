@@ -6,14 +6,15 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, Check } from 'lucide-react';
 import type { Metadata } from 'next';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
+import React from 'react';
 
 type Props = {
-  params: { slug: string, locale: string };
+  params: { slug: string; locale: string };
 };
 
 export async function generateMetadata({ params: { slug, locale } }: Props): Promise<Metadata> {
-  unstable_setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'Services' });
+  unstable_setRequestLocale(locale);
   const service = services.find(s => s.slug === slug);
 
   if (!service) {
@@ -64,6 +65,7 @@ export default async function ServiceDetailPage({ params: { slug, locale } }: Pr
                 fill
                 className="object-cover"
                 data-ai-hint={service.dataAiHint}
+                priority
               />
             </div>
           </div>
