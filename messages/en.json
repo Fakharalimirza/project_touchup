@@ -215,7 +215,7 @@
       "email": "Email Address",
       "emailPlaceholder": "you@example.com",
       "phone": "Phone Number",
-      "phonePlaceholder": "+971 50 123 4567",
+      "phonePlaceholder": "+971542477677",
       "service": "Service Required",
       "servicePlaceholder": "Select a service",
       "propertyType": "Property Type",
@@ -313,7 +313,7 @@
       "list": {
         "personal": "Personal Data: name, email address, phone number, mailing address.",
         "technical": "Technical Data: IP address, browser type and version, operating system, device identifiers.",
-        "usage": "Usage Data: pages visited, time spent on pages, referral source.",
+        "usage": "Data: pages visited, time spent on pages, referral source.",
         "cookies": "Cookies & Tracking: we use cookies and similar technologies to enhance your experience and analyze traffic. We securely save data on secure servers, and we do not sell any data."
       }
     },

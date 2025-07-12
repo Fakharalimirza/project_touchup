@@ -25,7 +25,7 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const contactDetails = [
-    { icon: Phone, text: '+971 54 531 4170', href: `tel:+971545314170` },
+    { icon: Phone, text: '+971542477677', href: `tel:+971542477677` },
     { icon: Mail, text: 'info@touchup.ae', href: `mailto:info@touchup.ae` },
     { icon: MapPin, text: 'A202 - Sport Society Mall - Mirdif - Dubai', href: 'https://maps.app.goo.gl/j2K9xckTiutBcczi7' },
   ];
@@ -195,7 +195,7 @@ export default function ContactPage() {
               </ul>
             </div>
             <Button asChild size="lg" className="w-full max-w-xs bg-green-500 hover:bg-green-600">
-              <a href="https://wa.me/+971545314170" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2">
+              <a href="https://wa.me/971542477677" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2">
                 <svg
                   aria-hidden="true"
                   focusable="false"
@@ -231,5 +231,3 @@ export default function ContactPage() {
     </div>
   );
 }
-
-    

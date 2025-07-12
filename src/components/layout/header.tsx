@@ -76,7 +76,7 @@ export default function Header() {
           <LanguageSwitcher />
           <ThemeToggle />
            <Button asChild size="icon" className="bg-green-500 hover:bg-green-600 text-white hover:text-white/90">
-            <a href="https://wa.me/+971545314170" target="_blank" rel="noopener noreferrer" aria-label={t('whatsApp')}>
+            <a href="https://wa.me/971542477677" target="_blank" rel="noopener noreferrer" aria-label={t('whatsApp')}>
               <svg
                 aria-hidden="true"
                 focusable="false"
@@ -131,7 +131,7 @@ export default function Header() {
               </nav>
                <div className="mt-auto flex flex-col gap-2 border-t pt-4">
                   <Button asChild className="w-full bg-green-500 hover:bg-green-600 text-white" onClick={closeSheet}>
-                    <a href="https://wa.me/+971545314170" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2">
+                    <a href="https://wa.me/971542477677" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2">
                       <svg
                         aria-hidden="true"
                         focusable="false"
