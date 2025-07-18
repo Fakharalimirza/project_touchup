@@ -7,12 +7,13 @@ import { Phone, Mail, MapPin, Instagram } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
 const socialLinks = [
-  { icon: Instagram, href: 'https://www.instagram.com/touchup.service/?igsh=anJqODhhNGlteDk2#', name: 'Instagram' },
+  { icon: Instagram, href: 'https://www.instagram.com/touchup.service/?igsh=anJqODhhNGlteDk2#', name: 'Instagram', handle: 'touchup.service' },
 ];
 
 const quickLinks = [
   { href: '/', labelKey: 'home' },
   { href: '/services', labelKey: 'services' },
+  { href: '/about', labelKey: 'about' },
   { href: '/contact', labelKey: 'contact' },
   { href: '/booking', labelKey: 'bookNow' },
   { href: '/privacy-policy', labelKey: 'privacyPolicy' },
@@ -110,19 +111,19 @@ export default function Footer() {
                   <span className="tracking-wider" dir="ltr">+971542477677</span>
                 </a>
               </li>
-            </ul>
-            <div className="flex space-x-4 mt-4">
-              {socialLinks.map((social) => (
-                <Link
-                  key={social.name}
-                  href={social.href}
-                  aria-label={social.name}
-                  className="hover:text-primary transition-colors"
-                >
-                  <social.icon className="h-5 w-5" />
-                </Link>
+               {socialLinks.map((social) => (
+                <li key={social.name} className="flex items-center gap-3">
+                   <social.icon className="h-5 w-5 shrink-0" />
+                  <a
+                    href={social.href}
+                    aria-label={social.name}
+                    className="hover:text-primary transition-colors"
+                  >
+                   {social.handle}
+                  </a>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
           {/* Office Hours + Socials */}
