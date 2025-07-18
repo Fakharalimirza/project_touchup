@@ -3,13 +3,11 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, MapPin, Twitter, Facebook, Instagram } from 'lucide-react';
+import { Phone, Mail, MapPin, Instagram } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
 const socialLinks = [
-  { icon: Twitter, href: '#', name: 'Twitter' },
-  { icon: Facebook, href: '#', name: 'Facebook' },
-  { icon: Instagram, href: '#', name: 'Instagram' },
+  { icon: Instagram, href: 'https://www.instagram.com/touchup.service/?igsh=anJqODhhNGlteDk2#', name: 'Instagram' },
 ];
 
 const quickLinks = [
