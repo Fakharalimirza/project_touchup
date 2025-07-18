@@ -91,7 +91,7 @@ export default function Home() {
                   <CardContent className="flex-grow flex flex-col justify-between">
                     <p className="text-muted-foreground mb-4">{tServices(`${service.slug}.description`)}</p>
                     <Button asChild variant="outline">
-                      <Link href={`/services/${service.slug}`} aria-label={tGeneral('learnMoreAbout', { service: tServices(`${service.slug}.title`) })}>
+                      <Link href={`/services/${service.slug}`}>
                         {tGeneral('learnMore')}
                       </Link>
                     </Button>
