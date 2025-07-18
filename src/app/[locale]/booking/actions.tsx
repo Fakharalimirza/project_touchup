@@ -1,3 +1,4 @@
+
 'use server';
 
 import { z } from 'zod';
@@ -62,7 +63,7 @@ export async function submitBooking(data: BookingFormValues) {
 
     // Send email to admin
     await transporter.sendMail({
-      from: `"TouchUp Booking" <${process.env.SMTP_FROM_EMAIL}>`,
+      from: `"TouchUp Booking" <${process.env.SMTP_USER}>`,
       to: process.env.ADMIN_EMAIL_BOOKING,
       subject: `New Booking Request - ${validatedData.data.service}`,
       html: adminEmailHtml,
@@ -70,7 +71,7 @@ export async function submitBooking(data: BookingFormValues) {
 
     // Send confirmation email to customer
     await transporter.sendMail({
-      from: `"Touchup Building Maintenance" <${process.env.SMTP_FROM_EMAIL}>`,
+      from: `"Touchup Building Maintenance" <${process.env.SMTP_USER}>`,
       to: validatedData.data.email,
       subject: 'Your Booking Request with Touchup Building Maintenance has been received!',
       html: customerEmailHtml,
