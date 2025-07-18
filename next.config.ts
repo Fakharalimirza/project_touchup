@@ -33,10 +33,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-   webpack: (config) => {
-    config.externals.push("@react-email/render", "@react-email/components");
-    return config;
-  },
 };
 
 export default withNextIntl(nextConfig);

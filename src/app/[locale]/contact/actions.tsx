@@ -2,11 +2,8 @@
 'use server';
 
 import { z } from 'zod';
-import nodemailer from 'nodemailer';
 import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { render } from '@react-email/render';
-import AdminContactNoticeEmail from '@/emails/admin-contact-notice';
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -16,17 +13,6 @@ const contactSchema = z.object({
 });
 
 export type ContactFormValues = z.infer<typeof contactSchema>;
-
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT || '587', 10),
-  secure: parseInt(process.env.SMTP_PORT || '587', 10) === 465,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
-
 
 export async function submitContactForm(data: ContactFormValues) {
   const validatedData = contactSchema.safeParse(data);
@@ -43,16 +29,6 @@ export async function submitContactForm(data: ContactFormValues) {
       ...contactData,
       createdAt: serverTimestamp(),
       status: 'new'
-    });
-    
-    const emailHtml = render(<AdminContactNoticeEmail data={validatedData.data} />);
-
-    await transporter.sendMail({
-      from: `"Touchup Contact Form" <${process.env.SMTP_USER}>`,
-      to: process.env.ADMIN_EMAIL_CONTACT,
-      replyTo: validatedData.data.email,
-      subject: `New Contact Form Message: ${validatedData.data.subject}`,
-      html: emailHtml,
     });
 
     return { success: true };
