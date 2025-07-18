@@ -4,6 +4,8 @@ import { z } from 'zod';
 import nodemailer from 'nodemailer';
 import { db } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { render } from '@react-email/render';
+import AdminContactNoticeEmail from '@/emails/admin-contact-notice';
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -35,9 +37,7 @@ export async function submitContactForm(data: ContactFormValues) {
     return { success: false, error: 'Invalid data provided.' };
   }
   
-  const { name, email, subject, message } = validatedData.data;
   const { terms, ...contactData } = validatedData.data;
-
   
   try {
     // Save to Firestore
@@ -47,23 +47,13 @@ export async function submitContactForm(data: ContactFormValues) {
       status: 'new'
     });
     
-    const emailHtml = `
-      <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-        <h2 style="color: #333;">New message from your website contact form</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <hr style="border: none; border-top: 1px solid #eee;" />
-        <h3 style="color: #333;">Message:</h3>
-        <p style="white-space: pre-wrap; background-color: #f9f9f9; padding: 10px; border-radius: 4px;">${message}</p>
-      </div>
-    `;
+    const emailHtml = render(<AdminContactNoticeEmail data={validatedData.data} />);
 
     await transporter.sendMail({
       from: `"TouchUp Contact Form" <${process.env.SMTP_FROM_EMAIL || 'noreply@touchup.ae'}>`,
       to: process.env.ADMIN_EMAIL_CONTACT,
-      replyTo: email,
-      subject: `New Contact Form Message: ${subject}`,
+      replyTo: validatedData.data.email,
+      subject: `New Contact Form Message: ${validatedData.data.subject}`,
       html: emailHtml,
     });
 

@@ -44,8 +44,8 @@ const bookingSchema = z.object({
   area: z.string().min(3, { message: 'Please enter a valid area.' }),
   city: z.string().min(2, { message: 'Please enter a valid city.' }),
   instructions: z.string().optional(),
-  terms: z.boolean().refine((val) => val === true, {
-    message: 'You must accept the terms and conditions.',
+  terms: z.literal(true, {
+    errorMap: () => ({ message: 'You must accept the terms and conditions.' }),
   }),
 });
 
