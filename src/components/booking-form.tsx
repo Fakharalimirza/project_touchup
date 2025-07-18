@@ -3,11 +3,11 @@
 
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { format } from 'date-fns';
-import { Calendar as CalendarIcon, MapPin, Loader2 } from 'lucide-react';
+import { Calendar as CalendarIcon, MapPin, Loader2, ArrowRight, ArrowLeft } from 'lucide-react';
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
 
@@ -19,14 +19,14 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { services } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { Checkbox } from '@/components/ui/checkbox';
 import { submitBooking } from '@/app/booking/actions';
-
+import { Progress } from '@/components/ui/progress';
 
 const bookingSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -73,6 +73,24 @@ const timeSlots = [
   '05:00 PM - 07:00 PM',
 ];
 
+const steps = [
+  { 
+    id: 1, 
+    titleKey: 'step1Title',
+    fields: ['name', 'email', 'phone', 'service'] 
+  },
+  { 
+    id: 2, 
+    titleKey: 'step2Title',
+    fields: ['propertyType', 'specificPropertyType', 'date', 'time'] 
+  },
+  { 
+    id: 3, 
+    titleKey: 'step3Title',
+    fields: ['apartmentVilla', 'building', 'street', 'area', 'city', 'instructions', 'terms'] 
+  },
+] as const;
+
 
 export default function BookingForm() {
   const searchParams = useSearchParams();
@@ -81,6 +99,7 @@ export default function BookingForm() {
   const { toast } = useToast();
   const tServices = useTranslations('Services');
   const t = useTranslations('BookingPage.form');
+  const [currentStep, setCurrentStep] = React.useState(0);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isCalendarOpen, setCalendarOpen] = React.useState(false);
   const [isDetectingLocation, setIsDetectingLocation] = React.useState(false);
@@ -107,6 +126,7 @@ export default function BookingForm() {
   });
 
   const propertyType = form.watch('propertyType');
+  const progress = ((currentStep + 1) / steps.length) * 100;
 
   React.useEffect(() => {
     if (propertyType) {
@@ -114,6 +134,17 @@ export default function BookingForm() {
     }
   }, [propertyType, form]);
 
+  const handleNextStep = async () => {
+    const fieldsToValidate = steps[currentStep].fields;
+    const isValid = await form.trigger(fieldsToValidate as any, { shouldFocus: true });
+    if (isValid) {
+      setCurrentStep(prev => prev + 1);
+    }
+  }
+
+  const handlePrevStep = () => {
+    setCurrentStep(prev => prev - 1);
+  }
 
   async function onSubmit(data: BookingFormValues) {
     setIsSubmitting(true);
@@ -163,7 +194,6 @@ export default function BookingForm() {
       async (position) => {
         const { latitude, longitude } = position.coords;
         try {
-          // Using OpenStreetMap's free Nominatim reverse geocoding service
           const response = await fetch(
             `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&addressdetails=1`
           );
@@ -233,337 +263,374 @@ export default function BookingForm() {
 
   return (
     <Card>
+      <CardHeader>
+        <CardTitle className="font-headline text-2xl text-center">{t(steps[currentStep].titleKey as any)}</CardTitle>
+        <div className="pt-4">
+          <Progress value={progress} className="w-full" />
+        </div>
+      </CardHeader>
       <CardContent className="p-6 md:p-8">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="grid md:grid-cols-2 gap-8">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('fullName')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('fullNamePlaceholder')} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('email')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('emailPlaceholder')} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('phone')}</FormLabel>
-                    <FormControl>
-                      <Input placeholder={t('phonePlaceholder')} {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="service"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('service')}</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={t('servicePlaceholder')} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {services.map((service) => (
-                          <SelectItem key={service.slug} value={service.slug}>
-                            {tServices(`${service.slug}.title`)}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
             
-            <FormField
-              control={form.control}
-              name="propertyType"
-              render={({ field }) => (
-                <FormItem className="space-y-3">
-                  <FormLabel>{t('propertyType')}</FormLabel>
-                  <FormControl>
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      className="flex items-center space-x-6"
-                    >
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value="residential" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          {t('residential')}
-                        </FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value="commercial" />
-                        </FormControl>
-                        <FormLabel className="font-normal">
-                          {t('commercial')}
-                        </FormLabel>
-                      </FormItem>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {propertyType && (
-              <FormField
-                control={form.control}
-                name="specificPropertyType"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{propertyType === 'residential' ? t('propertyDetails') : t('businessType')}</FormLabel>
-                    <Select onValueChange={field.onChange} value={field.value}>
+            {currentStep === 0 && (
+              <div className="grid md:grid-cols-2 gap-8">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('fullName')}</FormLabel>
                       <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={propertyType === 'residential' ? t('propertyDetailsPlaceholder') : t('businessTypePlaceholder')} />
-                        </SelectTrigger>
+                        <Input placeholder={t('fullNamePlaceholder')} {...field} />
                       </FormControl>
-                      <SelectContent>
-                        {(propertyType === 'residential' ? residentialOptions : commercialOptions).map(option => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('email')}</FormLabel>
+                      <FormControl>
+                        <Input placeholder={t('emailPlaceholder')} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('phone')}</FormLabel>
+                      <FormControl>
+                        <Input placeholder={t('phonePlaceholder')} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="service"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('service')}</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder={t('servicePlaceholder')} />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {services.map((service) => (
+                            <SelectItem key={service.slug} value={service.slug}>
+                              {tServices(`${service.slug}.title`)}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             )}
             
-            <div className="grid md:grid-cols-2 gap-8 items-start">
-              <FormField
-                control={form.control}
-                name="date"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('preferredDate')}</FormLabel>
-                    <Popover open={isCalendarOpen} onOpenChange={setCalendarOpen}>
-                      <PopoverTrigger asChild>
-                        <FormControl>
-                          <Button
-                            variant={"outline"}
-                            className={cn(
-                              "w-full justify-start text-left font-normal",
-                              !field.value && "text-muted-foreground"
-                            )}
-                          >
-                            <CalendarIcon className="mr-2 h-4 w-4" />
-                            {field.value ? (
-                              format(field.value, "PPP")
-                            ) : (
-                              <span>{t('pickDate')}</span>
-                            )}
-                          </Button>
-                        </FormControl>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={(date) => {
-                            field.onChange(date);
-                            setCalendarOpen(false);
-                          }}
-                          disabled={(date) => date < new Date(new Date().setHours(0,0,0,0))}
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="time"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t('preferredTime')}</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+            {currentStep === 1 && (
+              <div className="space-y-8">
+                <FormField
+                  control={form.control}
+                  name="propertyType"
+                  render={({ field }) => (
+                    <FormItem className="space-y-3">
+                      <FormLabel>{t('propertyType')}</FormLabel>
                       <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder={t('timePlaceholder')} />
-                        </SelectTrigger>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="flex items-center space-x-6"
+                        >
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="residential" />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              {t('residential')}
+                            </FormLabel>
+                          </FormItem>
+                          <FormItem className="flex items-center space-x-3 space-y-0">
+                            <FormControl>
+                              <RadioGroupItem value="commercial" />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              {t('commercial')}
+                            </FormLabel>
+                          </FormItem>
+                        </RadioGroup>
                       </FormControl>
-                      <SelectContent>
-                        {timeSlots.map(slot => (
-                          <SelectItem key={slot} value={slot}>
-                            {slot}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {propertyType && (
+                  <FormField
+                    control={form.control}
+                    name="specificPropertyType"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{propertyType === 'residential' ? t('propertyDetails') : t('businessType')}</FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder={propertyType === 'residential' ? t('propertyDetailsPlaceholder') : t('businessTypePlaceholder')} />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {(propertyType === 'residential' ? residentialOptions : commercialOptions).map(option => (
+                              <SelectItem key={option.value} value={option.value}>
+                                {option.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 )}
-              />
-            </div>
-            
-            <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                    <FormLabel>{t('fullAddress')}</FormLabel>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={handleDetectLocation}
-                      disabled={isDetectingLocation}
-                    >
-                      {isDetectingLocation ? (
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      ) : (
-                        <MapPin className="mr-2 h-4 w-4" />
-                      )}
-                      {isDetectingLocation ? t('detectingButton') : t('detectButton')}
-                    </Button>
+                
+                <div className="grid md:grid-cols-2 gap-8 items-start">
+                  <FormField
+                    control={form.control}
+                    name="date"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t('preferredDate')}</FormLabel>
+                        <Popover open={isCalendarOpen} onOpenChange={setCalendarOpen}>
+                          <PopoverTrigger asChild>
+                            <FormControl>
+                              <Button
+                                variant={"outline"}
+                                className={cn(
+                                  "w-full justify-start text-left font-normal",
+                                  !field.value && "text-muted-foreground"
+                                )}
+                              >
+                                <CalendarIcon className="mr-2 h-4 w-4" />
+                                {field.value ? (
+                                  format(field.value, "PPP")
+                                ) : (
+                                  <span>{t('pickDate')}</span>
+                                )}
+                              </Button>
+                            </FormControl>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={(date) => {
+                                field.onChange(date);
+                                setCalendarOpen(false);
+                              }}
+                              disabled={(date) => date < new Date(new Date().setHours(0,0,0,0))}
+                              initialFocus
+                            />
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="time"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>{t('preferredTime')}</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder={t('timePlaceholder')} />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {timeSlots.map(slot => (
+                              <SelectItem key={slot} value={slot}>
+                                {slot}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormField
-                        control={form.control}
-                        name="apartmentVilla"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className="text-xs text-muted-foreground">{t('aptNo')}</FormLabel>
-                                <FormControl>
-                                    <Input placeholder={t('aptNoPlaceholder')} {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="building"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className="text-xs text-muted-foreground">{t('buildingName')}</FormLabel>
-                                <FormControl>
-                                    <Input placeholder={t('buildingNamePlaceholder')} {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="street"
-                        render={({ field }) => (
-                            <FormItem>
-                                 <FormLabel className="text-xs text-muted-foreground">{t('street')}</FormLabel>
-                                <FormControl>
-                                    <Input placeholder={t('streetPlaceholder')} {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                     <FormField
-                        control={form.control}
-                        name="area"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className="text-xs text-muted-foreground">{t('area')}</FormLabel>
-                                <FormControl>
-                                    <Input placeholder={t('areaPlaceholder')} {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                     <FormField
-                        control={form.control}
-                        name="city"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className="text-xs text-muted-foreground">{t('city')}</FormLabel>
+              </div>
+            )}
 
-                                <FormControl>
-                                    <Input {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+            {currentStep === 2 && (
+              <div className="space-y-8">
+                <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                        <FormLabel>{t('fullAddress')}</FormLabel>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={handleDetectLocation}
+                          disabled={isDetectingLocation}
+                        >
+                          {isDetectingLocation ? (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          ) : (
+                            <MapPin className="mr-2 h-4 w-4" />
+                          )}
+                          {isDetectingLocation ? t('detectingButton') : t('detectButton')}
+                        </Button>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <FormField
+                            control={form.control}
+                            name="apartmentVilla"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-xs text-muted-foreground">{t('aptNo')}</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder={t('aptNoPlaceholder')} {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="building"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-xs text-muted-foreground">{t('buildingName')}</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder={t('buildingNamePlaceholder')} {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="street"
+                            render={({ field }) => (
+                                <FormItem>
+                                     <FormLabel className="text-xs text-muted-foreground">{t('street')}</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder={t('streetPlaceholder')} {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                         <FormField
+                            control={form.control}
+                            name="area"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-xs text-muted-foreground">{t('area')}</FormLabel>
+                                    <FormControl>
+                                        <Input placeholder={t('areaPlaceholder')} {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                         <FormField
+                            control={form.control}
+                            name="city"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="text-xs text-muted-foreground">{t('city')}</FormLabel>
+
+                                    <FormControl>
+                                        <Input {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                    </div>
                 </div>
-            </div>
-            
-            <FormField
-              control={form.control}
-              name="instructions"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('specialInstructions')}</FormLabel>
-                  <FormControl>
-                    <Textarea placeholder={t('specialInstructionsPlaceholder')} {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                
+                <FormField
+                  control={form.control}
+                  name="instructions"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>{t('specialInstructions')}</FormLabel>
+                      <FormControl>
+                        <Textarea placeholder={t('specialInstructionsPlaceholder')} {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <FormField
-              control={form.control}
-              name="terms"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <div className="space-y-1 leading-none">
-                    <FormLabel>
-                      {t('terms')}{' '}
-                      <Link href="/privacy-policy" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
-                        {t('termsLink')}
-                      </Link>
-                      .
-                    </FormLabel>
-                    <FormMessage />
-                  </div>
-                </FormItem>
-              )}
-            />
+                <FormField
+                  control={form.control}
+                  name="terms"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel>
+                          {t('terms')}{' '}
+                          <Link href="/privacy-policy" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
+                            {t('termsLink')}
+                          </Link>
+                          .
+                        </FormLabel>
+                        <FormMessage />
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              </div>
+            )}
             
-            <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-              {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {isSubmitting ? t('submittingButton') : t('submitButton')}
-            </Button>
+            <div className="flex justify-between items-center pt-4">
+              <div>
+                {currentStep > 0 && (
+                  <Button type="button" variant="outline" onClick={handlePrevStep}>
+                    <ArrowLeft className="h-4 w-4 ltr:mr-2 rtl:ml-2" />
+                    {t('backButton')}
+                  </Button>
+                )}
+              </div>
+              <div>
+                {currentStep < steps.length - 1 && (
+                  <Button type="button" onClick={handleNextStep}>
+                    {t('nextButton')}
+                    <ArrowRight className="h-4 w-4 ltr:ml-2 rtl:mr-2" />
+                  </Button>
+                )}
+                {currentStep === steps.length - 1 && (
+                  <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                    {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    {isSubmitting ? t('submittingButton') : t('submitButton')}
+                  </Button>
+                )}
+              </div>
+            </div>
           </form>
         </Form>
       </CardContent>

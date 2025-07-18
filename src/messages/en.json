@@ -56,7 +56,7 @@
     },
     "ctaTitle": "Ready for a Spotless Home?",
     "ctaSubtitle": "Let our experts take care of your home maintenance needs. Get a free quote or book your service online today!",
-    "ctaButton": "Get Your Free Quote"
+    "ctaButton": "Book a Service Now"
   },
   "ServicesPage": {
     "title": "Our Professional Services",
@@ -267,7 +267,12 @@
       "addressClearedTitle": "Address Cleared",
       "addressClearedDescription": "Please enter your address manually.",
       "addressConfirmedTitle": "Address Confirmed",
-      "addressConfirmedDescription": "Please double-check and fill in any missing details like your apartment number."
+      "addressConfirmedDescription": "Please double-check and fill in any missing details like your apartment number.",
+      "step1Title": "Your Details",
+      "step2Title": "Property & Schedule",
+      "step3Title": "Address & Confirm",
+      "nextButton": "Next Step",
+      "backButton": "Go Back"
     }
   },
   "Footer": {

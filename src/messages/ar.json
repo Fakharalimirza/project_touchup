@@ -56,7 +56,7 @@
     },
     "ctaTitle": "هل أنت مستعد لمنزل نظيف؟",
     "ctaSubtitle": "دع خبرائنا يهتمون باحتياجات صيانة منزلك. احصل على عرض أسعار مجاني أو احجز خدمتك عبر الإنترنت اليوم!",
-    "ctaButton": "احصل على عرض أسعار مجاني"
+    "ctaButton": "احجز خدمة الآن"
   },
   "ServicesPage": {
     "title": "خدماتنا الاحترافية",
@@ -267,7 +267,12 @@
       "addressClearedTitle": "تم مسح العنوان",
       "addressClearedDescription": "يرجى إدخال عنوانك يدويًا.",
       "addressConfirmedTitle": "تم تأكيد العنوان",
-      "addressConfirmedDescription": "يرجى التحقق مرة أخرى وملء أي تفاصيل مفقودة مثل رقم شقتك."
+      "addressConfirmedDescription": "يرجى التحقق مرة أخرى وملء أي تفاصيل مفقودة مثل رقم شقتك.",
+      "step1Title": "تفاصيلك",
+      "step2Title": "العقار والجدول الزمني",
+      "step3Title": "العنوان والتأكيد",
+      "nextButton": "الخطوة التالية",
+      "backButton": "العودة"
     }
   },
   "Footer": {
