@@ -151,7 +151,7 @@ export default function Home() {
                         <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
                           <AvatarImage src={
                             testimonialKey === 'ahmed' ? "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtYW58ZW58MHx8fHwxNzUyODQ0NDU5fDA&ixlib=rb-4.1.0&q=80&w=1080" :
-                            testimonialKey === 'fatima' ? "https://placehold.co/100x100.png" :
+                            testimonialKey === 'fatima' ? "https://images.unsplash.com/photo-1613005798967-632017e477c8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxnaXJsfGVufDB8fHx8MTc1Mjg1NTYzOXww&ixlib=rb-4.1.0&q=80&w=1080" :
                             "https://placehold.co/100x100.png"
                           } alt={tHome(`testimonials.${testimonialKey}.name`)} data-ai-hint={
                             testimonialKey === 'ahmed' ? "man portrait" :
