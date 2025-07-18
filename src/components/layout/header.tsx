@@ -1,9 +1,5 @@
-
-"use client";
-
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
@@ -31,9 +27,12 @@ const logos = {
   }
 }
 
-export default function Header() {
+type HeaderProps = {
+  pathname: string;
+};
+
+export default function Header({ pathname }: HeaderProps) {
   const t = useTranslations('Header');
-  const pathname = usePathname();
   const locale = useLocale() as 'en' | 'ar';
   const [isSheetOpen, setSheetOpen] = useState(false);
 
@@ -41,7 +40,6 @@ export default function Header() {
 
   const getIsActive = (href: string) => {
     const localizedPath = `/${locale}${href === '/' ? '' : href}`;
-    // Exact match for homepage, startsWith for other pages
     if (href === '/') {
         return pathname === `/${locale}` || pathname === `/${locale}/`;
     }

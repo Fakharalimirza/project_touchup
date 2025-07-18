@@ -4,7 +4,7 @@ import {getMessages, unstable_setRequestLocale} from 'next-intl/server';
 import { Inter, Orbitron } from 'next/font/google';
 import '../globals.css';
 import { Toaster } from "@/components/ui/toaster";
-import Header from '@/components/layout/header';
+import ClientHeader from '@/components/layout/client-header';
 import Footer from '@/components/layout/footer';
 import { ThemeProvider } from '@/components/theme-provider';
 
@@ -97,7 +97,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <div className="flex flex-col min-h-screen">
-              <Header />
+              <ClientHeader />
               <main className="flex-grow">
                 {children}
               </main>
