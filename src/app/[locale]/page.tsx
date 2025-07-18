@@ -149,7 +149,7 @@ export default function Home() {
                     <Card className="h-full glow-border bg-card/50 backdrop-blur-sm">
                       <CardContent className="flex flex-col items-center text-center p-6 h-full">
                         <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
-                          <AvatarImage src={`https://placehold.co/100x100.png?text=${index}`} alt={tHome(`testimonials.${testimonialKey}.name`)} />
+                          <AvatarImage src={`https://placehold.co/100x100.png`} alt={tHome(`testimonials.${testimonialKey}.name`)} data-ai-hint="man portrait" />
                           <AvatarFallback>{tHome(`testimonials.${testimonialKey}.name`).charAt(0)}</AvatarFallback>
                         </Avatar>
                         <p className="text-muted-foreground italic mb-4 flex-grow">"{tHome(`testimonials.${testimonialKey}.quote`)}"</p>
