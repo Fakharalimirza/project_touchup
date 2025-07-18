@@ -1,7 +1,10 @@
+
 'use server';
 
 import { z } from 'zod';
 import nodemailer from 'nodemailer';
+import { db } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -34,20 +37,29 @@ export async function submitContactForm(data: ContactFormValues) {
   }
   
   const { name, email, subject, message } = validatedData.data;
-  
-  const emailHtml = `
-    <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-      <h2 style="color: #333;">New message from your website contact form</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-      <p><strong>Subject:</strong> ${subject}</p>
-      <hr style="border: none; border-top: 1px solid #eee;" />
-      <h3 style="color: #333;">Message:</h3>
-      <p style="white-space: pre-wrap; background-color: #f9f9f9; padding: 10px; border-radius: 4px;">${message}</p>
-    </div>
-  `;
+  const { terms, ...contactData } = validatedData.data;
 
+  
   try {
+    // Save to Firestore
+    await addDoc(collection(db, "contacts"), {
+      ...contactData,
+      createdAt: serverTimestamp(),
+      status: 'new'
+    });
+    
+    const emailHtml = `
+      <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+        <h2 style="color: #333;">New message from your website contact form</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+        <p><strong>Subject:</strong> ${subject}</p>
+        <hr style="border: none; border-top: 1px solid #eee;" />
+        <h3 style="color: #333;">Message:</h3>
+        <p style="white-space: pre-wrap; background-color: #f9f9f9; padding: 10px; border-radius: 4px;">${message}</p>
+      </div>
+    `;
+
     await transporter.sendMail({
       from: `"TouchUp Contact Form" <${process.env.SMTP_FROM_EMAIL || 'noreply@touchup.ae'}>`,
       to: process.env.ADMIN_EMAIL_CONTACT,
@@ -58,7 +70,10 @@ export async function submitContactForm(data: ContactFormValues) {
 
     return { success: true };
   } catch (error) {
-    console.error('Email sending failed:', error);
-    return { success: false, error: 'Failed to send the message.' };
+    console.error('Error during submission:', error);
+    if (error instanceof Error) {
+        return { success: false, error: `Failed to send message: ${error.message}` };
+    }
+    return { success: false, error: 'An unknown error occurred.' };
   }
 }
