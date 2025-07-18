@@ -18,7 +18,6 @@ const navLinks = [
   { href: '/services', key: 'services' },
   { href: '/about', key: 'about' },
   { href: '/contact', key: 'contact' },
-  { href: '/blog', key: 'blog' },
 ] as const;
 
 const logos = {

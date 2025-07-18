@@ -5,7 +5,6 @@
     "services": "Services",
     "about": "About Us",
     "contact": "Contact",
-    "blog": "Blog",
     "bookNow": "Book Now",
     "whatsApp": "Chat on WhatsApp"
   },
@@ -148,31 +147,6 @@
     "visionText": "To be Dubai's most trusted and sought-after home services company, known for our professionalism, efficiency, and unwavering commitment to customer satisfaction.",
     "valuesTitle": "Our Values",
     "valuesText": "We operate with integrity, professionalism, and a strong work ethic. We believe in building long-term relationships with our clients based on trust and exceptional service."
-  },
-  "BlogPage": {
-    "title": "Blog & Maintenance Tips",
-    "subtitle": "Expert advice and insights to help you keep your home in top shape.",
-    "readMore": "Read More"
-  },
-  "BlogPosts": {
-    "ac_maintenance_tips": {
-      "title": "Top 5 AC Maintenance Tips for the Dubai Heat",
-      "excerpt": "Keep your cool this summer with these essential tips for maintaining your air conditioning unit. A little care goes a long way!",
-      "date": "July 15, 2024",
-      "content": "<h2>Keep Your Cool This Summer with These Must-Know Air Conditioning Tips</h2><p>Published by Touchup Building Maintenance | Visit: <a>www.touchup.ae</a></p><br/><p>Living in Dubai means dealing with extreme temperatures, especially during the summer months when the heat can be relentless. Your air conditioning system is not just a luxury—it's a necessity. At Touchup Building Maintenance, we specialize in AC maintenance in Dubai, and we know how crucial it is to keep your unit running efficiently. Whether you're in a villa, apartment, or office, these 5 expert tips will help you stay cool and save money.</p><h2>1. Clean or Replace Air Filters Regularly</h2><p>Dirty air filters are the number one reason for reduced AC efficiency. In Dubai’s dusty climate, air filters can clog faster than usual, restricting airflow and forcing your system to work harder.</p><p>👉 Tip: Check and clean your filters every month. Replace them every 2-3 months for optimal performance.</p><p>📍 Keyword Focus: AC cleaning Dubai, air filter service, AC maintenance UAE</p><h2>2. Schedule Professional AC Maintenance Twice a Year</h2><p>Preventive maintenance ensures your unit is running efficiently before the temperature peaks. Our expert technicians at Touchup Building Maintenance perform a full system check-up, clean the coils, inspect ductwork, and ensure all components are in top shape.</p><p>👉 Tip: Book your AC service in Dubai before summer begins and once again in mid-season.</p><p>📍 Keyword Focus: AC maintenance Dubai, air conditioning service, professional AC servicing</p><h2>3. Keep the Outdoor Unit Clear</h2><p>Your AC’s outdoor unit needs space to \"breathe.\" In Dubai, sand and debris can block the condenser coils, making it harder for the system to expel heat.</p><p>👉 Tip: Make sure there’s at least 2 feet of clearance around your outdoor unit. Remove any nearby plants, trash, or obstacles.</p><p>📍 Keyword Focus: AC outdoor unit cleaning, condenser maintenance Dubai</p><h2>4. Seal Leaks in Windows and Doors</h2><p>A properly sealed home helps maintain a consistent indoor temperature. Leaks allow hot air in and cool air out, putting unnecessary pressure on your AC system.</p><p>👉 Tip: Inspect windows and doors for gaps and use weather stripping or caulking to seal them.</p><p>📍 Keyword Focus: energy-efficient AC Dubai, reducing AC load, Dubai heat AC tips</p><h2>5. Install a Smart Thermostat</h2><p>Smart thermostats can significantly reduce your cooling costs by automatically adjusting the temperature based on your daily routine.</p><p>👉 Tip: Set your thermostat a few degrees higher when you're not home and lower it just before you return.</p><p>📍 Keyword Focus: smart thermostat Dubai, AC energy saving, home cooling automation</p><h2>Why Choose Touchup Building Maintenance for Your AC Needs?</h2><p>At Touchup.ae, we pride ourselves on delivering reliable, affordable, and fast AC maintenance in Dubai. Our trained technicians are equipped with the latest tools and knowledge to ensure your air conditioning unit runs smoothly all year round. From emergency AC repairs to regular servicing, we’ve got you covered.</p><ul><li>✔️ 24/7 Emergency Service</li><li>✔️ Experienced & Certified Technicians</li><li>✔️ Transparent Pricing</li><li>✔️ 100% Customer Satisfaction</li></ul><p>📞 Contact us today to schedule your AC service:<br/>🌐 www.touchup.ae | 📧 info@touchup.ae | 📞 +971542477677</p><h2>Final Thoughts</h2><p>The Dubai heat is no joke, and neither is the cost of an inefficient AC system. With a little proactive care—and the help of experts from Touchup Building Maintenance—you can beat the heat without breaking the bank. Remember, a well-maintained AC is a long-lasting AC.</p>"
-    },
-    "choosing_paint": {
-      "title": "How to Choose the Right Paint for Your Dubai Home",
-      "excerpt": "Picking the right paint is more than just color. Learn about different types of paint and what works best for the local climate.",
-      "date": "July 10, 2024",
-      "content": "<p>Content for this blog post is coming soon. Please check back later!</p>"
-    },
-    "common_plumbing_issues": {
-      "title": "DIY Fixes for Common Plumbing Issues (and When to Call a Pro)",
-      "excerpt": "A leaky faucet? A slow drain? Here are some simple fixes you can try yourself, and how to know when it's time to call Touchup Building Maintenance.",
-      "date": "July 5, 2024",
-      "content": "<p>Content for this blog post is coming soon. Please check back later!</p>"
-    }
   },
   "ContactPage": {
     "title": "Get In Touch",
