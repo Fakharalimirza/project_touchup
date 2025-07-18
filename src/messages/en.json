@@ -129,6 +129,7 @@
   },
   "General": {
     "learnMore": "Learn More",
+    "learnMoreAbout": "Learn More about {service}",
     "viewDetails": "View Details",
     "backToServices": "Back to Services",
     "service": "SERVICE",

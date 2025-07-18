@@ -11,7 +11,7 @@
   "Home": {
     "heroTitle": "صيانة منزلية موثوقة، بلمسة واحدة",
     "heroSubtitle": "شريكك الموثوق لخدمات التنظيف والتكييف والسباكة والكهرباء في دبي.",
-    "heroButton": "احصل على عرض أسعار مجاني",
+    "heroButton": "احجز خدمة الآن",
     "servicesTitle": "خدماتنا",
     "servicesSubtitle": "نحن نقدم مجموعة واسعة من الخدمات للحفاظ على منزلك في حالة ممتازة.",
     "whyChooseUsTitle": "لماذا تختارنا؟",
@@ -129,6 +129,7 @@
   },
   "General": {
     "learnMore": "اعرف المزيد",
+    "learnMoreAbout": "اعرف المزيد عن {service}",
     "viewDetails": "عرض التفاصيل",
     "backToServices": "العودة إلى الخدمات",
     "service": "خدمة",

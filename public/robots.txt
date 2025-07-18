@@ -1,0 +1,5 @@
+# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+#
+# A robot should have access to every page on the site.
+User-agent: *
+Allow: /
