@@ -35,8 +35,8 @@ export default function ContactPage() {
     email: z.string().email({ message: t('formValidation.emailInvalid') }),
     subject: z.string().min(3, { message: t('formValidation.subjectRequired') }),
     message: z.string().min(10, { message: t('formValidation.messageRequired') }),
-    terms: z.boolean().refine((val) => val === true, {
-      message: 'You must accept the terms and conditions.',
+    terms: z.literal(true, {
+      errorMap: () => ({ message: 'You must accept the terms and conditions.' }),
     }),
   });
 
