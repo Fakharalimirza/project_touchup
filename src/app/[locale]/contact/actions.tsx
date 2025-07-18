@@ -19,15 +19,19 @@ export type ContactFormValues = z.infer<typeof contactSchema>;
 
 // This transporter configuration relies on environment variables.
 // Ensure SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, and SMTP_FROM_EMAIL are set in your .env file.
+const port = parseInt(process.env.SMTP_PORT || '587', 10);
+const secure = port === 465;
+
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
-  port: parseInt(process.env.SMTP_PORT || '587', 10),
-  secure: parseInt(process.env.SMTP_PORT || '587', 10) === 465, // true for 465, false for other ports
+  port,
+  secure,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
 });
+
 
 export async function submitContactForm(data: ContactFormValues) {
   const validatedData = contactSchema.safeParse(data);
