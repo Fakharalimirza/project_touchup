@@ -12,7 +12,7 @@
   "Home": {
     "heroTitle": "Reliable Home Maintenance, One Touch Away",
     "heroSubtitle": "Your trusted partner for cleaning, AC, plumbing, and electrical services in Dubai.",
-    "heroButton": "Book a Service Now",
+    "heroButton": "Get Your Free Quote",
     "servicesTitle": "Our Services",
     "servicesSubtitle": "We offer a wide range of services to keep your home in perfect condition.",
     "whyChooseUsTitle": "Why Choose Us?",
@@ -215,7 +215,7 @@
       "email": "Email Address",
       "emailPlaceholder": "you@example.com",
       "phone": "Phone Number",
-      "phonePlaceholder": "+971 50 123 4567",
+      "phonePlaceholder": "+971542477677",
       "service": "Service Required",
       "servicePlaceholder": "Select a service",
       "propertyType": "Property Type",

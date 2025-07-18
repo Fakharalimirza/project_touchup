@@ -12,7 +12,7 @@
   "Home": {
     "heroTitle": "صيانة منزلية موثوقة، بلمسة واحدة",
     "heroSubtitle": "شريكك الموثوق لخدمات التنظيف والتكييف والسباكة والكهرباء في دبي.",
-    "heroButton": "احجز خدمة الآن",
+    "heroButton": "احصل على عرض أسعار مجاني",
     "servicesTitle": "خدماتنا",
     "servicesSubtitle": "نحن نقدم مجموعة واسعة من الخدمات للحفاظ على منزلك في حالة ممتازة.",
     "whyChooseUsTitle": "لماذا تختارنا؟",
@@ -215,7 +215,7 @@
       "email": "البريد الإلكتروني",
       "emailPlaceholder": "you@example.com",
       "phone": "رقم الهاتف",
-      "phonePlaceholder": "+971 50 123 4567",
+      "phonePlaceholder": "+971542477677",
       "service": "الخدمة المطلوبة",
       "servicePlaceholder": "اختر خدمة",
       "propertyType": "نوع العقار",
