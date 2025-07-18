@@ -41,11 +41,10 @@ export default function Header() {
 
   const getIsActive = (href: string) => {
     const localizedPath = `/${locale}${href === '/' ? '' : href}`;
-    
+    // Exact match for homepage, startsWith for other pages
     if (href === '/') {
         return pathname === `/${locale}` || pathname === `/${locale}/`;
     }
-
     return pathname.startsWith(localizedPath);
   };
 
