@@ -165,7 +165,7 @@ export default function ContactPage() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" size="lg" disabled={isSubmitting}>
+                <Button type="submit" size="lg" disabled={isSubmitting} className="mt-auto">
                   {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                   {isSubmitting ? t('sendingButton') : t('sendButton')}
                 </Button>
@@ -231,3 +231,5 @@ export default function ContactPage() {
     </div>
   );
 }
+
+    
