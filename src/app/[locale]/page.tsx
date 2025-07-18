@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { services } from '@/lib/data';
-import { Users, DollarSign, Clock, LifeBuoy, ChevronDown } from 'lucide-react';
+import { Users, DollarSign, Clock, LifeBuoy } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 const whyChooseUsKeys = ['experienced', 'affordable', 'reliable', 'support'] as const;
@@ -85,10 +85,10 @@ export default function Home() {
                     <div className="mx-auto bg-primary/10 text-primary rounded-full p-4 w-fit mb-4">
                       <service.icon className="w-8 h-8" />
                     </div>
-                    <CardTitle className="font-headline">{tServices(service.titleKey)}</CardTitle>
+                    <CardTitle className="font-headline">{tServices(`${service.slug}.title`)}</CardTitle>
                   </CardHeader>
                   <CardContent className="flex-grow flex flex-col justify-between">
-                    <p className="text-muted-foreground mb-4">{tServices(service.descriptionKey)}</p>
+                    <p className="text-muted-foreground mb-4">{tServices(`${service.slug}.description`)}</p>
                     <Button asChild variant="outline">
                       <Link href={`/services/${service.slug}`}>{tGeneral('learnMore')}</Link>
                     </Button>
@@ -149,7 +149,15 @@ export default function Home() {
                     <Card className="h-full glow-border bg-card/50 backdrop-blur-sm">
                       <CardContent className="flex flex-col items-center text-center p-6 h-full">
                         <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
-                          <AvatarImage src={`https://placehold.co/100x100.png`} alt={tHome(`testimonials.${testimonialKey}.name`)} data-ai-hint="man portrait" />
+                          <AvatarImage src={
+                            testimonialKey === 'ahmed' ? "https://images.unsplash.com/photo-1633193231840-e8fcfcead786?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwYWtpc3RhbmklMjBtYW58ZW58MHx8fHwxNzUyODU1MzQ1fDA&ixlib=rb-4.1.0&q=80&w=1080" :
+                            testimonialKey === 'fatima' ? "https://placehold.co/100x100.png" :
+                            "https://placehold.co/100x100.png"
+                          } alt={tHome(`testimonials.${testimonialKey}.name`)} data-ai-hint={
+                            testimonialKey === 'ahmed' ? "man portrait" :
+                            testimonialKey === 'fatima' ? "business woman" :
+                            "man portrait"
+                          } />
                           <AvatarFallback>{tHome(`testimonials.${testimonialKey}.name`).charAt(0)}</AvatarFallback>
                         </Avatar>
                         <p className="text-muted-foreground italic mb-4 flex-grow">"{tHome(`testimonials.${testimonialKey}.quote`)}"</p>
