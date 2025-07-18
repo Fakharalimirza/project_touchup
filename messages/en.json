@@ -211,7 +211,7 @@
     "subtitle": "Fill out the form below to schedule your service. We'll get back to you to confirm your appointment.",
     "form": {
       "fullName": "Full Name",
-      "fullNamePlaceholder": "John Doe",
+      "fullNamePlaceholder": "Ahmed",
       "email": "Email Address",
       "emailPlaceholder": "you@example.com",
       "phone": "Phone Number",
@@ -267,7 +267,12 @@
       "addressClearedTitle": "Address Cleared",
       "addressClearedDescription": "Please enter your address manually.",
       "addressConfirmedTitle": "Address Confirmed",
-      "addressConfirmedDescription": "Please double-check and fill in any missing details like your apartment number."
+      "addressConfirmedDescription": "Please double-check and fill in any missing details like your apartment number.",
+      "step1Title": "Step 1: Select Service",
+      "step2Title": "Step 2: Property & Details",
+      "step3Title": "Step 3: Confirm & Submit",
+      "nextButton": "Next",
+      "backButton": "Back"
     }
   },
   "Footer": {

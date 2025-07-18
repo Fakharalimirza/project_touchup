@@ -211,11 +211,11 @@
     "subtitle": "املأ النموذج أدناه لحجز خدمتك. سنتواصل معك لتأكيد موعدك.",
     "form": {
       "fullName": "الاسم الكامل",
-      "fullNamePlaceholder": "جون دو",
+      "fullNamePlaceholder": "احمد",
       "email": "البريد الإلكتروني",
       "emailPlaceholder": "you@example.com",
       "phone": "رقم الهاتف",
-      "phonePlaceholder": "+971542477677",
+      "phonePlaceholder": "971542477677",
       "service": "الخدمة المطلوبة",
       "servicePlaceholder": "اختر خدمة",
       "propertyType": "نوع العقار",
@@ -267,7 +267,12 @@
       "addressClearedTitle": "تم مسح العنوان",
       "addressClearedDescription": "يرجى إدخال عنوانك يدويًا.",
       "addressConfirmedTitle": "تم تأكيد العنوان",
-      "addressConfirmedDescription": "يرجى التحقق مرة أخرى وملء أي تفاصيل مفقودة مثل رقم شقتك."
+      "addressConfirmedDescription": "يرجى التحقق مرة أخرى وملء أي تفاصيل مفقودة مثل رقم شقتك.",
+      "step1Title": "الخطوة 1: اختيار الخدمة",
+      "step2Title": "الخطوة 2: تفاصيل العقار",
+      "step3Title": "الخطوة 3: تأكيد وإرسال",
+      "nextButton": "التالي",
+      "backButton": "السابق"
     }
   },
   "Footer": {
