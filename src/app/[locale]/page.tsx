@@ -150,7 +150,7 @@ export default function Home() {
                       <CardContent className="flex flex-col items-center text-center p-6 h-full">
                         <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
                           <AvatarImage src={
-                            testimonialKey === 'ahmed' ? "https://images.unsplash.com/photo-1633193231840-e8fcfcead786?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwYWtpc3RhbmklMjBtYW58ZW58MHx8fHwxNzUyODU1MzQ1fDA&ixlib=rb-4.1.0&q=80&w=1080" :
+                            testimonialKey === 'ahmed' ? "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtYW58ZW58MHx8fHwxNzUyODQ0NDU5fDA&ixlib=rb-4.1.0&q=80&w=1080" :
                             testimonialKey === 'fatima' ? "https://placehold.co/100x100.png" :
                             "https://placehold.co/100x100.png"
                           } alt={tHome(`testimonials.${testimonialKey}.name`)} data-ai-hint={
