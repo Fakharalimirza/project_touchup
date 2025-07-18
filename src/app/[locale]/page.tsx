@@ -39,6 +39,7 @@ export default function Home() {
                 fill
                 className="object-cover"
                 priority
+                fetchPriority="high"
                 data-ai-hint="painting wall"
             />
         </div>

@@ -87,7 +87,9 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} suppressHydrationWarning className={`${inter.variable} ${orbitron.variable}`}>
-      <head />
+      <head>
+        <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
+      </head>
       <body className="font-body antialiased" suppressHydrationWarning>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider
