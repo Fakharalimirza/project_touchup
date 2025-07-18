@@ -49,7 +49,7 @@ export default async function BlogPage({ params: { locale } }: Props) {
               </div>
               <div className="p-6">
                 <CardTitle className="font-headline text-xl leading-snug">
-                  <Link href="#" className="hover:text-primary transition-colors">{tPosts(`${postKey}.title`)}</Link>
+                  <Link href={`/blog/${postKey}`} className="hover:text-primary transition-colors">{tPosts(`${postKey}.title`)}</Link>
                 </CardTitle>
               </div>
             </CardHeader>
@@ -58,7 +58,7 @@ export default async function BlogPage({ params: { locale } }: Props) {
             </CardContent>
             <CardFooter className="px-6 pb-6 flex justify-between items-center text-sm text-muted-foreground">
               <span>{tPosts(`${postKey}.date`)}</span>
-              <Link href="#" className="font-semibold text-primary hover:underline">
+              <Link href={`/blog/${postKey}`} className="font-semibold text-primary hover:underline">
                 {t('readMore')} <ArrowRight className="inline h-4 w-4" />
               </Link>
             </CardFooter>

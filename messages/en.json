@@ -12,7 +12,7 @@
   "Home": {
     "heroTitle": "Reliable Home Maintenance, One Touch Away",
     "heroSubtitle": "Your trusted partner for cleaning, AC, plumbing, and electrical services in Dubai.",
-    "heroButton": "Book a Service Now",
+    "heroButton": "Get Your Free Quote",
     "servicesTitle": "Our Services",
     "servicesSubtitle": "We offer a wide range of services to keep your home in perfect condition.",
     "whyChooseUsTitle": "Why Choose Us?",
@@ -56,7 +56,7 @@
     },
     "ctaTitle": "Ready for a Spotless Home?",
     "ctaSubtitle": "Let our experts take care of your home maintenance needs. Get a free quote or book your service online today!",
-    "ctaButton": "Get Your Free Quote"
+    "ctaButton": "Book a Service Now"
   },
   "ServicesPage": {
     "title": "Our Professional Services",
