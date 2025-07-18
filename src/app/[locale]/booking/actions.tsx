@@ -2,8 +2,6 @@
 'use server';
 
 import { z } from 'zod';
-import { db } from '@/lib/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const bookingSchema = z.object({
   name: z.string().min(2),
@@ -33,22 +31,9 @@ export async function submitBooking(data: BookingFormValues) {
     return { success: false, error: 'Invalid data provided.' };
   }
   
-  const { terms, ...bookingData } = validatedData.data;
-
-  try {
-    // Save to Firestore
-    await addDoc(collection(db, "bookings"), {
-      ...bookingData,
-      createdAt: serverTimestamp(),
-      status: 'new'
-    });
-
-    return { success: true };
-  } catch (error) {
-    console.error('Error during submission:', error);
-    if (error instanceof Error) {
-        return { success: false, error: `Failed to submit booking: ${error.message}` };
-    }
-    return { success: false, error: 'An unknown error occurred.' };
-  }
+  // All logic for sending email and saving to DB has been removed.
+  // The form will appear to submit successfully.
+  console.log('Booking form submitted but not processed:', validatedData.data);
+  
+  return { success: true };
 }
