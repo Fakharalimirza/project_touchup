@@ -17,15 +17,10 @@ const contactSchema = z.object({
 
 export type ContactFormValues = z.infer<typeof contactSchema>;
 
-// This transporter configuration relies on environment variables.
-// Ensure SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, and SMTP_FROM_EMAIL are set in your .env file.
-const port = parseInt(process.env.SMTP_PORT || '587', 10);
-const secure = port === 465;
-
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
-  port,
-  secure,
+  port: parseInt(process.env.SMTP_PORT || '587', 10),
+  secure: parseInt(process.env.SMTP_PORT || '587', 10) === 465,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
@@ -44,7 +39,6 @@ export async function submitContactForm(data: ContactFormValues) {
   const contactData = validatedData.data;
   
   try {
-    // Save to Firestore
     await addDoc(collection(db, "contacts"), {
       ...contactData,
       createdAt: serverTimestamp(),
@@ -54,7 +48,7 @@ export async function submitContactForm(data: ContactFormValues) {
     const emailHtml = render(<AdminContactNoticeEmail data={validatedData.data} />);
 
     await transporter.sendMail({
-      from: `"TouchUp Contact Form" <${process.env.SMTP_FROM_EMAIL || 'noreply@touchup.ae'}>`,
+      from: `"Touchup Contact Form" <${process.env.SMTP_USER}>`,
       to: process.env.ADMIN_EMAIL_CONTACT,
       replyTo: validatedData.data.email,
       subject: `New Contact Form Message: ${validatedData.data.subject}`,
@@ -70,5 +64,3 @@ export async function submitContactForm(data: ContactFormValues) {
     return { success: false, error: 'An unknown error occurred.' };
   }
 }
-
-    
