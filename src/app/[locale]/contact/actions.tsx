@@ -1,3 +1,4 @@
+
 'use server';
 
 import { z } from 'zod';
@@ -12,7 +13,6 @@ const contactSchema = z.object({
   email: z.string().email(),
   subject: z.string().min(3),
   message: z.string().min(10),
-  terms: z.literal(true),
 });
 
 export type ContactFormValues = z.infer<typeof contactSchema>;
@@ -41,7 +41,7 @@ export async function submitContactForm(data: ContactFormValues) {
     return { success: false, error: 'Invalid data provided.' };
   }
   
-  const { terms, ...contactData } = validatedData.data;
+  const contactData = validatedData.data;
   
   try {
     // Save to Firestore
@@ -70,3 +70,5 @@ export async function submitContactForm(data: ContactFormValues) {
     return { success: false, error: 'An unknown error occurred.' };
   }
 }
+
+    

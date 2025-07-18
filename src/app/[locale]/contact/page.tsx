@@ -6,21 +6,18 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Phone, Mail, MapPin, Clock, Loader2 } from 'lucide-react';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { submitContactForm } from './actions';
 
 export default function ContactPage() {
   const t = useTranslations('ContactPage');
-  const tBooking = useTranslations('BookingPage.form');
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
@@ -35,9 +32,6 @@ export default function ContactPage() {
     email: z.string().email({ message: t('formValidation.emailInvalid') }),
     subject: z.string().min(3, { message: t('formValidation.subjectRequired') }),
     message: z.string().min(10, { message: t('formValidation.messageRequired') }),
-    terms: z.literal(true, {
-      errorMap: () => ({ message: 'You must accept the terms and conditions.' }),
-    }),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -47,7 +41,6 @@ export default function ContactPage() {
       email: '',
       subject: '',
       message: '',
-      terms: false,
     },
   });
 
@@ -141,30 +134,6 @@ export default function ContactPage() {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={form.control}
-                  name="terms"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel>
-                          {tBooking('terms')}{' '}
-                          <Link href="/privacy-policy" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
-                            {tBooking('termsLink')}
-                          </Link>
-                          .
-                        </FormLabel>
-                        <FormMessage />
-                      </div>
-                    </FormItem>
-                  )}
-                />
                 <Button type="submit" size="lg" disabled={isSubmitting} className="mt-auto">
                   {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                   {isSubmitting ? t('sendingButton') : t('sendButton')}
@@ -231,3 +200,5 @@ export default function ContactPage() {
     </div>
   );
 }
+
+    
