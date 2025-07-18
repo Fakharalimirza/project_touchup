@@ -16,7 +16,7 @@ import { Phone, Mail, MapPin, Clock, Loader2 } from 'lucide-react';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
-import { submitContactForm } from './actions.tsx';
+import { submitContactForm } from './actions';
 
 export default function ContactPage() {
   const t = useTranslations('ContactPage');

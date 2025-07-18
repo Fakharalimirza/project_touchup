@@ -24,7 +24,7 @@ import { services } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { Checkbox } from '@/components/ui/checkbox';
-import { submitBooking } from '@/app/[locale]/booking/actions.tsx';
+import { submitBooking } from '@/app/[locale]/booking/actions';
 import { Progress } from '@/components/ui/progress';
 
 const bookingSchema = z.object({
