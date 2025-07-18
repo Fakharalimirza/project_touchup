@@ -2,8 +2,6 @@
 'use server';
 
 import { z } from 'zod';
-import { db } from '@/lib/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import nodemailer from 'nodemailer';
 import { render } from '@react-email/render';
 import AdminContactNoticeEmail from '@/emails/admin-contact-notice';
@@ -26,13 +24,7 @@ export async function submitContactForm(data: ContactFormValues) {
   }
 
   try {
-    // 1. Save to Firestore
-    await addDoc(collection(db, 'contacts'), {
-      ...validatedData.data,
-      createdAt: serverTimestamp(),
-    });
-
-    // 2. Send Email
+    // Send Email
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT),

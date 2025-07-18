@@ -2,8 +2,6 @@
 'use server';
 
 import { z } from 'zod';
-import { db } from '@/lib/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import nodemailer from 'nodemailer';
 import { render } from '@react-email/render';
 import AdminBookingNoticeEmail from '@/emails/admin-booking-notice';
@@ -38,14 +36,7 @@ export async function submitBooking(data: BookingFormValues) {
   }
 
   try {
-    // 1. Save to Firestore
-    await addDoc(collection(db, 'bookings'), {
-      ...validatedData.data,
-      status: 'pending',
-      createdAt: serverTimestamp(),
-    });
-
-    // 2. Send Emails
+    // Send Emails
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: Number(process.env.SMTP_PORT),
@@ -78,6 +69,9 @@ export async function submitBooking(data: BookingFormValues) {
     return { success: true };
   } catch (error) {
     console.error('Error in submitBooking:', error);
+    if (error instanceof Error) {
+       return { success: false, error: error.message };
+    }
     return { success: false, error: 'An unexpected error occurred on the server.' };
   }
 }
