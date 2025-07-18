@@ -5,6 +5,7 @@
     "services": "Services",
     "about": "About Us",
     "contact": "Contact",
+    "blog": "Blog",
     "bookNow": "Book Now",
     "whatsApp": "Chat on WhatsApp"
   },
@@ -129,7 +130,6 @@
   },
   "General": {
     "learnMore": "Learn More",
-    "learnMoreAbout": "Learn More about {service}",
     "viewDetails": "View Details",
     "backToServices": "Back to Services",
     "service": "SERVICE",
@@ -148,6 +148,28 @@
     "visionText": "To be Dubai's most trusted and sought-after home services company, known for our professionalism, efficiency, and unwavering commitment to customer satisfaction.",
     "valuesTitle": "Our Values",
     "valuesText": "We operate with integrity, professionalism, and a strong work ethic. We believe in building long-term relationships with our clients based on trust and exceptional service."
+  },
+  "BlogPage": {
+    "title": "Blog & Maintenance Tips",
+    "subtitle": "Expert advice and insights to help you keep your home in top shape.",
+    "readMore": "Read More"
+  },
+  "BlogPosts": {
+    "ac_maintenance_tips": {
+      "title": "Top 5 AC Maintenance Tips for the Dubai Heat",
+      "excerpt": "Keep your cool this summer with these essential tips for maintaining your air conditioning unit. A little care goes a long way!",
+      "date": "July 15, 2024"
+    },
+    "choosing_paint": {
+      "title": "How to Choose the Right Paint for Your Dubai Home",
+      "excerpt": "Picking the right paint is more than just color. Learn about different types of paint and what works best for the local climate.",
+      "date": "July 10, 2024"
+    },
+    "common_plumbing_issues": {
+      "title": "DIY Fixes for Common Plumbing Issues (and When to Call a Pro)",
+      "excerpt": "A leaky faucet? A slow drain? Here are some simple fixes you can try yourself, and how to know when it's time to call Touchup Building Maintenance.",
+      "date": "July 5, 2024"
+    }
   },
   "ContactPage": {
     "title": "Get In Touch",

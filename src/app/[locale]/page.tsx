@@ -92,7 +92,7 @@ export default function Home() {
                     <p className="text-muted-foreground mb-4">{tServices(`${service.slug}.description`)}</p>
                     <Button asChild variant="outline">
                       <Link href={`/services/${service.slug}`}>
-                        {tGeneral('learnMore')}
+                        {tGeneral('viewDetails')}
                       </Link>
                     </Button>
                   </CardContent>
