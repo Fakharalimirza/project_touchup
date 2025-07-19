@@ -27,7 +27,7 @@ export const services: Service[] = [
         'painting.subServices.touchup_2bhk',
         'painting.subServices.table_chair',
     ],
-    image: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/painting.png?alt=media&token=cd8e0f87-467e-433f-9ce8-2060f7e8345e',
+    image: '/Images/painting.webp',
     dataAiHint: 'wall painting',
   },
   {
@@ -48,7 +48,7 @@ export const services: Service[] = [
         'electrical-repair.subServices.socket_plug',
         'electrical-repair.subServices.visit_only',
     ],
-    image: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/electric.png?alt=media&token=8e5ce6f7-f008-431c-9ae6-5e2364aeef4d',
+    image: '/Images/electric.webp',
     dataAiHint: 'electrical repair',
   },
   {
@@ -68,7 +68,7 @@ export const services: Service[] = [
         'plumbing.subServices.shower_set',
         'plumbing.subServices.shower_head',
     ],
-    image: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/Plumbing.png?alt=media&token=902780c5-b755-474c-b01c-4b7938a54227',
+    image: '/Images/Plumbing.webp',
     dataAiHint: 'plumbing work',
   },
   {
@@ -83,7 +83,7 @@ export const services: Service[] = [
         'cleaning-services.subServices.normal_2bhk',
         'cleaning-services.subServices.hourly',
     ],
-    image: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/Cleaning%20Services.png?alt=media&token=5e369248-1ee9-40ad-bddf-cc80bdfb20d9',
+    image: '/Images/Cleaning Services.webp',
     dataAiHint: 'deep cleaning',
   },
   {
@@ -93,7 +93,7 @@ export const services: Service[] = [
     icon: Bug,
     detailsKey: 'pest-control.details',
     subServiceKeys: [],
-    image: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/Pest%20Control.png?alt=media&token=b34b0647-a179-42f0-9ed5-65fb30dc6e9c',
+    image: '/Images/Pest Control.webp',
     dataAiHint: 'pest control',
   }
 ];

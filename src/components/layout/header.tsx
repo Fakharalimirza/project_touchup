@@ -18,12 +18,12 @@ const navLinks = [
 
 const logos = {
   en: {
-    light: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20black%20en.png?alt=media&token=74ca5c3b-ee14-4188-a000-8f3b4f91bca4',
-    dark: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20white%20en.png?alt=media&token=652355d2-af45-4c5a-a112-71d79a85c10d'
+    dark: '/Images/logo white en.webp',
+    light: '/Images/logo black en.webp'
   },
   ar: {
-    light: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20black%20ar.png?alt=media&token=a7fa8eef-e242-4275-be0a-8171a99f1d2e',
-    dark: 'https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20white%20ar.png?alt=media&token=c3bf3614-1d8c-49df-99d8-98b181d2ce36'
+    light: '/Images/logo black ar.webp',
+    dark: '/Images/logo white ar.webp'
   }
 }
 

@@ -64,7 +64,7 @@ export default async function AboutPage({ params: { locale } }: Props) {
             </div>
             <div>
               <Image
-                src="https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/Who%20We%20Are.png?alt=media&token=de112c34-fbf7-4d54-90f1-352c764c6df3"
+                src="/Images/Who We Are.webp"
                 alt={t('whoWeAreTitle')}
                 width={600}
                 height={400}

@@ -368,5 +368,10 @@
       "title": "Final Agreement",
       "content": "By signing up for an account on touchup.ae, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions. If you have any questions or concerns, please contact us at info@touchup.ae."
     }
+  },
+  "NotFoundPage": {
+    "title": "Page Not Found",
+    "description": "Sorry, we couldn't find the page you were looking for. It might have been moved, deleted, or maybe it never existed.",
+    "goHome": "Back to Homepage"
   }
 }

@@ -33,7 +33,7 @@ export default function AdminBookingNoticeEmail({ data }: AdminBookingNoticeEmai
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
             <Section className="mt-[32px]">
               <Img
-                src="https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/logo%2Flogo%20black%20en.png?alt=media&token=74ca5c3b-ee14-4188-a000-8f3b4f91bca4"
+                src="/Images/logo black en.webp"
                 width="120"
                 height="35"
                 alt="Touchup Logo"

@@ -34,7 +34,7 @@ export default function Home() {
             className="absolute inset-0"
         >
             <Image
-                src="https://firebasestorage.googleapis.com/v0/b/touchup-42i8o.firebasestorage.app/o/painting.png?alt=media&token=cd8e0f87-467e-433f-9ce8-2060f7e8345e"
+                src="/Images/painting.webp"
                 alt="Technician working on an air conditioner"
                 fill
                 className="object-cover"
@@ -153,9 +153,9 @@ export default function Home() {
                       <CardContent className="flex flex-col items-center text-center p-6 h-full">
                         <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
                           <AvatarImage src={
-                            testimonialKey === 'ahmed' ? "https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtYW58ZW58MHx8fHwxNzUyODQ0NDU5fDA&ixlib=rb-4.1.0&q=80&w=1080" :
-                            testimonialKey === 'fatima' ? "https://images.unsplash.com/photo-1613005798967-632017e477c8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxnaXJsfGVufDB8fHx8MTc1Mjg1NTYzOXww&ixlib=rb-4.1.0&q=80&w=1080" :
-                            "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxKb2huJTIwfGVufDB8fHx8MTc1Mjg1NTc0Mnww&ixlib=rb-4.1.0&q=80&w=1080"
+                            testimonialKey === 'ahmed' ? "/Images/ahmed-khan.webp" :
+                            testimonialKey === 'fatima' ? "/Images/Fatima Al-Jaber.webp" :
+                            "/Images/John Smith.webp"
                           } alt={tHome(`testimonials.${testimonialKey}.name`)} data-ai-hint={
                             testimonialKey === 'ahmed' ? "man portrait" :
                             testimonialKey === 'fatima' ? "business woman" :
