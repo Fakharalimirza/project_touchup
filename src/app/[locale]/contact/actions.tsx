@@ -2,9 +2,9 @@
 'use server';
 
 import { z } from 'zod';
-import nodemailer from 'nodemailer';
-import { render } from '@react-email/render';
+import { Resend } from 'resend';
 import AdminContactNoticeEmail from '@/emails/admin-contact-notice';
+import * as React from 'react';
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -15,6 +15,8 @@ const contactSchema = z.object({
 
 export type ContactFormValues = z.infer<typeof contactSchema>;
 
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export async function submitContactForm(data: ContactFormValues) {
   const validatedData = contactSchema.safeParse(data);
 
@@ -24,26 +26,17 @@ export async function submitContactForm(data: ContactFormValues) {
   }
 
   try {
-    // Send Email
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: Number(process.env.SMTP_PORT) === 465,
-      requireTLS: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-
-    const emailHtml = render(<AdminContactNoticeEmail data={validatedData.data} />);
-
-    await transporter.sendMail({
-      from: `"TouchUp Contact Form" <${process.env.SMTP_USER}>`,
-      to: process.env.ADMIN_EMAIL_CONTACT,
+    const fromAddress = process.env.EMAIL_FROM_ADDRESS;
+    if (!fromAddress) {
+      throw new Error('EMAIL_FROM_ADDRESS environment variable is not set.');
+    }
+    
+    await resend.emails.send({
+      from: fromAddress,
+      to: process.env.ADMIN_EMAIL_CONTACT as string,
       subject: `New Contact Message: ${validatedData.data.subject}`,
-      replyTo: validatedData.data.email,
-      html: emailHtml,
+      reply_to: validatedData.data.email,
+      react: React.createElement(AdminContactNoticeEmail, { data: validatedData.data }),
     });
 
     return { success: true };

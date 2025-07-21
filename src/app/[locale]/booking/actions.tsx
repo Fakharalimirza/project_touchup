@@ -2,11 +2,11 @@
 'use server';
 
 import { z } from 'zod';
-import nodemailer from 'nodemailer';
-import { render } from '@react-email/render';
+import { Resend } from 'resend';
+import { format } from 'date-fns';
 import AdminBookingNoticeEmail from '@/emails/admin-booking-notice';
 import CustomerConfirmationEmail from '@/emails/customer-confirmation';
-import { format } from 'date-fns';
+import * as React from 'react';
 
 const bookingSchema = z.object({
   name: z.string().min(2),
@@ -25,12 +25,12 @@ const bookingSchema = z.object({
   instructions: z.string().optional(),
 });
 
-// We create a new type for the email data that uses a string for the date.
 export type BookingEmailData = Omit<z.infer<typeof bookingSchema>, 'date'> & {
   date: string;
 };
 export type BookingFormValues = z.infer<typeof bookingSchema>;
 
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function submitBooking(data: BookingFormValues) {
   const validatedData = bookingSchema.safeParse(data);
@@ -38,6 +38,11 @@ export async function submitBooking(data: BookingFormValues) {
   if (!validatedData.success) {
     console.error('Server-side validation failed:', validatedData.error.flatten().fieldErrors);
     return { success: false, error: 'Invalid data provided.' };
+  }
+  
+  const fromAddress = process.env.EMAIL_FROM_ADDRESS;
+  if (!fromAddress) {
+      throw new Error('EMAIL_FROM_ADDRESS environment variable is not set.');
   }
 
   // Format the date into a string before sending it to the email template.
@@ -47,35 +52,20 @@ export async function submitBooking(data: BookingFormValues) {
   };
 
   try {
-    // Send Emails
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: Number(process.env.SMTP_PORT) === 465,
-      requireTLS: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-
-    const adminEmailHtml = render(<AdminBookingNoticeEmail data={emailData} />);
-    const customerEmailHtml = render(<CustomerConfirmationEmail name={emailData.name} data={emailData} />);
-
     // Send email to admin
-    await transporter.sendMail({
-      from: `"TouchUp Booking" <${process.env.SMTP_USER}>`,
-      to: process.env.ADMIN_EMAIL_BOOKING,
+    await resend.emails.send({
+      from: fromAddress,
+      to: process.env.ADMIN_EMAIL_BOOKING as string,
       subject: `New Booking Request: ${emailData.service}`,
-      html: adminEmailHtml,
+      react: React.createElement(AdminBookingNoticeEmail, { data: emailData }),
     });
 
     // Send confirmation email to customer
-    await transporter.sendMail({
-      from: `"Touchup Building Maintenance" <${process.env.SMTP_USER}>`,
+    await resend.emails.send({
+      from: fromAddress,
       to: emailData.email,
       subject: 'Your Booking Request has been Received!',
-      html: customerEmailHtml,
+      react: React.createElement(CustomerConfirmationEmail, { name: emailData.name, data: emailData }),
     });
 
     return { success: true };
