@@ -6,14 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { services } from '@/lib/data';
 import { useTranslations } from 'next-intl';
-import { unstable_setRequestLocale } from 'next-intl/server';
 
-export function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'ar' }];
-}
-
-export default function ServicesPage({ params: { locale } }: { params: { locale: string } }) {
-  unstable_setRequestLocale(locale);
+export default function ServicesPage() {
   const tPage = useTranslations('ServicesPage');
   const tServices = useTranslations('Services');
   const tGeneral = useTranslations('General');
