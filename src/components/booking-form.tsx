@@ -44,9 +44,6 @@ const bookingSchema = z.object({
   area: z.string().min(3, { message: 'Please enter a valid area.' }),
   city: z.string().min(2, { message: 'Please enter a valid city.' }),
   instructions: z.string().optional(),
-  terms: z.literal(true, {
-    errorMap: () => ({ message: 'You must accept the terms and conditions.' }),
-  }),
 });
 
 type BookingFormValues = z.infer<typeof bookingSchema>;
@@ -86,7 +83,7 @@ const steps = [
   { 
     id: 3, 
     titleKey: 'step3Title',
-    fields: ['apartmentVilla', 'building', 'street', 'area', 'city', 'instructions', 'terms'] 
+    fields: ['apartmentVilla', 'building', 'street', 'area', 'city', 'instructions'] 
   },
 ] as const;
 
@@ -120,7 +117,6 @@ export default function BookingForm() {
       street: '',
       area: '',
       city: 'Dubai',
-      terms: false,
     },
   });
 
@@ -575,31 +571,6 @@ export default function BookingForm() {
                         <Textarea placeholder={t('specialInstructionsPlaceholder')} {...field} />
                       </FormControl>
                       <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="terms"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow-sm">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel>
-                          {t('terms')}{' '}
-                          <Link href="/privacy-policy" className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">
-                            {t('termsLink')}
-                          </Link>
-                          .
-                        </FormLabel>
-                        <FormMessage />
-                      </div>
                     </FormItem>
                   )}
                 />

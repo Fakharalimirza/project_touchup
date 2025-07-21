@@ -22,7 +22,6 @@ const bookingSchema = z.object({
   area: z.string().min(3),
   city: z.string().min(2),
   instructions: z.string().optional(),
-  terms: z.literal(true),
 });
 
 export type BookingFormValues = z.infer<typeof bookingSchema>;

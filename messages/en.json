@@ -211,7 +211,7 @@
     "subtitle": "Fill out the form below to schedule your service. We'll get back to you to confirm your appointment.",
     "form": {
       "fullName": "Full Name",
-      "fullNamePlaceholder": "Ahmed",
+      "fullNamePlaceholder": "John Doe",
       "email": "Email Address",
       "emailPlaceholder": "you@example.com",
       "phone": "Phone Number",
@@ -243,8 +243,6 @@
       "city": "City",
       "specialInstructions": "Special Instructions (Optional)",
       "specialInstructionsPlaceholder": "e.g., Please call before arrival.",
-      "terms": "I agree to the",
-      "termsLink": "Terms and Conditions & Privacy Policy",
       "submitButton": "Submit Booking Request",
       "submittingButton": "Submitting...",
       "successTitle": "Booking Request Sent!",
