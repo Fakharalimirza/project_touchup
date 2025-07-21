@@ -34,7 +34,7 @@ export default function CustomerConfirmationEmail({ name, data }: CustomerConfir
           <Container className="border border-solid border-gray-200 rounded my-10 mx-auto p-8 w-full max-w-2xl bg-white shadow-sm">
             <Section className="mt-8">
               <Img
-                src={`${baseUrl}/Images/logo-black-en.webp`}
+                src={`${baseUrl}/Images/logo black en.webp`}
                 width="150"
                 height="auto"
                 alt="Touchup.ae Logo"
