@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: 'Admin Dashboard',
 };
 
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'ar' }];
+}
+
 export default async function AdminDashboard({ params: { locale } }: { params: { locale: string } }) {
   unstable_setRequestLocale(locale);
 

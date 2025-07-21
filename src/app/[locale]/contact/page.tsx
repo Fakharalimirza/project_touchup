@@ -15,8 +15,14 @@ import { Phone, Mail, MapPin, Clock, Loader2 } from 'lucide-react';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
 import { submitContactForm } from './actions';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
-export default function ContactPage() {
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'ar' }];
+}
+
+export default function ContactPage({ params: { locale } }: { params: { locale: string } }) {
+  unstable_setRequestLocale(locale);
   const t = useTranslations('ContactPage');
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
@@ -200,5 +206,3 @@ export default function ContactPage() {
     </div>
   );
 }
-
-    

@@ -7,6 +7,10 @@ type Props = {
   params: { locale: string };
 };
 
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'ar' }];
+}
+
 export async function generateMetadata({ params: { locale } }: Props): Promise<Metadata> {
   unstable_setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'AboutPage' });
