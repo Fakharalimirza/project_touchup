@@ -12,6 +12,8 @@ import {
   Tailwind,
 } from '@react-email/components';
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://touchup.ae';
+
 export default function TestEmail() {
   const previewText = `This is a test email from Touchup.ae`;
 
@@ -24,7 +26,7 @@ export default function TestEmail() {
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
             <Section className="mt-[32px]">
               <Img
-                src="/Images/logo black en.webp"
+                src={`${baseUrl}/images/logos/logo-black-en.webp`}
                 width="120"
                 height="35"
                 alt="Touchup Logo"

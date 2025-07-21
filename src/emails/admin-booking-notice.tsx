@@ -18,7 +18,7 @@ interface AdminBookingNoticeEmailProps {
   data: BookingEmailData;
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ? `https://${process.env.NEXT_PUBLIC_SITE_URL}` : '';
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://touchup.ae';
 
 export default function AdminBookingNoticeEmail({ data }: AdminBookingNoticeEmailProps) {
   const previewText = `New Booking Request from ${data.name}`;
@@ -32,7 +32,7 @@ export default function AdminBookingNoticeEmail({ data }: AdminBookingNoticeEmai
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
             <Section className="mt-[32px]">
               <Img
-                src="/Images/logo black en.webp"
+                src={`${baseUrl}/images/logos/logo-black-en.webp`}
                 width="120"
                 height="35"
                 alt="Touchup Logo"
