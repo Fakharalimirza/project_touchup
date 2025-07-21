@@ -6,6 +6,7 @@ import nodemailer from 'nodemailer';
 import { render } from '@react-email/render';
 import AdminBookingNoticeEmail from '@/emails/admin-booking-notice';
 import CustomerConfirmationEmail from '@/emails/customer-confirmation';
+import { format } from 'date-fns';
 
 const bookingSchema = z.object({
   name: z.string().min(2),
@@ -24,7 +25,12 @@ const bookingSchema = z.object({
   instructions: z.string().optional(),
 });
 
+// We create a new type for the email data that uses a string for the date.
+export type BookingEmailData = Omit<z.infer<typeof bookingSchema>, 'date'> & {
+  date: string;
+};
 export type BookingFormValues = z.infer<typeof bookingSchema>;
+
 
 export async function submitBooking(data: BookingFormValues) {
   const validatedData = bookingSchema.safeParse(data);
@@ -33,6 +39,12 @@ export async function submitBooking(data: BookingFormValues) {
     console.error('Server-side validation failed:', validatedData.error.flatten().fieldErrors);
     return { success: false, error: 'Invalid data provided.' };
   }
+
+  // Format the date into a string before sending it to the email template.
+  const emailData: BookingEmailData = {
+    ...validatedData.data,
+    date: format(validatedData.data.date, 'PPP'),
+  };
 
   try {
     // Send Emails
@@ -46,21 +58,21 @@ export async function submitBooking(data: BookingFormValues) {
       },
     });
 
-    const adminEmailHtml = render(<AdminBookingNoticeEmail data={validatedData.data} />);
-    const customerEmailHtml = render(<CustomerConfirmationEmail name={validatedData.data.name} data={validatedData.data} />);
+    const adminEmailHtml = render(<AdminBookingNoticeEmail data={emailData} />);
+    const customerEmailHtml = render(<CustomerConfirmationEmail name={emailData.name} data={emailData} />);
 
     // Send email to admin
     await transporter.sendMail({
       from: `"TouchUp Booking" <${process.env.SMTP_USER}>`,
       to: process.env.ADMIN_EMAIL_BOOKING,
-      subject: `New Booking Request: ${validatedData.data.service}`,
+      subject: `New Booking Request: ${emailData.service}`,
       html: adminEmailHtml,
     });
 
     // Send confirmation email to customer
     await transporter.sendMail({
       from: `"Touchup Building Maintenance" <${process.env.SMTP_USER}>`,
-      to: validatedData.data.email,
+      to: emailData.email,
       subject: 'Your Booking Request has been Received!',
       html: customerEmailHtml,
     });

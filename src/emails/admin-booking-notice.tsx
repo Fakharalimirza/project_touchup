@@ -12,11 +12,10 @@ import {
   Text,
   Tailwind,
 } from '@react-email/components';
-import { format } from 'date-fns';
-import type { BookingFormValues } from '@/app/[locale]/booking/actions';
+import type { BookingEmailData } from '@/app/[locale]/booking/actions';
 
 interface AdminBookingNoticeEmailProps {
-  data: BookingFormValues;
+  data: BookingEmailData;
 }
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ? `https://${process.env.NEXT_PUBLIC_SITE_URL}` : '';
@@ -58,7 +57,7 @@ export default function AdminBookingNoticeEmail({ data }: AdminBookingNoticeEmai
                <Text className="text-black text-[14px] leading-[20px] m-0"><strong>Service:</strong> {data.service}</Text>
                <Text className="text-black text-[14px] leading-[20px] m-0"><strong>Property Type:</strong> {data.propertyType}</Text>
                <Text className="text-black text-[14px] leading-[20px] m-0"><strong>Property Details:</strong> {data.specificPropertyType}</Text>
-               <Text className="text-black text-[14px] leading-[20px] m-0"><strong>Preferred Date:</strong> {format(data.date, 'PPP')}</Text>
+               <Text className="text-black text-[14px] leading-[20px] m-0"><strong>Preferred Date:</strong> {data.date}</Text>
                <Text className="text-black text-[14px] leading-[20px] m-0"><strong>Preferred Time:</strong> {data.time}</Text>
             </Section>
              <Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
