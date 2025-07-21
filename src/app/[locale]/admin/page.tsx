@@ -14,6 +14,10 @@ import { auth } from '@/lib/firebase';
 import { login } from './actions';
 import { useRouter } from 'next/navigation';
 
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'ar' }];
+}
+
 export default function AdminPage() {
   const [state, formAction] = useActionState(login, undefined);
   const { toast } = useToast();
