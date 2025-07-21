@@ -13,8 +13,14 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import { login } from './actions';
 import { useRouter } from 'next/navigation';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
-export default function AdminPage() {
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'ar' }];
+}
+
+export default function AdminPage({ params: { locale } }: { params: { locale: string } }) {
+  unstable_setRequestLocale(locale);
   const [state, formAction] = useActionState(login, undefined);
   const { toast } = useToast();
   const [email, setEmail] = useState('');
