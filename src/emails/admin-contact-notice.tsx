@@ -6,7 +6,6 @@ import {
   Heading,
   Hr,
   Html,
-  Img,
   Preview,
   Section,
   Text,
@@ -19,8 +18,6 @@ interface AdminContactNoticeEmailProps {
   data: ContactFormValues;
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://touchup.ae';
-
 export default function AdminContactNoticeEmail({ data }: AdminContactNoticeEmailProps) {
   const previewText = `New Contact Message: ${data.subject}`;
 
@@ -31,15 +28,6 @@ export default function AdminContactNoticeEmail({ data }: AdminContactNoticeEmai
       <Tailwind>
         <Body className="bg-white my-auto mx-auto font-sans">
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
-            <Section className="mt-[32px]">
-              <Img
-                src={`${baseUrl}/images/logos/logo-black-en.webp`}
-                width="120"
-                height="35"
-                alt="Touchup Logo"
-                className="my-0 mx-auto"
-              />
-            </Section>
             <Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
               New Contact Form Message
             </Heading>
