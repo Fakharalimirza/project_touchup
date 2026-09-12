@@ -1,0 +1,10 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/$USER/touchup.ae
+    # Use the Node.js selector binary - adjust version (20/22) to match Setup Node.js App
+    - /opt/alt/alt-nodejs20/root/usr/bin/node --version || node --version
+    - /opt/alt/alt-nodejs20/root/usr/bin/npm ci || npm ci
+    - /opt/alt/alt-nodejs20/root/usr/bin/npm run build || npm run build
+    # Restart Passenger - touch restart.txt signals reload (cPanel default)
+    - mkdir -p tmp && touch tmp/restart.txt

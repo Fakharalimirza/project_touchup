@@ -1,0 +1,14 @@
+# Email Configuration
+# You must get a free API key from https://resend.com
+RESEND_API_KEY=re_Wvamuka2_KT4E4MiRAdRyzA5REz6tJ5QF
+# This must be a domain you have verified with Resend.
+EMAIL_FROM_ADDRESS=no-reply@touchup.ae
+
+# The email address where booking notifications will be sent.
+ADMIN_EMAIL_BOOKING=a.galal@touchup.ae
+# The email address where contact form messages will be sent.
+ADMIN_EMAIL_CONTACT=a.galal@touchup.ae
+
+# Public URL of your deployed site. Required for absolute image paths in emails.
+# Example: https://my-awesome-app.firebaseapp.com
+NEXT_PUBLIC_SITE_URL=https://touchup.ae
