@@ -27,6 +27,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  webpack: (config) => {
+    // Explicit @ alias for Linux/CageFS where tsconfig paths may not be resolved
+    const path = require('path');
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      '@': path.resolve(__dirname, './src'),
+    };
+    return config;
+  },
 };
 
 export default withNextIntl(nextConfig);
