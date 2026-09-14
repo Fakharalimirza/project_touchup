@@ -2,10 +2,11 @@
 'use server';
 
 import { z } from 'zod';
-import { Resend } from 'resend';
 import { format } from 'date-fns';
+import { render } from '@react-email/render';
 import AdminBookingNoticeEmail from '@/emails/admin-booking-notice';
 import CustomerConfirmationEmail from '@/emails/customer-confirmation';
+import { getTransporter, getFromAddress, getAdminRecipients } from '@/lib/mailer';
 import * as React from 'react';
 
 const bookingSchema = z.object({
@@ -30,8 +31,6 @@ export type BookingEmailData = Omit<z.infer<typeof bookingSchema>, 'date'> & {
 };
 export type BookingFormValues = z.infer<typeof bookingSchema>;
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function submitBooking(data: BookingFormValues) {
   const validatedData = bookingSchema.safeParse(data);
 
@@ -39,10 +38,11 @@ export async function submitBooking(data: BookingFormValues) {
     console.error('Server-side validation failed:', validatedData.error.flatten().fieldErrors);
     return { success: false, error: 'Invalid data provided.' };
   }
-  
-  const fromAddress = process.env.EMAIL_FROM_ADDRESS;
-  if (!fromAddress) {
-      throw new Error('EMAIL_FROM_ADDRESS environment variable is not set.');
+
+  const fromAddress = getFromAddress();
+  const adminRecipients = getAdminRecipients('BOOKING');
+  if (adminRecipients.length === 0) {
+    throw new Error('ADMIN_EMAIL_BOOKING environment variable is not set.');
   }
 
   // Format the date into a string before sending it to the email template.
@@ -52,20 +52,30 @@ export async function submitBooking(data: BookingFormValues) {
   };
 
   try {
-    // Send email to admin
-    await resend.emails.send({
+    const transporter = getTransporter();
+
+    const adminHtml = await render(
+      React.createElement(AdminBookingNoticeEmail, { data: emailData })
+    );
+    const customerHtml = await render(
+      React.createElement(CustomerConfirmationEmail, { name: emailData.name, data: emailData })
+    );
+
+    // Send email to admins (supports multiple recipients)
+    await transporter.sendMail({
       from: fromAddress,
-      to: process.env.ADMIN_EMAIL_BOOKING as string,
+      to: adminRecipients,
       subject: `New Booking Request: ${emailData.service}`,
-      react: React.createElement(AdminBookingNoticeEmail, { data: emailData }),
+      html: adminHtml,
+      replyTo: emailData.email,
     });
 
     // Send confirmation email to customer
-    await resend.emails.send({
+    await transporter.sendMail({
       from: fromAddress,
       to: emailData.email,
       subject: 'Your Booking Request has been Received!',
-      react: React.createElement(CustomerConfirmationEmail, { name: emailData.name, data: emailData }),
+      html: customerHtml,
     });
 
     return { success: true };

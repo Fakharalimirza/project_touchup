@@ -2,8 +2,9 @@
 'use server';
 
 import { z } from 'zod';
-import { Resend } from 'resend';
+import { render } from '@react-email/render';
 import AdminContactNoticeEmail from '@/emails/admin-contact-notice';
+import { getTransporter, getFromAddress, getAdminRecipients } from '@/lib/mailer';
 import * as React from 'react';
 
 const contactSchema = z.object({
@@ -15,8 +16,6 @@ const contactSchema = z.object({
 
 export type ContactFormValues = z.infer<typeof contactSchema>;
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function submitContactForm(data: ContactFormValues) {
   const validatedData = contactSchema.safeParse(data);
 
@@ -26,17 +25,22 @@ export async function submitContactForm(data: ContactFormValues) {
   }
 
   try {
-    const fromAddress = process.env.EMAIL_FROM_ADDRESS;
-    if (!fromAddress) {
-      throw new Error('EMAIL_FROM_ADDRESS environment variable is not set.');
+    const fromAddress = getFromAddress();
+    const adminRecipients = getAdminRecipients('CONTACT');
+    if (adminRecipients.length === 0) {
+      throw new Error('ADMIN_EMAIL_CONTACT environment variable is not set.');
     }
-    
-    await resend.emails.send({
+
+    const html = await render(
+      React.createElement(AdminContactNoticeEmail, { data: validatedData.data })
+    );
+
+    await getTransporter().sendMail({
       from: fromAddress,
-      to: process.env.ADMIN_EMAIL_CONTACT as string,
+      to: adminRecipients,
       subject: `New Contact Message: ${validatedData.data.subject}`,
-      reply_to: validatedData.data.email,
-      react: React.createElement(AdminContactNoticeEmail, { data: validatedData.data }),
+      replyTo: validatedData.data.email,
+      html,
     });
 
     return { success: true };

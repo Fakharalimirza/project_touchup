@@ -50,14 +50,19 @@ After Create → **Environment Variables** → Add:
 ```
 NODE_ENV=production
 NEXT_PUBLIC_SITE_URL=https://touchup.ae
-RESEND_API_KEY=re_Wvamuka2_KT4E4MiRAdRyzA5REz6tJ5QF
-EMAIL_FROM_ADDRESS=no-reply@touchup.ae
-ADMIN_EMAIL_BOOKING=a.galal@touchup.ae
-ADMIN_EMAIL_CONTACT=a.galal@touchup.ae
+SMTP_HOST=mail.touchup.ae
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER=website-form@touchup.ae
+SMTP_PASS=(mailbox password - paste as-is, contains #)
+EMAIL_FROM_ADDRESS=Touchup Website <website-form@touchup.ae>
+ADMIN_EMAIL_BOOKING=a.galal@touchup.ae, info@touchup.ae
+ADMIN_EMAIL_CONTACT=a.galal@touchup.ae, info@touchup.ae
 # GOOGLE_API_KEY not required (AI disabled) — leave empty
+# RESEND_API_KEY removed - delete it from cPanel env vars
 ```
 
-*Copy values from `,env.txt:3`.* cPanel encrypts them — not written to `.env` file.
+cPanel encrypts them — not written to `.env` file. See `.env.example` for template.
 
 Click **Create** → **Run NPM Install** (or SSH `npm ci`) → **Run Build** (or wait for `.cpanel.yml` task).
 
