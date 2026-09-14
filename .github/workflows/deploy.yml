@@ -1,0 +1,53 @@
+# Auto-deploy touchup.ae to cPanel (d8197) on push to main.
+#
+# Required GitHub Secrets (repo > Settings > Secrets and variables > Actions):
+#   CPANEL_HOST     e.g. d8197.lon1.stableserver.net (or 209.42.22.241)
+#   CPANEL_USER     e.g. jadetude
+#   CPANEL_SSH_KEY  private key matching the .pub added to ~/.ssh/authorized_keys on d8197
+# Optional (defaults below are used if unset):
+#   CPANEL_PORT     default 22
+#   CPANEL_PATH     default /home/jadetude/touchup.ae
+#
+# Flow: push -> SSH -> git sync -> npm ci -> next build -> Passenger restart -> health check.
+
+name: Deploy touchup.ae to cPanel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.CPANEL_HOST }}
+          username: ${{ secrets.CPANEL_USER }}
+          key: ${{ secrets.CPANEL_SSH_KEY }}
+          port: ${{ secrets.CPANEL_PORT || 22 }}
+          script: |
+            set -e
+            APP_PATH="${{ secrets.CPANEL_PATH }}"
+            if [ -z "$APP_PATH" ]; then APP_PATH="/home/jadetude/touchup.ae"; fi
+            echo "==> Deploying to $APP_PATH"
+            source /home/jadetude/nodevenv/touchup.ae/20/bin/activate
+            cd "$APP_PATH"
+            node --version
+            npm --version
+            echo "==> Syncing from GitHub"
+            git fetch origin
+            git reset --hard origin/main
+            echo "==> Installing dependencies"
+            npm ci
+            echo "==> Building (Next.js)"
+            rm -rf .next
+            NODE_OPTIONS=--max-old-space-size=3072 npm run build
+            echo "==> Restarting Passenger"
+            mkdir -p tmp && touch tmp/restart.txt
+            sleep 8
+            echo "==> Health check"
+            curl -sS -o /dev/null -w "EN %{http_code}\n" https://touchup.ae/en
+            curl -sS -o /dev/null -w "AR %{http_code}\n" https://touchup.ae/ar
